@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Musclivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF3F1;--card:#fff;--ink:#12302B;--mut:#5E7771;--acc:#1F7A68;--acc2:#F2A93B;--line:#D5E1DD;--warn:#C8553D;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B18;--card:#172622;--ink:#E6F1EE;--mut:#8BA8A1;--acc:#3FB89E;--line:#26403A}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Tajawal,system-ui,sans-serif;font-size:16px;line-height:1.5;padding-bottom:84px}
+main{max-width:520px;margin:0 auto;padding:16px}
+h1{font-size:22px;font-weight:800;margin:4px 0 14px}
+h2{font-size:16px;font-weight:800;margin:0 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.row{display:flex;gap:8px;align-items:center}
+.sp{justify-content:space-between}
+.mut{color:var(--mut);font-size:14px}
+.big{font-size:44px;font-weight:800;line-height:1}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .3s}
+.bar.o i{background:var(--warn)}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;min-width:0}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:10px 14px;background:var(--acc);color:#fff;font-weight:500}
+button.g{background:transparent;color:var(--acc);border:1px solid var(--line)}
+button.x{background:transparent;color:var(--mut);padding:4px 8px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--acc2);outline-offset:1px}
+.mac{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.mac b{display:block;font-size:20px}
+.item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+nav{position:fixed;bottom:0;inset-inline:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;background:transparent;color:var(--mut);border-radius:0;padding:14px 2px;font-size:13px}
+nav button[aria-selected=true]{color:var(--acc);font-weight:800;box-shadow:inset 0 3px 0 var(--acc)}
+.tab{display:none}.tab.on{display:block}
+.cups{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.cup{width:30px;height:38px;border:2px solid var(--acc);border-radius:4px 4px 10px 10px;background:transparent}
+.cup.f{background:var(--acc)}
+canvas{width:100%;height:140px}
+textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%;min-width:0;resize:vertical}
+a{color:var(--acc)}
+.btn{display:block;text-align:center;text-decoration:none;background:var(--acc);color:#fff;border-radius:10px;padding:10px 14px;margin-top:8px;font-weight:500}
+.lgbtn{padding:6px 10px;font-size:13px}
+#ub{flex-wrap:wrap;gap:6px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;text-align:center;border-top:1px solid var(--line);white-space:nowrap}th{color:var(--mut);font-weight:500;border-top:0}.tw{overflow-x:auto;margin-top:8px}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<div id="lg" style="position:fixed;inset:0;background:var(--bg);z-index:10;display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto">
+  <div class="card" style="width:100%;max-width:360px;margin:auto">
+    <div style="margin-bottom:12px"><div class="row" style="gap:6px;flex-wrap:wrap"><button class="lgbtn" data-lg="ar" aria-pressed="true">العربية</button><button class="lgbtn g" data-lg="en" aria-pressed="false">English</button><button class="lgbtn g" data-lg="sv" aria-pressed="false">Svenska</button><button class="lgbtn g" data-lg="ru" aria-pressed="false">Русский</button></div></div>
+    <h1>Musclivo</h1>
+    <div style="margin-bottom:6px">تطبيق لتتبع التغذية والتمارين.</div>
+    <ul class="mut" style="margin:0 0 14px;padding-inline-start:18px">
+      <li>تسجيل الوجبات وحساب السعرات والبروتين والكارب والدهون</li>
+      <li>حساب هدفك اليومي (نظام عادي أو كيتو)</li>
+      <li>تتبع الوزن وقياسات الجسم بجداول</li>
+      <li>تسجيل التمارين بالأوزان ومتابعة تقدّمك</li>
+      <li>مؤقت الصيام المتقطع</li>
+      <li>قسم خاص بمرضى السكري</li>
+    </ul>
+    <div class="mut" style="margin-bottom:10px">اكتب اسمك وكلمة المرور.</div>
+    <input id="ls" placeholder="الاسم" autocomplete="username" autocapitalize="none" aria-label="الاسم">
+    <input id="lp" type="password" placeholder="كلمة المرور" autocomplete="current-password" style="margin-top:8px" aria-label="كلمة المرور">
+    <button id="lb" style="margin-top:10px;width:100%">دخول</button>
+    <div id="le" style="color:var(--warn);margin-top:8px"></div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+      <div class="mut" style="margin-bottom:6px">الدخول بحساب يعطيك إياه المدرب. للحصول على حساب أو لأي سؤال، تواصل مع المدرب:</div>
+      <div class="item" style="flex-wrap:wrap;gap:4px"><b>البريد الإلكتروني</b><a href="mailto:pt.bodybuildingxx@gmail.com" dir="ltr">pt.bodybuildingxx@gmail.com</a></div>
+      <div class="item"><b>انستغرام</b><a href="https://www.instagram.com/pt.assef/" target="_blank" rel="noopener" dir="ltr">@pt.assef</a></div>
+    </div>
+  </div>
+</div>
+<div class="card row sp" id="ub" style="padding:10px;display:none"><b id="who">-</b><div class="row" style="gap:4px;flex-wrap:wrap"><button class="lgbtn" data-lg="ar" aria-pressed="true">العربية</button><button class="lgbtn g" data-lg="en" aria-pressed="false">English</button><button class="lgbtn g" data-lg="sv" aria-pressed="false">Svenska</button><button class="lgbtn g" data-lg="ru" aria-pressed="false">Русский</button></div><button class="g" id="lo">خروج</button></div>
+<div id="toast" role="status" style="display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);inset-inline:12px;z-index:20;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px"></div>
+
+<section id="t0" class="tab on">
+  <h1>اليوم</h1>
+  <div class="card">
+    <div class="row sp"><div><div class="big" id="left">0</div><div class="mut">سعرة متبقية</div></div>
+      <div class="mut" style="text-align:end">الهدف <b id="goal">2000</b><br>مأكول <b id="eaten">0</b><br>محروق <b id="burn">0</b></div></div>
+    <div class="bar" id="pb"><i id="pi"></i></div>
+    <div class="mac"><div><b id="mp">0</b><span class="mut" id="tp">بروتين</span><div class="bar"><i id="bp"></i></div></div><div><b id="mc">0</b><span class="mut" id="tc">كارب</span><div class="bar"><i id="bc"></i></div></div><div><b id="mf">0</b><span class="mut" id="tf">دهون</span><div class="bar"><i id="bf"></i></div></div></div>
+  </div>
+  <div class="card">
+    <h2>إضافة وجبة</h2>
+    <div class="grid2">
+      <select id="meal"><option value="فطور">فطور</option><option value="غداء">غداء</option><option value="عشاء">عشاء</option><option value="سناك">سناك</option></select>
+      <input id="q" list="foods" placeholder="ابحث عن أكل" aria-label="ابحث عن أكل">
+    </div>
+    <datalist id="foods"></datalist>
+    <div class="grid2" style="margin-top:8px">
+      <input id="g" type="number" inputmode="decimal" placeholder="الكمية (غرام)" aria-label="الكمية بالغرام">
+      <button id="add">أضف الوجبة</button>
+    </div>
+    <details style="margin-top:10px"><summary class="mut">أكل غير موجود؟ أضفه بنفسك</summary>
+      <div class="grid2" style="margin-top:8px">
+        <input id="cn" placeholder="الاسم">
+        <input id="ck" type="number" inputmode="decimal" placeholder="سعرات لكل 100غ">
+        <input id="cp" type="number" inputmode="decimal" placeholder="بروتين لكل 100غ">
+        <input id="cc" type="number" inputmode="decimal" placeholder="كارب لكل 100غ">
+        <input id="cf" type="number" inputmode="decimal" placeholder="دهون لكل 100غ">
+        <button class="g" id="addc">احفظ الأكل</button>
+      </div>
+    </details>
+  </div>
+  <div class="card"><h2>وجبات اليوم</h2><div id="log"></div></div>
+  <div class="card">
+    <div class="row sp"><h2>الماء</h2><span class="mut"><b id="wc">0</b> من 8 أكواب</span></div>
+    <div class="cups" id="cups"></div>
+    <div class="row"><button id="wp">+ كوب</button><button class="g" id="wm">− كوب</button></div>
+  </div>
+</section>
+
+<section id="t1" class="tab">
+  <h1>الوزن وقياسات الجسم</h1>
+  <div class="card">
+    <div class="row"><input id="wi" type="number" inputmode="decimal" step="0.1" placeholder="وزنك اليوم (كغ)" aria-label="الوزن بالكيلوغرام"><button id="wa">سجّل</button></div>
+    <div id="wt2" class="tw"></div>
+    <div class="mut" id="wh">لا توجد قياسات بعد. سجّل وزنك لتبدأ الجدول.</div>
+  </div>
+  <div class="card">
+    <h2>قياسات الجسم</h2>
+    <div class="grid2">
+      <select id="mt" aria-label="نوع القياس"></select>
+      <input id="mv" type="number" inputmode="decimal" step="0.1" placeholder="القياس (سم)" aria-label="قيمة القياس">
+    </div>
+    <button id="ma" style="margin-top:8px;width:100%">سجّل القياس</button>
+    <div id="mtb" class="tw"></div>
+  </div>
+</section>
+
+<section id="t2" class="tab">
+  <h1>الصيام</h1>
+  <div class="card">
+    <select id="fm" aria-label="نظام الصيام"><option value="16">16:8 (صيام 16 ساعة)</option><option value="18">18:6 (صيام 18 ساعة)</option><option value="20">20:4 (صيام 20 ساعة)</option></select>
+    <div class="big" id="ft" style="margin:16px 0 4px">00:00:00</div>
+    <div class="mut" id="fs">لا يوجد صيام نشط</div>
+    <div class="bar"><i id="fb"></i></div>
+    <div class="row"><button id="fgo">ابدأ الصيام</button></div>
+  </div>
+  <div class="card"><h2>سجل الصيام</h2><div id="fl" class="mut">لا يوجد سجل بعد.</div></div>
+</section>
+
+<section id="tx" class="tab">
+  <h1>التمارين</h1>
+  <div class="card">
+    <div class="grid2">
+      <select id="xs" aria-label="نوع التمرين"></select>
+      <input id="xm" type="number" inputmode="numeric" placeholder="المدة (دقيقة)" aria-label="المدة بالدقائق">
+    </div>
+    <div id="sf" class="grid2" style="margin-top:8px;display:none;grid-template-columns:1fr 1fr 1fr">
+      <input id="xst" type="number" inputmode="numeric" placeholder="مجموعات" aria-label="عدد المجموعات">
+      <input id="xr" type="number" inputmode="numeric" placeholder="تكرارات" aria-label="عدد التكرارات">
+      <input id="xw" type="number" inputmode="decimal" step="0.5" placeholder="الوزن (كغ)" aria-label="الوزن بالكيلوغرام">
+    </div>
+    <div class="mut" id="xp" style="margin-top:6px"></div>
+    <button id="xa" style="margin-top:8px;width:100%">أضف التمرين</button>
+    <div class="mut" id="xn" style="margin-top:8px"></div>
+  </div>
+  <div class="card">
+    <h2>تقسيمات جاهزة</h2>
+    <div class="row" id="sp" style="flex-wrap:wrap"></div>
+    <div id="spl"></div>
+  </div>
+  <div class="card">
+    <h2>تقدّمك بالأوزان</h2>
+    <select id="px" aria-label="اختر التمرين"></select>
+    <div id="pt" class="tw"></div>
+    <div class="mut" id="ph">سجّل تمرين بوزن لتشوف تقدمك.</div>
+  </div>
+  <div class="card">
+    <div class="row sp"><h2>تمارين اليوم</h2><span class="mut">المحروق <b id="xt">0</b> سعرة</span></div>
+    <div id="xl"></div>
+  </div>
+</section>
+
+<section id="t3" class="tab">
+  <h1>هدفي</h1>
+  <div class="card">
+    <div class="grid2">
+      <select id="sx" aria-label="الجنس"><option value="m">ذكر</option><option value="f">أنثى</option></select>
+      <input id="ag" type="number" inputmode="numeric" placeholder="العمر" aria-label="العمر">
+      <input id="ht" type="number" inputmode="numeric" placeholder="الطول (سم)" aria-label="الطول">
+      <input id="wt" type="number" inputmode="decimal" placeholder="الوزن (كغ)" aria-label="الوزن">
+    </div>
+    <select id="ac" style="margin-top:8px" aria-label="النشاط"><option value="1.2">قليل الحركة</option><option value="1.375">نشاط خفيف (1-3 أيام)</option><option value="1.55" selected>نشاط متوسط (3-5 أيام)</option><option value="1.725">نشاط عالٍ (6-7 أيام)</option></select>
+    <select id="gl" style="margin-top:8px" aria-label="الهدف"><option value="-500">تنزيل وزن</option><option value="0" selected>ثبات</option><option value="300">زيادة وزن</option></select>
+    <div class="grid2" id="dtb" role="group" aria-label="نوع النظام" style="margin-top:8px">
+      <button type="button" data-d="n" aria-pressed="true">نظام عادي</button>
+      <button type="button" class="g" data-d="k" aria-pressed="false">كيتو دايت</button>
+    </div>
+    <input type="hidden" id="dt" value="n">
+    <div class="mut" style="margin-top:6px">الكيتو: كارب 25 غ، بروتين وزنك × 2.2، والباقي دهون.</div>
+    <button id="calc" style="margin-top:10px;width:100%">احسب هدفي</button>
+    <div class="mut" id="gr" style="margin-top:10px"></div>
+  </div>
+</section>
+<section id="td" class="tab">
+  <h1>قسم مرضى السكري</h1>
+  <div class="card">
+    <h2>احتياجك اليومي</h2>
+    <div id="dtg"></div>
+    <button id="dap" style="margin-top:10px;width:100%">طبّق هذه الأهداف على شاشة اليوم</button>
+  </div>
+  <div class="card"><h2>إرشادات</h2><div id="dmn"></div></div>
+  <div class="card"><h2>وجبات مقترحة</h2><div id="dml"></div></div>
+</section>
+<section id="ta" class="tab">
+  <h1>إدارة الأشخاص</h1>
+  <div class="card">
+    <h2>شخص جديد</h2>
+    <div class="grid2">
+      <input id="nu" placeholder="الاسم" maxlength="20" autocapitalize="none" aria-label="اسم الشخص الجديد">
+      <input id="np" placeholder="كلمة المرور (8 أحرف+)" autocapitalize="none" aria-label="كلمة المرور الجديدة">
+    </div>
+    <div class="grid2" style="margin-top:8px"><button class="g" id="ng">كلمة مرور عشوائية</button><button id="nb">أضف الشخص</button></div>
+  </div>
+  <div class="card"><h2>الأشخاص</h2><div id="al" class="tw"></div></div>
+  <div class="card mut">الحسابات محفوظة على السيرفر، وكل شخص يرى بياناته فقط. أنت كمدير تقدر ترى ملخصاً لبيانات الكل. اسم المستخدم: حروف إنجليزية وأرقام فقط (2 إلى 20).</div>
+</section>
+<section id="tc" class="tab">
+  <h1>تواصل مع المدرب</h1>
+  <div class="card">
+    <div class="mut" style="margin-bottom:10px">لأي سؤال عن برنامجك أو أهدافك أو التطبيق، تواصل مع المدرب مباشرة.</div>
+    <div class="item"><b>البريد الإلكتروني</b><span class="row" style="flex-wrap:wrap;justify-content:flex-end"><a href="mailto:pt.bodybuildingxx@gmail.com" dir="ltr">pt.bodybuildingxx@gmail.com</a><button class="g" data-cp="pt.bodybuildingxx@gmail.com">نسخ</button></span></div>
+    <div class="item"><b>انستغرام</b><span class="row"><a href="https://www.instagram.com/pt.assef/" target="_blank" rel="noopener" dir="ltr">@pt.assef</a><button class="g" data-cp="@pt.assef">نسخ</button></span></div>
+  </div>
+  <div class="card">
+    <textarea id="cmsg" rows="5" placeholder="اكتب رسالتك للمدرب" aria-label="اكتب رسالتك للمدرب"></textarea>
+    <a id="cmb" class="btn" href="mailto:pt.bodybuildingxx@gmail.com" target="_blank" rel="noopener">أرسل بالبريد</a>
+    <div class="mut" style="margin-top:8px">سيفتح تطبيق البريد برسالة جاهزة فيها اسمك.</div>
+  </div>
+</section>
+</main>
+
+<nav role="tablist">
+  <button role="tab" aria-selected="true" data-t="0">اليوم</button>
+  <button role="tab" aria-selected="false" data-t="1">الوزن</button>
+  <button role="tab" aria-selected="false" data-t="2">الصيام</button>
+  <button role="tab" aria-selected="false" data-t="3">تمارين</button>
+  <button role="tab" aria-selected="false" data-t="4">هدفي</button>
+  <button role="tab" aria-selected="false" data-t="5">سكري</button>
+  <button role="tab" aria-selected="false" data-t="7">Coach</button>
+  <button role="tab" aria-selected="false" data-t="6" id="nav-a" style="display:none">إدارة</button>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const FOODS=[ // [name, kcal, protein, carb, fat] per 100g
+["خبز عربي",275,9,56,1.2],["أرز مطبوخ",130,2.7,28,0.3],["دجاج مشوي",165,31,0,3.6],["لحم بقر مشوي",250,26,0,15],
+["بيض مسلوق",155,13,1.1,11],["حمص مطبوخ",164,8.9,27,2.6],["فول مدمس",110,7.6,19,0.5],["لبنة",170,8,5,13],
+["لبن زبادي",61,3.5,4.7,3.3],["جبنة بيضاء",260,17,2,20],["تمر",282,2.5,75,0.4],["موز",89,1.1,23,0.3],
+["تفاح",52,0.3,14,0.2],["خيار",15,0.7,3.6,0.1],["بندورة",18,0.9,3.9,0.2],["زيت زيتون",884,0,0,100],
+["فلافل",333,13,32,18],["شاورما دجاج",215,20,8,11],["مجدرة",150,5.5,24,3.5],["كبة مقلية",260,12,20,15],
+["معكرونة مطبوخة",158,5.8,31,0.9],["سمك مشوي",140,24,0,4.5],["شوفان",389,17,66,7],["لوز",579,21,22,50],["حليب",61,3.2,4.8,3.3],
+["خبز أسمر",247,13,41,3.4],["برغل مطبوخ",83,3,18.6,0.2],["عدس مطبوخ",116,9,20,0.4],["شوفان مطبوخ بالماء",71,2.5,12,1.5],["كينوا مطبوخة",120,4.4,21,1.9],["بطاطا حلوة مشوية",90,2,21,0.2],["سلطة خضراء",20,1.4,3.6,0.2],["بروكلي مطبوخ",35,2.4,7,0.4],["كوسا مطبوخة",17,1.2,3.1,0.3],["سلمون مشوي",208,22,0,13],["تونة بالماء",116,26,0,1],["جبنة قريش",98,11,3.4,4.3],["أفوكادو",160,2,8.5,15],["جوز",654,15,14,65],["توت",57,0.7,14,0.3]];
+/* ===== إعداد Supabase: ضع رابط مشروعك والمفتاح العام (anon) ===== */
+const SB_URL='https://kucmmjnfrgypcwewlzpl.supabase.co',SB_KEY='sb_publishable_vB1D4ibFpik2JJfOLTNYfQ_HfqKw45I';
+/* ================================================================== */
+const DEF=()=>({foods:[],log:{},water:{},weights:[],fasts:[],fast:null,goal:2000,ex:{},kg:0,ms:[]});
+let S=DEF(),sb=null,me=null,saveT=null;
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',4500)}
+async function pushS(){if(!sb||!me)return;const {error}=await sb.from('user_data').upsert({user_id:me.id,data:S,updated_at:new Date().toISOString()});if(error)toast('تعذر الحفظ على السيرفر: '+error.message)}
+const save=()=>{if(!me)return;clearTimeout(saveT);saveT=setTimeout(pushS,600)};
+const day=()=>new Date().toISOString().slice(0,10);
+const all=()=>FOODS.concat(S.foods);
+const r1=n=>Math.round(n);
+
+function render(){
+  const d=day(),L=S.log[d]||[];
+  let k=0,p=0,c=0,f=0;L.forEach(x=>{k+=x.k;p+=x.p;c+=x.c;f+=x.f});
+  const bn=burned(d),net=k-bn;
+  $('goal').textContent=S.goal;$('eaten').textContent=r1(k);$('burn').textContent=r1(bn);
+  $('left').textContent=r1(S.goal-net);
+  const pct=Math.max(0,Math.min(100,net/S.goal*100));$('pi').style.width=pct+'%';
+  $('pb').classList.toggle('o',net>S.goal);
+  $('mp').textContent=r1(p);$('mc').textContent=r1(c);$('mf').textContent=r1(f);
+  const T=tg();
+  [['p',p,T.p,'بروتين'],['c',c,T.c,'كارب'],['f',f,T.f,'دهون']].forEach(a=>{$('t'+a[0]).textContent=`${a[3]} من ${a[2]} غ`;$('b'+a[0]).style.width=Math.min(100,a[1]/a[2]*100)+'%'});
+  showGoal();drawDM();drawM();
+  $('foods').innerHTML=all().map(x=>`<option value="${tr(x[0])}">`).join('');
+  $('log').innerHTML=L.length?L.map((x,i)=>`<div class="item"><div><b>${x.n}</b> <span class="mut">${x.g}غ · ${x.m}</span><div class="mut">${r1(x.k)} سعرة · بروتين ${r1(x.p)}غ · كارب ${r1(x.c)}غ · دهون ${r1(x.f)}غ</div></div><button class="x" data-del="${i}" aria-label="احذف ${x.n}">حذف</button></div>`).join(''):'<div class="mut">لم تضف وجبات اليوم. اختر أكلاً وأضفه.</div>';
+  const w=S.water[d]||0;$('wc').textContent=w;
+  $('cups').innerHTML=Array.from({length:8},(_,i)=>`<div class="cup ${i<w?'f':''}"></div>`).join('');
+  drawW();drawF();drawX();
+}
+$('add').onclick=()=>{
+  const n=$('q').value.trim(),g=parseFloat($('g').value),x=all().find(a=>a[0]===n||tr(a[0])===n);
+  if(!x){alert('اختر أكلاً من القائمة، أو أضفه بنفسك.');return}
+  if(!(g>0)){alert('اكتب الكمية بالغرام.');return}
+  const m=g/100,d=day();(S.log[d]=S.log[d]||[]).push({n:x[0],g,m:$('meal').value,k:x[1]*m,p:x[2]*m,c:x[3]*m,f:x[4]*m});
+  $('q').value='';$('g').value='';save();render();
+};
+$('log').onclick=e=>{const i=e.target.dataset.del;if(i===undefined)return;S.log[day()].splice(+i,1);save();render()};
+$('addc').onclick=()=>{
+  const n=$('cn').value.trim(),k=parseFloat($('ck').value);
+  if(!n||!(k>=0)){alert('اكتب الاسم والسعرات على الأقل.');return}
+  S.foods.push([n,k,parseFloat($('cp').value)||0,parseFloat($('cc').value)||0,parseFloat($('cf').value)||0]);
+  ['cn','ck','cp','cc','cf'].forEach(i=>$(i).value='');save();render();
+};
+$('wp').onclick=()=>{const d=day();S.water[d]=Math.min(20,(S.water[d]||0)+1);save();render()};
+$('wm').onclick=()=>{const d=day();S.water[d]=Math.max(0,(S.water[d]||0)-1);save();render()};
+
+$('wa').onclick=()=>{
+  const v=parseFloat($('wi').value);if(!(v>20&&v<400)){alert('اكتب وزناً صحيحاً بالكيلوغرام.');return}
+  S.weights=S.weights.filter(x=>x.d!==day());S.weights.push({d:day(),v});S.weights.sort((a,b)=>a.d<b.d?-1:1);
+  $('wi').value='';save();render();
+};
+function drawW(){
+  const W=S.weights;
+  if(!W.length){$('wh').textContent='لا توجد قياسات بعد. سجّل وزنك لتبدأ الجدول.';$('wt2').innerHTML='';return}
+  $('wh').textContent=`آخر وزن ${W[W.length-1].v} كغ`+(W.length>1?` · التغيّر ${(W[W.length-1].v-W[0].v).toFixed(1)} كغ منذ ${W[0].d}`:'');
+  $('wt2').innerHTML='<table><thead><tr><th>التاريخ</th><th>الوزن (كغ)</th><th>التغيّر</th><th></th></tr></thead><tbody>'+W.slice().reverse().map((a,i,r)=>`<tr><td>${a.d.split('-').reverse().join('/')}</td><td><b>${a.v}</b></td><td>${r[i+1]?`${a.v-r[i+1].v>0?'+':''}${(a.v-r[i+1].v).toFixed(1)}`:'-'}</td><td><button class="x" data-wd="${a.d}" aria-label="احذف وزن ${a.d}">حذف</button></td></tr>`).join('')+'</tbody></table>';
+}
+$('wt2').onclick=e=>{const d=e.target.dataset.wd;if(!d)return;S.weights=S.weights.filter(x=>x.d!==d);save();render()};
+
+const G1='رياضات عامة',G2='أجهزة الكارديو',G3='أجهزة المقاومة',G4='أوزان حرة (دمبل وبار)';
+const EX=[["مشي",3.5,G1],["جري",9.8,G1],["سباحة",7,G1],["كرة قدم",7,G1],["كرة يد",8,G1],["رفع أوزان حرة",5,G1],["دراجة",7.5,G1],["حبل قفز",11,G1],["يوغا",3,G1],
+["جهاز المشي (تردميل)",6,G2],["دراجة ثابتة",7,G2],["إليبتيكال",5,G2],["جهاز التجديف",7,G2],["جهاز الدرج (ستيبر)",9,G2],
+["ضغط الصدر (Chest Press)",5,G3],["فراشة (Pec Deck)",5,G3],["سحب علوي (Lat Pulldown)",5,G3],["سحب أرضي (Seated Row)",5,G3],["ضغط الكتف (Shoulder Press)",5,G3],["ضغط الأرجل (Leg Press)",5,G3],["رفرفة أمامية للأرجل (Leg Extension)",5,G3],["رفرفة خلفية للأرجل (Leg Curl)",5,G3],["جهاز سميث (Smith Machine)",5,G3],["كيبل (Cable)",5,G3],["بايسبس (Biceps Curl Machine)",5,G3],["ترايسبس (Triceps Machine)",5,G3],["سمانة (Calf Raise)",5,G3],["جهاز البطن (Ab Crunch)",5,G3],
+["ضغط صدر بالدمبل",5,G4],["ضغط كتف بالدمبل",5,G4],["رفرفة بالدمبل",5,G4],["رفرفة جانبية بالدمبل",5,G4],["بايسبس بالدمبل",5,G4],["ترايسبس بالدمبل",5,G4],["تجديف بالدمبل",5,G4],["لانجز بالدمبل",5,G4],["سكوات جوبلت بالدمبل",5,G4],
+["بنش بريس بالبار",6,G4],["سكوات بالبار",6,G4],["ديدلفت بالبار",6,G4],["ضغط كتف بالبار",5,G4],["تجديف بالبار",6,G4],["بايسبس بالبار",5,G4],["ترايسبس بالبار (Skull Crusher)",5,G4],["هيب ثرست بالبار",5,G4]];
+const kgNow=()=>S.weights.length?S.weights[S.weights.length-1].v:(S.kg||70);
+const burned=d=>(S.ex[d]||[]).reduce((a,x)=>a+x.k,0);
+$('xs').innerHTML=[G1,G2,G3,G4].map(g=>`<optgroup label="${g}">`+EX.map((e,i)=>e[2]===g?`<option value="${i}">${e[0]}</option>`:'').join('')+'</optgroup>').join('');
+$('xa').onclick=()=>{
+  const e=EX[+$('xs').value],d=day(),st=e[2]===G3||e[2]===G4;
+  let m=parseFloat($('xm').value);const o={n:e[0]};
+  if(st){const s=+$('xst').value,r=+$('xr').value,w=parseFloat($('xw').value);
+    if(!(s>0&&r>0&&w>=0)){alert('اكتب المجموعات والتكرارات والوزن.');return}
+    if(!(m>0))m=s*2.5;
+    Object.assign(o,{s,r,w})}
+  else if(!(m>0)){alert('اكتب مدة التمرين بالدقائق.');return}
+  o.m=m;o.k=e[1]*kgNow()*m/60;
+  (S.ex[d]=S.ex[d]||[]).push(o);
+  ['xst','xr','xw'].forEach(i=>$(i).value='');
+  $('xm').value='';save();render();
+};
+$('xl').onclick=e=>{const i=e.target.dataset.xd;if(i===undefined)return;S.ex[day()].splice(+i,1);save();render()};
+function lastSet(n){const ds=Object.keys(S.ex).sort().reverse();for(const d of ds){for(let i=S.ex[d].length-1;i>=0;i--){const x=S.ex[d][i];if(x.n===n&&x.w!==undefined)return x}}return null}
+function xsel(){const e=EX[+$('xs').value],st=e[2]===G3||e[2]===G4;
+  $('sf').style.display=st?'grid':'none';
+  $('xm').placeholder=st?'المدة (اختياري)':'المدة (دقيقة)';
+  const l=st&&lastSet(e[0]);
+  $('xp').textContent=l?`آخر مرة: ${l.s}×${l.r} بوزن ${l.w} كغ`:'';}
+$('xs').onchange=xsel;
+const SPL={'Push (دفع)':[['بنش بريس بالبار',4,8],['ضغط كتف بالدمبل',3,10],['ضغط الصدر (Chest Press)',3,12],['رفرفة جانبية بالدمبل',3,12],['ترايسبس (Triceps Machine)',3,12]],
+'Pull (سحب)':[['ديدلفت بالبار',3,6],['سحب علوي (Lat Pulldown)',4,10],['سحب أرضي (Seated Row)',3,10],['تجديف بالدمبل',3,10],['بايسبس بالدمبل',3,12]],
+'Legs (أرجل)':[['سكوات بالبار',4,8],['ضغط الأرجل (Leg Press)',3,12],['رفرفة أمامية للأرجل (Leg Extension)',3,12],['رفرفة خلفية للأرجل (Leg Curl)',3,12],['سمانة (Calf Raise)',3,15]]};
+$('sp').innerHTML=Object.keys(SPL).map(k=>`<button class="g" data-sp="${k}">${k}</button>`).join('');
+$('sp').onclick=e=>{const k=e.target.dataset.sp;if(!k)return;
+  $('spl').innerHTML=SPL[k].map(a=>`<div class="item"><span>${a[0]} <span class="mut">${a[1]}×${a[2]}</span></span><button class="x" data-pk="${a[0]}|${a[1]}|${a[2]}">اختر</button></div>`).join('')};
+$('spl').onclick=e=>{const p=e.target.dataset.pk;if(!p)return;const [n,s,r]=p.split('|'),i=EX.findIndex(x=>x[0]===n);if(i<0)return;
+  $('xs').value=i;xsel();$('xst').value=s;$('xr').value=r;$('xw').focus();$('xs').scrollIntoView({block:'center'})};
+$('px').onchange=drawP;
+function drawP(){
+  const sel=$('px'),cur=sel.value,names=[...new Set(Object.values(S.ex).flat().filter(x=>x.w!==undefined).map(x=>x.n))];
+  sel.innerHTML=names.map(n=>`<option value="${n}">${n}</option>`).join('');
+  if(names.includes(cur))sel.value=cur;
+  if(!names.length){$('ph').textContent='سجّل تمرين بوزن لتشوف تقدمك.';$('pt').innerHTML='';return}
+  const R=[];Object.keys(S.ex).sort().forEach(d=>S.ex[d].forEach(a=>{if(a.n===sel.value&&a.w!==undefined)R.push({d,s:a.s,r:a.r,w:a.w})}));
+  const f=R[0],l=R[R.length-1],mx=Math.max(...R.map(a=>a.w));
+  $('ph').textContent=`أعلى وزن رفعته ${mx} كغ`+(R.length>1?` · التغيّر ${(l.w-f.w>0?'+':'')}${(l.w-f.w).toFixed(1)} كغ منذ ${f.d}`:'');
+  $('pt').innerHTML='<table><thead><tr><th>التاريخ</th><th>المجموعات × التكرارات</th><th>الوزن (كغ)</th><th>التغيّر</th></tr></thead><tbody>'+R.slice().reverse().map((a,i,r)=>`<tr><td>${a.d.split('-').reverse().join('/')}</td><td>${a.s}×${a.r}</td><td><b>${a.w}</b></td><td>${r[i+1]?`${a.w-r[i+1].w>0?'+':''}${(a.w-r[i+1].w).toFixed(1)}`:'-'}</td></tr>`).join('')+'</tbody></table>';
+}
+function drawX(){
+  xsel();drawP();
+  const L=S.ex[day()]||[];
+  $('xt').textContent=r1(burned(day()));
+  $('xn').textContent=`الحساب بوزن ${kgNow()} كغ. القيمة تقديرية، وأجهزة المقاومة محسوبة بمعدل متوسط لأن الجهد يختلف حسب الوزن والراحة بين المجموعات. إذا تركت المدة فاضية بنحسب 2.5 دقيقة لكل مجموعة.`;
+  $('xl').innerHTML=L.length?L.map((x,i)=>`<div class="item"><div><b>${x.n}</b> <span class="mut">${x.s?`${x.s}×${x.r} بوزن ${x.w} كغ · `:''}${r1(x.m)} دقيقة</span><div class="mut">${r1(x.k)} سعرة</div></div><button class="x" data-xd="${i}" aria-label="احذف ${x.n}">حذف</button></div>`).join(''):'<div class="mut">لم تسجّل تمارين اليوم.</div>';
+}
+$('dtb').onclick=e=>{const b=e.target.closest('button');if(!b)return;$('dt').value=b.dataset.d;
+  $('dtb').querySelectorAll('button').forEach(x=>{const on=x===b;x.classList.toggle('g',!on);x.setAttribute('aria-pressed',on)})};
+function applyDiet(){$('dtb').querySelector(S.keto?'[data-d=k]':'[data-d=n]').click()}
+applyDiet();
+const TPL={'فطور':[[['شوفان مطبوخ بالماء',200],['لبن زبادي',150],['لوز',15],['توت',80]],[['بيض مسلوق',100],['خبز أسمر',60],['خيار',100],['بندورة',100],['زيت زيتون',5]],[['فول مدمس',150],['خبز أسمر',50],['بندورة',100],['زيت زيتون',5]]],
+'غداء':[[['دجاج مشوي',120],['برغل مطبوخ',120],['سلطة خضراء',150],['زيت زيتون',10]],[['سلمون مشوي',120],['كينوا مطبوخة',100],['بروكلي مطبوخ',150],['زيت زيتون',5]],[['عدس مطبوخ',200],['سلطة خضراء',150],['لبن زبادي',100],['خبز أسمر',40]]],
+'عشاء':[[['تونة بالماء',100],['سلطة خضراء',200],['خبز أسمر',40],['زيت زيتون',10],['أفوكادو',50]],[['لحم بقر مشوي',100],['كوسا مطبوخة',150],['بطاطا حلوة مشوية',100],['سلطة خضراء',100]],[['جبنة قريش',150],['بندورة',100],['خيار',100],['خبز أسمر',50],['جوز',15]]],
+'سناك':[[['تفاح',150],['لوز',20]],[['لبن زبادي',150],['جوز',15]],[['خيار',150],['حمص مطبوخ',60]],[['جبنة قريش',100],['بندورة',100]]]};
+const SH={'فطور':.25,'غداء':.3,'عشاء':.25,'سناك':.2};
+function scaleTpl(it,meal){
+  const T=dt(),cg=T.c*SH[meal];let c0=0;
+  it.forEach(a=>{const f=all().find(x=>x[0]===a[0]);c0+=f[3]*a[1]/100});
+  const k=Math.min(1.6,Math.max(.6,cg/(c0||1)));
+  return it.map(a=>{const f=all().find(x=>x[0]===a[0]),g=Math.max(5,Math.round(a[1]*k/5)*5),m=g/100;return{n:a[0],g,k:f[1]*m,p:f[2]*m,c:f[3]*m,f:f[4]*m}});
+}
+function drawDM(){
+  showDT();
+  const T=dt(),op=[...$('dml').querySelectorAll('details[open]')].map(d=>d.dataset.m);
+  $('dmn').innerHTML='<ul style="margin:6px 0;padding-inline-start:18px"><li>اتبع طريقة الطبق: نصف الطبق خضار غير نشوية، ربع بروتين قليل الدهن، وربع نشويات كاملة الحبوب.</li><li>وزّع الكارب بشكل متقارب على الوجبات كل يوم.</li><li>تجنب العصائر والمشروبات المحلاة والخبز الأبيض والحلويات.</li><li>اختر الدهون الصحية (زيت الزيتون، المكسرات، السمك) وزد الألياف.</li><li>إذا انخفض سكرك عن 70 ملغ/دل وأنت على إنسولين أو أدوية خافضة: خذ 15 غ كارب سريع (نصف كوب عصير) وأعد القياس بعد 15 دقيقة.</li></ul><div class="mut">الكميات تتعدّل تلقائياً لتقارب حصة الكارب لكل وجبة من هدفك. هذه اقتراحات عامة، وخطتك الدقيقة يحددها طبيبك أو أخصائي التغذية.</div>';
+  $('dml').innerHTML=Object.keys(TPL).map(m=>{
+    const sh=SH[m];
+    return `<details data-m="${m}" ${op.includes(m)?'open':''} style="border-top:1px solid var(--line);padding:8px 0"><summary><b>${m}</b> <span class="mut">هدفك: كارب ${r1(T.c*sh)}غ · بروتين ${r1(T.p*sh)}غ · دهون ${r1(T.f*sh)}غ</span></summary>`+TPL[m].map((it,i)=>{
+      const s=scaleTpl(it,m),t=s.reduce((a,x)=>({k:a.k+x.k,p:a.p+x.p,c:a.c+x.c,f:a.f+x.f}),{k:0,p:0,c:0,f:0});
+      return `<div class="item" style="align-items:flex-start"><div><div>${s.map(x=>`${x.n} ${x.g}غ`).join(' + ')}</div><div class="mut">${r1(t.k)} سعرة · بروتين ${r1(t.p)}غ · كارب ${r1(t.c)}غ · دهون ${r1(t.f)}غ</div></div><button class="g" data-tm="${m}|${i}">أضف</button></div>`}).join('')+'</details>';
+  }).join('');
+}
+$('dml').onclick=e=>{const v=e.target.dataset.tm;if(!v)return;const [m,i]=v.split('|'),s=scaleTpl(TPL[m][+i],m),d=day();
+  s.forEach(x=>(S.log[d]=S.log[d]||[]).push({n:x.n,g:x.g,m,k:x.k,p:x.p,c:x.c,f:x.f}));save();render()};
+function dt(){const g=S.goal,w=kgNow(),p=r1(w*1.2),c=r1(g*.4/4);return{p,c,f:Math.max(0,r1((g-p*4-c*4)/9))}}
+function showDT(){
+  const t=dt(),g=S.goal;
+  const row=(n,v,pc)=>`<div class="item"><b>${n}</b><span>${v}${pc?` <span class="mut">(${pc}% من السعرات)</span>`:''}</span></div>`;
+  $('dtg').innerHTML=row('السعرات',g+' سعرة')+row('الكارب',t.c+' غ (حوالي '+r1(t.c/3)+' غ لكل وجبة رئيسية)',40)+row('البروتين',t.p+' غ',r1(t.p*4/g*100))+row('الدهون',t.f+' غ',r1(t.f*9/g*100))+`<div class="mut" style="margin-top:8px">محسوب على وزن ${kgNow()} كغ وهدف ${g} سعرة (غيّرهم من تبويب هدفي). الكارب 40% من السعرات، والبروتين وزنك × 1.2 غ، والدهون هي الباقي. مع مشاكل الكلى يختلف البروتين المناسب، فراجع طبيبك.</div>`;
+}
+$('dap').onclick=()=>{const t=dt();S.tp=t.p;S.tc=t.c;S.tf=t.f;S.pk=1.2;S.keto=false;S.dm=true;save();render();
+  $('dap').textContent='تم التطبيق على شاشة اليوم';setTimeout(()=>$('dap').textContent='طبّق هذه الأهداف على شاشة اليوم',2500)};
+const MT=[['الخصر','سم'],['الصدر','سم'],['الورك','سم'],['الذراع','سم'],['الكتف','سم'],['الفخذ','سم'],['السمانة','سم'],['الرقبة','سم'],['نسبة الدهون','%']];
+S.ms=S.ms||[];
+$('mt').innerHTML=MT.map(a=>`<option value="${a[0]}">${a[0]}</option>`).join('');
+$('mt').onchange=drawM;
+$('ma').onclick=()=>{const v=parseFloat($('mv').value);if(!(v>0)){alert('اكتب قيمة القياس.');return}
+  const t=$('mt').value;S.ms=S.ms.filter(x=>!(x.d===day()&&x.t===t));S.ms.push({d:day(),t,v});S.ms.sort((a,b)=>a.d<b.d?-1:1);$('mv').value='';save();render()};
+$('mtb').onclick=e=>{const c=e.target.dataset.dc;if(!c)return;const [d,t]=c.split('|');S.ms=S.ms.filter(x=>!(x.d===d&&x.t===t));save();render()};
+function drawM(){
+  const sel=$('mt').value,u=MT.find(a=>a[0]===sel)[1];
+  $('mv').placeholder=`القياس (${u})`;
+  const cols=MT.filter(a=>S.ms.some(x=>x.t===a[0])),ds=[...new Set(S.ms.map(x=>x.d))].sort().reverse();
+  if(!cols.length){$('mtb').innerHTML='<div class="mut">لم تسجّل قياسات بعد. اختر القياس وأدخل رقمك.</div>';return}
+  $('mtb').innerHTML='<table><thead><tr><th>التاريخ</th>'+cols.map(a=>`<th>${a[0]} (${a[1]})</th>`).join('')+'</tr></thead><tbody>'+ds.map(d=>'<tr><td>'+d.split('-').reverse().join('/')+'</td>'+cols.map(a=>{
+    const Q=S.ms.filter(x=>x.t===a[0]),i=Q.findIndex(x=>x.d===d);
+    if(i<0)return'<td>-</td>';
+    const df=i>0?Q[i].v-Q[i-1].v:null;
+    return `<td><b>${Q[i].v}</b>${df===null?'':` <span class="mut">(${df>0?'+':''}${df.toFixed(1)})</span>`} <button class="x" data-dc="${d}|${a[0]}" aria-label="احذف ${a[0]} بتاريخ ${d}">×</button></td>`}).join('')+'</tr>').join('')+'</tbody></table>';
+}
+function tg(){const g=S.goal;return S.tp?{p:S.tp,f:S.tf,c:S.tc}:{p:r1(g*.25/4),f:r1(g*.28/9),c:r1(g*.47/4)}}
+function showGoal(){
+  const t=tg(),g=S.goal;
+  const row=(n,v,pc)=>`<div class="item"><b>${n}</b><span>${v}${pc?` <span class="mut">(${pc}% من السعرات)</span>`:''}</span></div>`;
+  const note=S.tp?`${S.bmr?`معدل الحرق الأساسي ${S.bmr} سعرة. `:''}البروتين ${S.pk} غ لكل كغ من وزنك، ${S.keto?'والكارب 25 غ يومياً، والدهون هي الباقي من سعراتك (كيتو). الكيتو لا يناسب الجميع (مرضى السكري أو الكلى أو الكبد، الحمل والرضاعة)، استشر طبيباً قبل البدء.':S.dm?'والكارب 40% من السعرات، يعني حوالي '+r1(t.c/3)+' غ لكل وجبة رئيسية (وزّعه على اليوم)، والدهون هي الباقي. هذا لا يغني عن خطة طبيبك: جرعات الأدوية أو الإنسولين لا تعتمد على هذا التطبيق، ومع مشاكل الكلى يختلف البروتين المناسب. اتفق مع طبيبك أو أخصائي التغذية على أهدافك.':'والدهون 0.4 غ لكل كغ، والكارب هو الباقي من سعراتك.'} تقدير عام وليس نصيحة طبية.`:'احسب هدفك فوق لتحصل على أرقام مخصصة لك. الأرقام الحالية افتراضية: بروتين 25% ودهون 28% وكارب 47%.';
+  $('gr').innerHTML='<h2 style="margin-top:4px">احتياجك اليومي</h2>'+row('السعرات',g+' سعرة')+row('البروتين',t.p+' غ',r1(t.p*4/g*100))+row('الكارب',t.c+' غ',r1(t.c*4/g*100))+row('الدهون',t.f+' غ',r1(t.f*9/g*100))+`<div style="margin-top:8px">${note}</div>`;
+}
+const fmt=s=>[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(n=>String(n).padStart(2,'0')).join(':');
+function drawF(){
+  const F=S.fast;$('fgo').textContent=F?'أنهِ الصيام':'ابدأ الصيام';
+  $('fl').innerHTML=S.fasts.length?S.fasts.slice(-7).reverse().map(a=>`<div class="item"><span>${a.d}</span><b>${fmt(a.s).slice(0,5)} ساعة</b><span>${a.ok?'أكملت الهدف':'لم تكمل الهدف'}</span></div>`).join(''):'لا يوجد سجل بعد.';
+}
+function tick(){
+  const F=S.fast;if(!F){$('ft').textContent='00:00:00';$('fs').textContent='لا يوجد صيام نشط';$('fb').style.width='0';return}
+  const s=Math.floor((Date.now()-F.t)/1000),tg=F.h*3600;
+  $('ft').textContent=fmt(s);$('fb').style.width=Math.min(100,s/tg*100)+'%';
+  $('fs').textContent=s>=tg?'أكملت هدف الصيام. يمكنك الأكل الآن.':`باقي ${fmt(tg-s).slice(0,5)} ساعة على الهدف`;
+}
+$('fgo').onclick=()=>{
+  if(S.fast){const s=Math.floor((Date.now()-S.fast.t)/1000);S.fasts.push({d:day(),s,ok:s>=S.fast.h*3600});S.fast=null}
+  else S.fast={t:Date.now(),h:+$('fm').value};
+  save();drawF();tick();
+};
+setInterval(tick,1000);
+
+$('calc').onclick=()=>{
+  const a=+$('ag').value,h=+$('ht').value,w=+$('wt').value;
+  if(!(a>0&&h>0&&w>0)){alert('املأ العمر والطول والوزن.');return}
+  const bmr=10*w+6.25*h-5*a+($('sx').value==='m'?5:-161);
+  const g=Math.max(1200,r1(bmr*$('ac').value+ +$('gl').value));
+  const pk={'-500':2.2,'0':2,'300':2.2}[$('gl').value]||2;
+  const kt=$('dt').value==='k';
+  const dm=$('dt').value==='d';
+  S.keto=kt;S.dm=dm;S.goal=g;S.kg=w;S.bmr=r1(bmr);S.pk=kt?2.2:dm?1.2:pk;S.tp=r1(w*S.pk);
+  if(dm){S.tc=r1(g*.4/4);S.tf=Math.max(0,r1((g-S.tp*4-S.tc*4)/9))}
+  else if(kt){S.tc=25;S.tf=Math.max(0,r1((g-S.tp*4-S.tc*4)/9))}
+  else{S.tf=r1(w*.4);S.tc=Math.max(0,r1((g-S.tp*4-S.tf*9)/4))}
+  S.pf={sx:$('sx').value,ag:$('ag').value,ht:$('ht').value,wt:$('wt').value,ac:$('ac').value,gl:$('gl').value};
+  save();render();
+  
+};
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i==b.dataset.t));
+  render();
+});
+const PD={sx:'m',ag:'',ht:'',wt:'',ac:'1.55',gl:'0'};
+function applyPf(){const p=S.pf||{};Object.keys(PD).forEach(i=>{$(i).value=p[i]??PD[i]})}
+
+const mail=u=>u.toLowerCase()+'@members.test';
+const okName=u=>/^[a-z0-9_.-]{2,20}$/i.test(u);
+function showLogin(msg){me=null;S=DEF();$('lg').style.display='flex';$('ub').style.display='none';$('nav-a').style.display='none';$('ls').value='';$('le').textContent=msg||''}
+async function startUser(user){
+  const {data:pf,error}=await sb.from('profiles').select('username,is_admin').eq('id',user.id).maybeSingle();
+  if(error||!pf){await sb.auth.signOut();showLogin('هذا الحساب غير مفعّل. تواصل مع المدير.');return}
+  me=user;
+  const {data:ud}=await sb.from('user_data').select('data').eq('user_id',user.id).maybeSingle();
+  S=Object.assign(DEF(),(ud&&ud.data)||{});S.ms=S.ms||[];
+  $('who').textContent=pf.username;$('lg').style.display='none';$('ub').style.display='flex';
+  $('nav-a').style.display=pf.is_admin?'':'none';
+  applyPf();applyDiet();
+  document.querySelector('nav button[data-t="0"]').click();
+  tick();if(pf.is_admin)loadUsers();
+}
+$('lb').onclick=async()=>{
+  const u=$('ls').value.trim(),p=$('lp').value;$('le').textContent='';
+  if(!okName(u)||!p){$('le').textContent='اكتب اسمك وكلمة المرور.';return}
+  if(!sb){$('le').textContent='التطبيق غير مضبوط بعد (انظر README).';return}
+  $('lb').disabled=true;
+  const {data,error}=await sb.auth.signInWithPassword({email:mail(u),password:p});
+  $('lb').disabled=false;
+  if(error){$('le').textContent='الاسم أو كلمة المرور غير صحيحة.';return}
+  $('lp').value='';await startUser(data.user);
+};
+$('lp').onkeydown=e=>{if(e.key==='Enter')$('lb').click()};
+$('ls').onkeydown=e=>{if(e.key==='Enter')$('lp').focus()};
+$('lo').onclick=async()=>{clearTimeout(saveT);await pushS();await sb.auth.signOut();showLogin('')};
+
+/* ===== إدارة الأشخاص (للمدير فقط) ===== */
+async function adm(action,body){
+  const {data:{session}}=await sb.auth.getSession();
+  const r=await fetch(SB_URL+'/functions/v1/admin-users',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+session.access_token,apikey:SB_KEY},body:JSON.stringify({action,...(body||{})})});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(j.error||'حدث خطأ');
+  return j;
+}
+async function loadUsers(){
+  try{
+    const j=await adm('list');
+    $('al').innerHTML='<table><thead><tr><th>الشخص</th><th>كلمة المرور</th><th></th></tr></thead><tbody>'+j.users.map(u=>`<tr><td><b>${esc(u.username)}</b>${u.is_admin?' <span class="mut">(المدير)</span>':''}</td><td>${u.id===me.id?'-':`<input data-pw="${u.id}" placeholder="كلمة جديدة" style="width:120px"> <button class="g" data-rs="${u.id}">غيّر</button>`}</td><td>${u.id===me.id?'':`<button class="g" data-vw="${u.id}">بياناته</button> <button class="x" data-dl="${u.id}">حذف</button>`}</td></tr>`).join('')+'</tbody></table><div id="av"></div>';
+  }catch(e){toast(e.message)}
+}
+$('al').onclick=async e=>{
+  const b=e.target.closest('button');if(!b)return;
+  try{
+    if(b.dataset.rs){
+      const id=b.dataset.rs,p=$('al').querySelector(`[data-pw="${id}"]`).value;
+      if(p.length<8){toast('كلمة المرور 8 أحرف على الأقل.');return}
+      await adm('reset',{id,password:p});toast('تم تغيير كلمة المرور. أعطها للشخص.');loadUsers();
+    }else if(b.dataset.dl){
+      if(b.dataset.c!=='1'){b.dataset.c='1';b.textContent='تأكيد الحذف';setTimeout(()=>{b.dataset.c='';b.textContent='حذف'},3000);return}
+      await adm('delete',{id:b.dataset.dl});toast('تم حذف الشخص وبياناته.');loadUsers();
+    }else if(b.dataset.vw){
+      const name=b.closest('tr').querySelector('b').textContent;
+      const {data,error}=await sb.from('user_data').select('data').eq('user_id',b.dataset.vw).maybeSingle();
+      if(error)throw error;
+      const d=(data&&data.data)||{},L=(d.log&&d.log[day()])||[],W=d.weights||[];
+      $('av').innerHTML=`<div class="card" style="margin-top:10px"><h2>${esc(name)}</h2><div class="item"><span>هدف السعرات</span><b>${d.goal||'-'}</b></div><div class="item"><span>مأكول اليوم</span><b>${r1(L.reduce((a,x)=>a+x.k,0))} سعرة</b></div><div class="item"><span>آخر وزن</span><b>${W.length?W[W.length-1].v+' كغ ('+W[W.length-1].d+')':'-'}</b></div><div class="item"><span>أيام فيها وجبات</span><b>${Object.keys(d.log||{}).length}</b></div></div>`;
+    }
+  }catch(err){toast(err.message||'حدث خطأ')}
+};
+$('nb').onclick=async()=>{
+  const u=$('nu').value.trim(),p=$('np').value;
+  if(!okName(u)){toast('اسم المستخدم: 2 إلى 20 حرف إنجليزي أو رقم.');return}
+  if(p.length<8){toast('كلمة المرور 8 أحرف على الأقل.');return}
+  try{await adm('create',{username:u,password:p});toast(`تمت إضافة ${u}. أعطه كلمة المرور.`);$('nu').value='';$('np').value='';loadUsers()}catch(e){toast(e.message)}
+};
+$('ng').onclick=()=>{const c='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789',a=crypto.getRandomValues(new Uint32Array(10));$('np').value=[...a].map(n=>c[n%c.length]).join('')};
+
+/* ===== اللغات: العربية / English / Svenska ===== */
+const DICT=[["اليوم", "Today", "Idag", "Сегодня"], ["الوزن وقياسات الجسم", "Weight and body measurements", "Vikt och kroppsmått", "Вес и замеры тела"], ["قياسات الجسم", "Body measurements", "Kroppsmått", "Замеры тела"], ["الوزن", "Weight", "Vikt", "Вес"], ["الصيام", "Fasting", "Fasta", "Голодание"], ["تمارين اليوم", "Today's exercise", "Dagens träning", "Тренировки сегодня"], ["التمارين", "Exercise", "Träning", "Тренировки"], ["تمارين", "Exercise", "Träning", "Тренировки"], ["هدفي", "My goal", "Mitt mål", "Моя цель"], ["سكري", "Diabetes", "Diabetes", "Диабет"], ["قسم مرضى السكري", "Diabetes section", "Diabetesavsnitt", "Раздел для больных диабетом"], ["إدارة الأشخاص", "People management", "Hantera personer", "Управление людьми"], ["إدارة", "Admin", "Admin", "Админ"], ["دخول", "Log in", "Logga in", "Войти"], ["خروج", "Log out", "Logga ut", "Выйти"], ["سعرة متبقية", "kcal left", "kcal kvar", "ккал осталось"], ["الهدف", "Goal", "Mål", "Цель"], ["مأكول اليوم", "Eaten today", "Ätit idag", "Съедено сегодня"], ["مأكول", "Eaten", "Ätit", "Съедено"], ["المحروق", "Burned", "Förbränt", "Сожжено"], ["محروق", "Burned", "Förbränt", "Сожжено"], ["إضافة وجبة", "Add meal", "Lägg till måltid", "Добавить приём пищи"], ["فطور", "Breakfast", "Frukost", "Завтрак"], ["غداء", "Lunch", "Lunch", "Обед"], ["عشاء", "Dinner", "Middag", "Ужин"], ["سناك", "Snack", "Mellanmål", "Перекус"], ["ابحث عن أكل", "Search food", "Sök mat", "Поиск продукта"], ["الكمية (غرام)", "Amount (grams)", "Mängd (gram)", "Количество (граммы)"], ["الكمية بالغرام", "Amount in grams", "Mängd i gram", "Количество в граммах"], ["أضف الوجبة", "Add meal", "Lägg till måltiden", "Добавить приём пищи"], ["أكل غير موجود؟ أضفه بنفسك", "Food not listed? Add your own", "Saknas maten? Lägg till själv", "Нет продукта? Добавьте свой"], ["الاسم أو كلمة المرور غير صحيحة.", "Wrong name or password.", "Fel namn eller lösenord.", "Неверное имя или пароль."], ["سعرات لكل", "kcal per", "kcal per", "ккал на"], ["بروتين لكل", "Protein per", "Protein per", "Белки на"], ["كارب لكل", "Carbs per", "Kolhydrater per", "Углеводы на"], ["دهون لكل", "Fat per", "Fett per", "Жиры на"], ["احفظ الأكل", "Save food", "Spara mat", "Сохранить продукт"], ["وجبات اليوم", "Today's meals", "Dagens måltider", "Приёмы пищи за сегодня"], ["لم تضف وجبات اليوم. اختر أكلاً وأضفه.", "No meals added today. Pick a food and add it.", "Inga måltider tillagda idag. Välj en mat och lägg till den.", "Сегодня ещё нет приёмов пищи. Выберите продукт и добавьте его."], ["الماء", "Water", "Vatten", "Вода"], ["+ كوب", "+ Cup", "+ Glas", "+ Стакан"], ["− كوب", "− Cup", "− Glas", "− Стакан"], ["أكواب", "cups", "glas", "стаканов"], ["اختر أكلاً من القائمة، أو أضفه بنفسك.", "Pick a food from the list, or add your own.", "Välj en mat från listan eller lägg till egen.", "Выберите продукт из списка или добавьте свой."], ["اكتب الكمية بالغرام.", "Enter the amount in grams.", "Ange mängd i gram.", "Введите количество в граммах."], ["اكتب الاسم والسعرات على الأقل.", "Enter at least the name and calories.", "Ange minst namn och kalorier.", "Введите хотя бы название и калории."], ["حذف", "Delete", "Ta bort", "Удалить"], ["احذف", "Delete", "Ta bort", "Удалить"], ["من", "of", "av", "из"], ["السعرات", "Calories", "Kalorier", "Калории"], ["سعرة", "kcal", "kcal", "ккал"], ["البروتين", "Protein", "Protein", "Белки"], ["بروتين", "Protein", "Protein", "Белки"], ["الكارب", "Carbs", "Kolhydrater", "Углеводы"], ["كارب", "Carbs", "Kolhydrater", "Углеводы"], ["والكارب", "and carbs", "och kolhydrater", "и углеводы"], ["وكارب", "and carbs", "och kolhydrater", "и углеводы"], ["الدهون", "Fat", "Fett", "Жиры"], ["والدهون", "and fat", "och fett", "и жиры"], ["ودهون", "and fat", "och fett", "и жиры"], ["دهون", "Fat", "Fett", "Жиры"], ["كغ", "kg", "kg", "кг"], ["سم", "cm", "cm", "см"], ["دقيقة", "min", "min", "мин"], ["ساعة على الهدف", "h to goal", "tim till målet", "ч до цели"], ["ساعة", "hours", "timmar", "часов"], ["أيام فيها وجبات", "Days with meals", "Dagar med måltider", "Дней с приёмами пищи"], ["أيام", "days", "dagar", "дней"], ["حوالي", "about", "ca", "около"], ["لكل وجبة رئيسية", "per main meal", "per huvudmål", "на основной приём пищи"], ["لكل مجموعة", "per set", "per set", "на подход"], ["منذ", "since", "sedan", "с"], ["بتاريخ", "on", "den", "от"], ["بوزن", "at", "med", "с весом"], ["وهدف", "and a goal of", "och ett mål på", "при цели"], ["لكل كغ من وزنك،", "per kg of your body weight,", "per kg av din kroppsvikt,", "на кг вашего веса,"], ["لكل كغ", "per kg", "per kg", "на кг"], ["وزنك اليوم (كغ)", "Your weight today (kg)", "Din vikt idag (kg)", "Ваш вес сегодня (кг)"], ["الوزن بالكيلوغرام", "Weight in kilograms", "Vikt i kilogram", "Вес в килограммах"], ["سجّل القياس", "Log measurement", "Logga mått", "Записать замер"], ["سجّل", "Log", "Logga", "Записать"], ["آخر وزن", "Last weight", "Senaste vikt", "Последний вес"], ["التغيّر", "Change", "Förändring", "Изменение"], ["التاريخ", "Date", "Datum", "Дата"], ["لا توجد قياسات بعد. سجّل وزنك لتبدأ الجدول.", "No entries yet. Log your weight to start the table.", "Inga mätningar än. Logga din vikt för att börja tabellen.", "Записей пока нет. Запишите вес, чтобы начать таблицу."], ["نوع القياس", "Measurement type", "Måtttyp", "Тип замера"], ["القياس (سم)", "Measurement (cm)", "Mått (cm)", "Замер (см)"], ["القياس (%)", "Measurement (%)", "Mått (%)", "Замер (%)"], ["قيمة القياس", "Measurement value", "Måttvärde", "Значение замера"], ["اكتب قيمة القياس.", "Enter the measurement value.", "Ange måttet.", "Введите значение замера."], ["لم تسجّل قياسات بعد. اختر القياس وأدخل رقمك.", "No measurements yet. Pick one and enter your number.", "Inga mått än. Välj mått och ange ditt värde.", "Замеров пока нет. Выберите замер и введите значение."], ["الخصر", "Waist", "Midja", "Талия"], ["الصدر", "Chest", "Bröst", "Грудь"], ["الورك", "Hips", "Höfter", "Таз"], ["الذراع", "Arm", "Arm", "Рука"], ["الكتف", "Shoulder", "Axel", "Плечо"], ["الفخذ", "Thigh", "Lår", "Бедро"], ["السمانة", "Calf", "Vad", "Икра"], ["الرقبة", "Neck", "Hals", "Шея"], ["نسبة الدهون", "Body fat", "Kroppsfett", "Процент жира"], ["اكتب وزناً صحيحاً بالكيلوغرام.", "Enter a valid weight in kilograms.", "Ange en giltig vikt i kilogram.", "Введите корректный вес в килограммах."], ["احذف وزن", "Delete weight", "Ta bort vikt", "Удалить вес"], ["نظام الصيام", "Fasting plan", "Fastemodell", "Режим голодания"], ["صيام", "Fasting", "Fasta", "Голодание"], ["باقي", "Remaining", "Kvar", "Осталось"], ["لا يوجد صيام نشط", "No active fast", "Ingen aktiv fasta", "Нет активного голодания"], ["أكملت هدف الصيام. يمكنك الأكل الآن.", "You reached your fasting goal. You can eat now.", "Du nådde ditt fastemål. Du kan äta nu.", "Вы достигли цели голодания. Теперь можно есть."], ["ابدأ الصيام", "Start fast", "Starta fastan", "Начать голодание"], ["أنهِ الصيام", "End fast", "Avsluta fastan", "Закончить голодание"], ["سجل الصيام", "Fasting history", "Fastehistorik", "История голодания"], ["لا يوجد سجل بعد.", "No history yet.", "Ingen historik än.", "Истории пока нет."], ["أكملت الهدف", "Goal reached", "Målet nått", "Цель достигнута"], ["لم تكمل الهدف", "Goal not reached", "Målet ej nått", "Цель не достигнута"], ["نوع التمرين", "Exercise type", "Övningstyp", "Тип упражнения"], ["رياضات عامة", "General sports", "Allmän idrott", "Общие виды спорта"], ["أجهزة الكارديو", "Cardio machines", "Konditionsmaskiner", "Кардиотренажёры"], ["أجهزة المقاومة", "Resistance machines", "Styrkemaskiner", "Силовые тренажёры"], ["أوزان حرة (دمبل وبار)", "Free weights (dumbbell and barbell)", "Fria vikter (hantel och skivstång)", "Свободные веса (гантели и штанга)"], ["مشي", "Walking", "Promenad", "Ходьба"], ["جري", "Running", "Löpning", "Бег"], ["سباحة", "Swimming", "Simning", "Плавание"], ["كرة قدم", "Football", "Fotboll", "Футбол"], ["كرة يد", "Handball", "Handboll", "Гандбол"], ["رفع أوزان حرة", "Free weight lifting", "Fria vikter", "Работа со свободными весами"], ["دراجة ثابتة", "Stationary bike", "Motionscykel", "Велотренажёр"], ["دراجة", "Cycling", "Cykling", "Велосипед"], ["حبل قفز", "Jump rope", "Hopprep", "Скакалка"], ["يوغا", "Yoga", "Yoga", "Йога"], ["جهاز المشي (تردميل)", "Treadmill", "Löpband", "Беговая дорожка"], ["إليبتيكال", "Elliptical", "Crosstrainer", "Эллиптический тренажёр"], ["جهاز التجديف", "Rowing machine", "Roddmaskin", "Гребной тренажёр"], ["جهاز الدرج (ستيبر)", "Stair climber", "Trappmaskin", "Степпер"], ["ضغط الصدر (Chest Press)", "Chest Press", "Bröstpress", "Жим от груди в тренажёре"], ["فراشة (Pec Deck)", "Pec Deck", "Pec deck", "Бабочка (Pec Deck)"], ["سحب علوي (Lat Pulldown)", "Lat Pulldown", "Latsdrag", "Тяга верхнего блока"], ["سحب أرضي (Seated Row)", "Seated Row", "Sittande rodd", "Горизонтальная тяга"], ["ضغط الكتف (Shoulder Press)", "Shoulder Press (machine)", "Axelpress (maskin)", "Жим на плечи в тренажёре"], ["ضغط الأرجل (Leg Press)", "Leg Press", "Benpress", "Жим ногами"], ["رفرفة أمامية للأرجل (Leg Extension)", "Leg Extension", "Bensträck", "Разгибание ног"], ["رفرفة خلفية للأرجل (Leg Curl)", "Leg Curl", "Bencurl", "Сгибание ног"], ["جهاز سميث (Smith Machine)", "Smith Machine", "Smithmaskin", "Машина Смита"], ["كيبل (Cable)", "Cable", "Kabel", "Блочный тренажёр"], ["بايسبس (Biceps Curl Machine)", "Biceps Curl Machine", "Bicepscurl (maskin)", "Сгибание на бицепс (тренажёр)"], ["ترايسبس (Triceps Machine)", "Triceps Machine", "Tricepsmaskin", "Разгибание на трицепс (тренажёр)"], ["سمانة (Calf Raise)", "Calf Raise", "Vadpress", "Подъём на икры"], ["جهاز البطن (Ab Crunch)", "Ab Crunch Machine", "Magmaskin", "Тренажёр для пресса"], ["ضغط صدر بالدمبل", "Dumbbell chest press", "Hantelpress bröst", "Жим гантелей лёжа"], ["ضغط كتف بالدمبل", "Dumbbell shoulder press", "Hantelpress axlar", "Жим гантелей на плечи"], ["رفرفة جانبية بالدمبل", "Dumbbell lateral raise", "Hantel sidolyft", "Махи гантелями в стороны"], ["رفرفة بالدمبل", "Dumbbell fly", "Hantelflyes", "Разводка гантелей"], ["بايسبس بالدمبل", "Dumbbell biceps curl", "Hantelcurl", "Сгибание гантелей на бицепс"], ["ترايسبس بالدمبل", "Dumbbell triceps extension", "Hantel triceps", "Разгибание гантели на трицепс"], ["تجديف بالدمبل", "Dumbbell row", "Hantelrodd", "Тяга гантели в наклоне"], ["لانجز بالدمبل", "Dumbbell lunges", "Utfall med hantlar", "Выпады с гантелями"], ["سكوات جوبلت بالدمبل", "Goblet squat", "Goblet-knäböj", "Гоблет-присед"], ["بنش بريس بالبار", "Barbell bench press", "Bänkpress med skivstång", "Жим штанги лёжа"], ["سكوات بالبار", "Barbell squat", "Knäböj med skivstång", "Приседания со штангой"], ["ديدلفت بالبار", "Barbell deadlift", "Marklyft", "Становая тяга"], ["ضغط كتف بالبار", "Barbell shoulder press", "Militärpress", "Жим штанги стоя"], ["تجديف بالبار", "Barbell row", "Skivstångsrodd", "Тяга штанги в наклоне"], ["بايسبس بالبار", "Barbell curl", "Skivstångscurl", "Подъём штанги на бицепс"], ["ترايسبس بالبار (Skull Crusher)", "Skull crusher", "Skull crusher", "Французский жим"], ["هيب ثرست بالبار", "Hip thrust", "Hip thrust", "Ягодичный мостик со штангой"], ["المدة (دقيقة)", "Duration (min)", "Tid (min)", "Время (мин)"], ["المدة (اختياري)", "Duration (optional)", "Tid (valfritt)", "Время (необязательно)"], ["المدة بالدقائق", "Duration in minutes", "Tid i minuter", "Время в минутах"], ["مجموعات", "Sets", "Set", "Подходы"], ["تكرارات", "Reps", "Reps", "Повторы"], ["عدد المجموعات", "Number of sets", "Antal set", "Количество подходов"], ["عدد التكرارات", "Number of reps", "Antal repetitioner", "Количество повторов"], ["أضف التمرين", "Add exercise", "Lägg till övning", "Добавить упражнение"], ["آخر مرة:", "Last time:", "Senast:", "В прошлый раз:"], ["الحساب بوزن", "Calculated at a weight of", "Beräknat på vikten", "Расчёт для веса"], ["القيمة تقديرية، وأجهزة المقاومة محسوبة بمعدل متوسط لأن الجهد يختلف حسب الوزن والراحة بين المجموعات.", "The value is an estimate, and resistance machines use an average rate because effort varies with the weight and rest between sets.", "Värdet är en uppskattning, och styrkemaskiner räknas med ett medelvärde eftersom ansträngningen varierar med vikt och vila mellan seten.", "Значение приблизительное, а для силовых тренажёров используется средний показатель, так как нагрузка зависит от веса и отдыха между подходами."], ["إذا تركت المدة فاضية بنحسب", "If you leave the duration empty, we count", "Om du lämnar tiden tom räknar vi", "Если оставить время пустым, мы считаем"], ["تقسيمات جاهزة", "Ready-made splits", "Färdiga upplägg", "Готовые программы"], ["Push (دفع)", "Push", "Push", "Push (жим)"], ["Pull (سحب)", "Pull", "Pull", "Pull (тяга)"], ["Legs (أرجل)", "Legs", "Legs", "Legs (ноги)"], ["اختر التمرين", "Choose exercise", "Välj övning", "Выберите упражнение"], ["اختر", "Choose", "Välj", "Выбрать"], ["تقدّمك بالأوزان", "Your weight progress", "Din viktutveckling", "Ваш прогресс в весах"], ["المجموعات × التكرارات", "Sets × reps", "Set × repetitioner", "Подходы × повторы"], ["سجّل تمرين بوزن لتشوف تقدمك.", "Log an exercise with weight to see your progress.", "Logga en övning med vikt för att se din utveckling.", "Запишите упражнение с весом, чтобы увидеть прогресс."], ["أعلى وزن رفعته", "Highest weight lifted", "Högsta vikt du lyft", "Максимальный поднятый вес"], ["لم تسجّل تمارين اليوم.", "No exercise logged today.", "Ingen träning loggad idag.", "Сегодня тренировок нет."], ["اكتب مدة التمرين بالدقائق.", "Enter the exercise duration in minutes.", "Ange träningstid i minuter.", "Введите длительность упражнения в минутах."], ["اكتب المجموعات والتكرارات والوزن.", "Enter sets, reps and weight.", "Ange set, repetitioner och vikt.", "Введите подходы, повторы и вес."], ["الجنس", "Sex", "Kön", "Пол"], ["ذكر", "Male", "Man", "Мужской"], ["أنثى", "Female", "Kvinna", "Женский"], ["العمر", "Age", "Ålder", "Возраст"], ["الطول (سم)", "Height (cm)", "Längd (cm)", "Рост (см)"], ["الوزن (كغ)", "Weight (kg)", "Vikt (kg)", "Вес (кг)"], ["الطول", "Height", "Längd", "Рост"], ["النشاط", "Activity", "Aktivitet", "Активность"], ["قليل الحركة", "Sedentary", "Stillasittande", "Малоподвижный"], ["نشاط خفيف", "Light activity", "Lätt aktivitet", "Лёгкая активность"], ["نشاط متوسط", "Moderate activity", "Måttlig aktivitet", "Умеренная активность"], ["نشاط عالٍ", "High activity", "Hög aktivitet", "Высокая активность"], ["تنزيل وزن", "Lose weight", "Gå ner i vikt", "Похудение"], ["ثبات", "Maintain", "Behålla vikten", "Поддержание веса"], ["زيادة وزن", "Gain weight", "Gå upp i vikt", "Набор веса"], ["نوع النظام", "Diet type", "Kosttyp", "Тип питания"], ["نظام عادي", "Normal", "Vanlig", "Обычный"], ["كيتو دايت", "Keto", "Keto", "Кето"], ["الكيتو: كارب 25 غ، بروتين وزنك × 2.2، والباقي دهون.", "Keto: carbs 25 g, protein your weight × 2.2, and the rest fat.", "Keto: kolhydrater 25 g, protein din vikt × 2,2 och resten fett.", "Кето: углеводы 25 г, белки — ваш вес × 2,2, остальное — жиры."], ["احسب هدفي", "Calculate my goal", "Beräkna mitt mål", "Рассчитать мою цель"], ["اكتب اسمك وكلمة المرور.", "Enter your name and password.", "Ange ditt namn och lösenord.", "Введите имя и пароль."], ["اكتب اسمك.", "Enter your name.", "Ange ditt namn.", "Введите своё имя."], ["احتياجك اليومي", "Your daily needs", "Ditt dagliga behov", "Ваша дневная норма"], ["من السعرات", "of calories", "av kalorierna", "от калорий"], ["السعرات", "Calories", "Kalorier", "Калории"], ["معدل الحرق الأساسي", "Basal metabolic rate", "Basalomsättning", "Базовый обмен веществ"], ["تقدير عام وليس نصيحة طبية.", "General estimate, not medical advice.", "Allmän uppskattning, inte medicinsk rådgivning.", "Общая оценка, не медицинская рекомендация."], ["والكارب 25 غ يومياً، والدهون هي الباقي من سعراتك (كيتو). الكيتو لا يناسب الجميع (مرضى السكري أو الكلى أو الكبد، الحمل والرضاعة)، استشر طبيباً قبل البدء.", "and carbs are 25 g per day, with fat as the rest of your calories (keto). Keto does not suit everyone (diabetes, kidney or liver disease, pregnancy and breastfeeding), consult a doctor before starting.", "och kolhydrater är 25 g per dag, med fett som resten av dina kalorier (keto). Keto passar inte alla (diabetes, njur- eller leversjukdom, graviditet och amning), rådfråga läkare innan du börjar.", "и углеводы — 25 г в день, а жиры — остаток ваших калорий (кето). Кето подходит не всем (диабет, болезни почек или печени, беременность и кормление грудью), проконсультируйтесь с врачом перед началом."], ["والدهون 0.4 غ لكل كغ، والكارب هو الباقي من سعراتك.", "and fat is 0.4 g per kg, with carbs as the rest of your calories.", "och fett är 0,4 g per kg, med kolhydrater som resten av dina kalorier.", "и жиры — 0,4 г на кг, а углеводы — остаток ваших калорий."], ["والكارب 40% من السعرات، يعني حوالي", "and carbs are 40% of calories, about", "och kolhydrater är 40% av kalorierna, ca", "и углеводы — 40% калорий, это около"], ["لكل وجبة رئيسية (وزّعه على اليوم)، والدهون هي الباقي. هذا لا يغني عن خطة طبيبك: جرعات الأدوية أو الإنسولين لا تعتمد على هذا التطبيق، ومع مشاكل الكلى يختلف البروتين المناسب. اتفق مع طبيبك أو أخصائي التغذية على أهدافك.", "per main meal (spread it across the day), and fat is the rest. This does not replace your doctor's plan: medication or insulin doses must not rely on this app, and with kidney problems the right protein amount differs. Agree on your targets with your doctor or dietitian.", "per huvudmål (fördela över dagen), och fett är resten. Detta ersätter inte din läkares plan: läkemedels- eller insulindoser ska inte bygga på appen, och vid njurproblem skiljer sig rätt proteinmängd. Kom överens om dina mål med din läkare eller dietist.", "на основной приём пищи (распределите в течение дня), а жиры — остаток. Это не заменяет план вашего врача: дозы лекарств и инсулина не должны определяться по этому приложению, а при проблемах с почками подходящее количество белка отличается. Согласуйте цели с врачом или диетологом."], ["احسب هدفك فوق لتحصل على أرقام مخصصة لك. الأرقام الحالية افتراضية: بروتين 25% ودهون 28% وكارب 47%.", "Calculate your goal above to get personal numbers. The current numbers are defaults: protein 25%, fat 28%, carbs 47%.", "Beräkna ditt mål ovan för personliga siffror. Nuvarande siffror är standard: protein 25%, fett 28%, kolhydrater 47%.", "Рассчитайте цель выше, чтобы получить персональные значения. Сейчас значения по умолчанию: белки 25%, жиры 28%, углеводы 47%."], ["طبّق هذه الأهداف على شاشة اليوم", "Apply these targets to the Today screen", "Använd dessa mål på Idag-skärmen", "Применить эти цели на экране «Сегодня»"], ["تم التطبيق على شاشة اليوم", "Applied to the Today screen", "Tillämpat på Idag-skärmen", "Применено на экране «Сегодня»"], ["إرشادات", "Guidance", "Riktlinjer", "Рекомендации"], ["وجبات مقترحة", "Suggested meals", "Måltidsförslag", "Предлагаемые приёмы пищи"], ["محسوب على وزن", "Based on a weight of", "Baserat på vikten", "Рассчитано для веса"], ["(غيّرهم من تبويب هدفي).", "(change them in the My goal tab).", "(ändra dem under fliken Mitt mål).", "(измените их на вкладке «Моя цель»)."], ["الكارب 40% من السعرات، والبروتين وزنك × 1.2 غ،", "Carbs are 40% of calories, protein is your weight × 1.2 g,", "Kolhydrater är 40% av kalorierna, protein är din vikt × 1,2 g,", "Углеводы — 40% калорий, белки — ваш вес × 1,2 г,"], ["والدهون هي الباقي. مع مشاكل الكلى يختلف البروتين المناسب، فراجع طبيبك.", "and fat is the rest. With kidney problems the right protein amount differs, so check with your doctor.", "och fett är resten. Vid njurproblem skiljer sig rätt proteinmängd, så fråga din läkare.", "а жиры — остаток. При проблемах с почками подходящее количество белка отличается, поэтому проконсультируйтесь с врачом."], ["اتبع طريقة الطبق: نصف الطبق خضار غير نشوية، ربع بروتين قليل الدهن، وربع نشويات كاملة الحبوب.", "Follow the plate method: half the plate non-starchy vegetables, a quarter lean protein, and a quarter whole-grain starches.", "Följ tallriksmodellen: halva tallriken icke-stärkelsehaltiga grönsaker, en fjärdedel magert protein och en fjärdedel fullkornsstärkelse.", "Следуйте методу тарелки: половина тарелки — некрахмалистые овощи, четверть — постный белок, четверть — цельнозерновые крахмалистые продукты."], ["وزّع الكارب بشكل متقارب على الوجبات كل يوم.", "Spread carbs fairly evenly across meals each day.", "Fördela kolhydraterna jämnt över måltiderna varje dag.", "Распределяйте углеводы по приёмам пищи примерно равномерно каждый день."], ["تجنب العصائر والمشروبات المحلاة والخبز الأبيض والحلويات.", "Avoid juices, sugary drinks, white bread and sweets.", "Undvik juice, sockrade drycker, vitt bröd och sötsaker.", "Избегайте соков, сладких напитков, белого хлеба и сладостей."], ["اختر الدهون الصحية (زيت الزيتون، المكسرات، السمك) وزد الألياف.", "Choose healthy fats (olive oil, nuts, fish) and eat more fibre.", "Välj nyttiga fetter (olivolja, nötter, fisk) och ät mer fibrer.", "Выбирайте полезные жиры (оливковое масло, орехи, рыба) и больше клетчатки."], ["إذا انخفض سكرك عن 70 ملغ/دل وأنت على إنسولين أو أدوية خافضة: خذ 15 غ كارب سريع (نصف كوب عصير) وأعد القياس بعد 15 دقيقة.", "If your blood sugar drops below 70 mg/dL and you take insulin or glucose-lowering drugs: take 15 g of fast carbs (half a cup of juice) and recheck after 15 minutes.", "Om ditt blodsocker sjunker under 70 mg/dL och du tar insulin eller blodsockersänkande läkemedel: ta 15 g snabba kolhydrater (en halv kopp juice) och mät igen efter 15 minuter.", "Если сахар в крови падает ниже 70 мг/дл и вы принимаете инсулин или сахароснижающие препараты: съешьте 15 г быстрых углеводов (полстакана сока) и измерьте снова через 15 минут."], ["الكميات تتعدّل تلقائياً لتقارب حصة الكارب لكل وجبة من هدفك. هذه اقتراحات عامة، وخطتك الدقيقة يحددها طبيبك أو أخصائي التغذية.", "Amounts adjust automatically to approach each meal's carb share of your target. These are general suggestions; your exact plan is set by your doctor or dietitian.", "Mängderna anpassas automatiskt till varje måltids kolhydratandel av ditt mål. Detta är allmänna förslag, din exakta plan bestäms av din läkare eller dietist.", "Количества подстраиваются автоматически под долю углеводов каждого приёма пищи от вашей цели. Это общие предложения; точный план определяет ваш врач или диетолог."], ["هدفك: كارب", "Your target: carbs", "Ditt mål: kolhydrater", "Ваша цель: углеводы"], ["أضف", "Add", "Lägg till", "Добавить"], ["الاسم", "Name", "Namn", "Имя"], ["اسم", "Name", "Namn", "Имя"], ["كلمة المرور الجديدة", "New password", "Nytt lösenord", "Новый пароль"], ["كلمة مرور عشوائية", "Random password", "Slumpmässigt lösenord", "Случайный пароль"], ["كلمة المرور", "Password", "Lösenord", "Пароль"], ["كلمة جديدة", "New password", "Nytt lösenord", "Новый пароль"], ["أحرف+)", "chars+)", "tecken+)", "симв.+)"], ["أحرف على الأقل.", "characters or more.", "tecken eller fler.", "символов или больше."], ["شخص جديد", "New person", "Ny person", "Новый человек"], ["اسم الشخص الجديد", "New person's name", "Ny persons namn", "Имя нового человека"], ["أضف الشخص", "Add person", "Lägg till person", "Добавить человека"], ["الأشخاص", "People", "Personer", "Люди"], ["الشخص", "Person", "Person", "Человек"], ["المدير", "Manager", "Admin", "Менеджер"], ["محمي بكلمة مرور", "Password protected", "Lösenordsskyddad", "Защищён паролем"], ["بدون كلمة مرور", "No password", "Inget lösenord", "Без пароля"], ["غيّر الاسم", "Rename", "Byt namn", "Переименовать"], ["غيّر", "Change", "Ändra", "Изменить"], ["بياناته", "View data", "Visa data", "Показать данные"], ["تأكيد الحذف", "Confirm delete", "Bekräfta borttagning", "Подтвердить удаление"], ["هدف السعرات", "Calorie goal", "Kalorimål", "Цель по калориям"], ["اكتب الاسم.", "Enter a name.", "Ange ett namn.", "Введите имя."], ["تم تغيير كلمة المرور. أعطها للشخص.", "Password changed. Give it to the person.", "Lösenordet ändrat. Ge det till personen.", "Пароль изменён. Передайте его человеку."], ["تم حذف الشخص وبياناته.", "Person and data deleted.", "Personen och datan raderades.", "Человек и его данные удалены."], ["تمت إضافة", "Added", "Lade till", "Добавлен(а)"], ["أعطه كلمة المرور.", "Give them the password.", "Ge dem lösenordet.", "Передайте пароль."], ["هذا الاسم مستخدم من قبل.", "That name is already used.", "Det namnet används redan.", "Это имя уже занято."], ["تم تغيير الاسم. استخدم الاسم الجديد للدخول.", "Name changed. Use the new name to log in.", "Namnet ändrat. Använd det nya namnet för att logga in.", "Имя изменено. Используйте новое имя для входа."], ["ضع كلمة مرور لحسابك من تبويب إدارة.", "Set a password for your account in the Admin tab.", "Ange ett lösenord för ditt konto under fliken Admin.", "Задайте пароль для своей учётной записи на вкладке «Админ»."], ["هذا المتصفح لا يدعم كلمات المرور هنا.", "This browser does not support passwords here.", "Den här webbläsaren stöder inte lösenord här.", "Этот браузер здесь не поддерживает пароли."], ["املأ العمر والطول والوزن.", "Fill in age, height and weight.", "Fyll i ålder, längd och vikt.", "Укажите возраст, рост и вес."], ["القفل محفوظ داخل المتصفح على هذا الجهاز. بيمنع الاستخدام العادي، لكن شخص خبير بالمتصفح بيقدر يتخطاه، فلا تعتمد عليه لأسرار حساسة.", "The lock is stored in the browser on this device. It prevents casual use, but someone skilled with browsers can bypass it, so do not rely on it for sensitive secrets.", "Låset sparas i webbläsaren på den här enheten. Det stoppar vanlig användning, men en person som kan webbläsare kan kringgå det, så lita inte på det för känsliga hemligheter.", "Блокировка хранится в браузере на этом устройстве. Она предотвращает обычное использование, но человек, разбирающийся в браузерах, может её обойти, поэтому не полагайтесь на неё для конфиденциальных секретов."], ["خبز عربي", "Arabic bread", "Arabiskt bröd", "Арабский хлеб"], ["أرز مطبوخ", "Cooked rice", "Kokt ris", "Варёный рис"], ["دجاج مشوي", "Grilled chicken", "Grillad kyckling", "Курица-гриль"], ["لحم بقر مشوي", "Grilled beef", "Grillat nötkött", "Говядина-гриль"], ["بيض مسلوق", "Boiled eggs", "Kokta ägg", "Варёные яйца"], ["حمص مطبوخ", "Cooked chickpeas", "Kokta kikärtor", "Варёный нут"], ["فول مدمس", "Ful medames", "Ful medames", "Фуль медамес"], ["لبنة", "Labneh", "Labneh", "Лабне"], ["لبن زبادي", "Yogurt", "Yoghurt", "Йогурт"], ["جبنة بيضاء", "White cheese", "Vit ost", "Белый сыр"], ["تمر", "Dates", "Dadlar", "Финики"], ["موز", "Banana", "Banan", "Банан"], ["تفاح", "Apple", "Äpple", "Яблоко"], ["خيار", "Cucumber", "Gurka", "Огурец"], ["بندورة", "Tomato", "Tomat", "Помидор"], ["زيت زيتون", "Olive oil", "Olivolja", "Оливковое масло"], ["فلافل", "Falafel", "Falafel", "Фалафель"], ["شاورما دجاج", "Chicken shawarma", "Kyckling-shawarma", "Шаурма с курицей"], ["مجدرة", "Mujaddara", "Mujaddara", "Моджаддара"], ["كبة مقلية", "Fried kibbeh", "Stekt kibbeh", "Жареная киббе"], ["معكرونة مطبوخة", "Cooked pasta", "Kokt pasta", "Варёные макароны"], ["سمك مشوي", "Grilled fish", "Grillad fisk", "Рыба-гриль"], ["شوفان مطبوخ بالماء", "Oatmeal cooked in water", "Havregrynsgröt kokt på vatten", "Овсянка на воде"], ["شوفان", "Oats", "Havre", "Овёс"], ["لوز", "Almonds", "Mandel", "Миндаль"], ["حليب", "Milk", "Mjölk", "Молоко"], ["خبز أسمر", "Whole wheat bread", "Fullkornsbröd", "Цельнозерновой хлеб"], ["برغل مطبوخ", "Cooked bulgur", "Kokt bulgur", "Варёный булгур"], ["عدس مطبوخ", "Cooked lentils", "Kokta linser", "Варёная чечевица"], ["كينوا مطبوخة", "Cooked quinoa", "Kokt quinoa", "Варёная киноа"], ["بطاطا حلوة مشوية", "Baked sweet potato", "Ugnsbakad sötpotatis", "Запечённый батат"], ["سلطة خضراء", "Green salad", "Grön sallad", "Зелёный салат"], ["بروكلي مطبوخ", "Cooked broccoli", "Kokt broccoli", "Варёная брокколи"], ["كوسا مطبوخة", "Cooked zucchini", "Kokt zucchini", "Варёные кабачки"], ["سلمون مشوي", "Grilled salmon", "Grillad lax", "Лосось-гриль"], ["تونة بالماء", "Tuna in water", "Tonfisk i vatten", "Тунец в собственном соку"], ["جبنة قريش", "Cottage cheese", "Keso", "Творог"], ["أفوكادو", "Avocado", "Avokado", "Авокадо"], ["جوز", "Walnuts", "Valnötter", "Грецкие орехи"], ["توت", "Berries", "Bär", "Ягоды"], ["تواصل مع المدرب", "Contact your coach", "Kontakta din coach", "Связаться с тренером"], ["لأي سؤال عن برنامجك أو أهدافك أو التطبيق، تواصل مع المدرب مباشرة.", "For any question about your program, goals or the app, contact the coach directly.", "Vid frågor om ditt program, dina mål eller appen, kontakta coachen direkt.", "По любым вопросам о программе, целях или приложении свяжитесь с тренером напрямую."], ["البريد الإلكتروني", "Email", "E-post", "Эл. почта"], ["انستغرام", "Instagram", "Instagram", "Instagram"], ["نسخ", "Copy", "Kopiera", "Копировать"], ["تم النسخ", "Copied", "Kopierat", "Скопировано"], ["اكتب رسالتك للمدرب", "Write your message to the coach", "Skriv ditt meddelande till coachen", "Напишите сообщение тренеру"], ["أرسل بالبريد", "Send by email", "Skicka via e-post", "Отправить по эл. почте"], ["سيفتح تطبيق البريد برسالة جاهزة فيها اسمك.", "Your email app will open with a ready message that includes your name.", "Din e-postapp öppnas med ett färdigt meddelande som innehåller ditt namn.", "Откроется почтовое приложение с готовым сообщением, содержащим ваше имя."], ["اكتب رسالتك أولاً.", "Write your message first.", "Skriv ditt meddelande först.", "Сначала напишите сообщение."], ["تطبيق لتتبع التغذية والتمارين.", "A nutrition and workout tracking app.", "En app för att följa kost och träning.", "Приложение для отслеживания питания и тренировок."], ["تسجيل الوجبات وحساب السعرات والبروتين والكارب والدهون", "Log meals and track calories, protein, carbs and fat", "Logga måltider och följ kalorier, protein, kolhydrater och fett", "Записывайте приёмы пищи и считайте калории, белки, углеводы и жиры"], ["حساب هدفك اليومي (نظام عادي أو كيتو)", "Calculate your daily goal (normal or keto)", "Beräkna ditt dagliga mål (vanlig eller keto)", "Рассчитайте дневную цель (обычное питание или кето)"], ["تتبع الوزن وقياسات الجسم بجداول", "Track weight and body measurements in tables", "Följ vikt och kroppsmått i tabeller", "Отслеживайте вес и замеры тела в таблицах"], ["تسجيل التمارين بالأوزان ومتابعة تقدّمك", "Log workouts with weights and follow your progress", "Logga träning med vikter och följ din utveckling", "Записывайте тренировки с весами и следите за прогрессом"], ["مؤقت الصيام المتقطع", "Intermittent fasting timer", "Timer för periodisk fasta", "Таймер интервального голодания"], ["قسم خاص بمرضى السكري", "A dedicated diabetes section", "En särskild diabetesavdelning", "Отдельный раздел для больных диабетом"], ["الدخول بحساب يعطيك إياه المدرب. للحصول على حساب أو لأي سؤال، تواصل مع المدرب:", "You log in with an account from your coach. To get an account or ask anything, contact the coach:", "Du loggar in med ett konto från din coach. För att få ett konto eller ställa en fråga, kontakta coachen:", "Вход по аккаунту от вашего тренера. Чтобы получить аккаунт или задать вопрос, свяжитесь с тренером:"], ["هذا الحساب غير مفعّل. تواصل مع المدير.", "This account is not activated. Contact the manager.", "Det här kontot är inte aktiverat. Kontakta admin.", "Эта учётная запись не активирована. Свяжитесь с менеджером."], ["التطبيق غير مضبوط بعد (انظر README).", "The app is not configured yet (see README).", "Appen är inte konfigurerad ännu (se README).", "Приложение ещё не настроено (см. README)."], ["أضف رابط Supabase والمفتاح العام داخل الملف أولاً (انظر README).", "First add your Supabase URL and public key inside the file (see README).", "Lägg först till din Supabase-URL och publika nyckel i filen (se README).", "Сначала добавьте URL Supabase и публичный ключ в файл (см. README)."], ["اسم المستخدم: 2 إلى 20 حرف إنجليزي أو رقم.", "Username: 2 to 20 English letters or digits.", "Användarnamn: 2 till 20 engelska bokstäver eller siffror.", "Имя пользователя: от 2 до 20 латинских букв или цифр."], ["حدث خطأ", "An error occurred", "Ett fel inträffade", "Произошла ошибка"], ["تعذر الحفظ على السيرفر:", "Could not save to the server:", "Kunde inte spara på servern:", "Не удалось сохранить на сервере:"], ["الحسابات محفوظة على السيرفر، وكل شخص يرى بياناته فقط. أنت كمدير تقدر ترى ملخصاً لبيانات الكل. اسم المستخدم: حروف إنجليزية وأرقام فقط (2 إلى 20).", "Accounts are stored on the server and each person sees only their own data. As manager you can see a summary of everyone's data. Username: English letters and digits only (2 to 20).", "Konton sparas på servern och varje person ser bara sin egen data. Som admin kan du se en sammanfattning av allas data. Användarnamn: endast engelska bokstäver och siffror (2 till 20).", "Учётные записи хранятся на сервере, и каждый видит только свои данные. Как менеджер вы можете видеть сводку по данным всех. Имя пользователя: только латинские буквы и цифры (от 2 до 20)."], ["غير مسجّل الدخول", "Not logged in", "Inte inloggad", "Вы не вошли"], ["للمدير فقط", "Manager only", "Endast för admin", "Только для менеджера"], ["اسم مستخدم غير صالح", "Invalid username", "Ogiltigt användarnamn", "Недопустимое имя пользователя"], ["كلمة المرور قصيرة", "Password too short", "Lösenordet är för kort", "Пароль слишком короткий"], ["اسم المستخدم مستخدم من قبل", "Username already taken", "Användarnamnet är upptaget", "Имя пользователя уже занято"], ["تعذر الإنشاء", "Could not create", "Kunde inte skapa", "Не удалось создать"], ["لا يمكنك حذف حسابك", "You cannot delete your own account", "Du kan inte ta bort ditt eget konto", "Нельзя удалить свою учётную запись"], ["طلب غير معروف", "Unknown request", "Okänd begäran", "Неизвестный запрос"]];
+const AR=/[\u0600-\u06FF]/,LET='\u0621-\u064A';
+let LANG='ar';try{LANG=localStorage.getItem('sa3rati_lang')||'ar'}catch(e){}
+if(!['ar','en','sv','ru'].includes(LANG))LANG='ar';
+const KEYS=DICT.slice().sort((a,b)=>b[0].length-a[0].length).map(k=>[k[0],k[1],k[2],k[3]||k[1],new RegExp('(?<!['+LET+'])'+k[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?!['+LET+'])','g')]);
+function tr(s){
+  if(LANG==='ar'||typeof s!=='string'||!AR.test(s))return s;
+  let t=s;const i={en:1,sv:2,ru:3}[LANG];
+  for(const k of KEYS){if(t.includes(k[0]))t=t.replace(k[4],()=>k[i])}
+  return t.replace(/(\d(?:[.,]\d+)?)\s*غ(?![\u0621-\u064A])/g,'$1 g').replace(/،/g,',');
+}
+const NM=new WeakMap(),ATTRS=['placeholder','aria-label','label'];
+function trNode(n){
+  const rec=NM.get(n);let o=n.nodeValue;
+  if(rec&&o===rec.t)o=rec.o;else if(!AR.test(o)||(LANG==='ar'&&!rec))return;
+  const t=tr(o);if(t!==n.nodeValue)n.nodeValue=t;NM.set(n,{o,t});
+}
+function trAttr(el,a){
+  const cur=el.getAttribute(a);if(cur==null)return;
+  const k='_'+a,rec=el[k];let o=cur;
+  if(rec&&cur===rec.t)o=rec.o;else if(!AR.test(cur)||(LANG==='ar'&&!rec))return;
+  const t=tr(o);if(t!==cur)el.setAttribute(a,t);el[k]={o,t};
+}
+function trTree(r){
+  if(r.nodeType===3){trNode(r);return}
+  if(r.nodeType!==1||r.tagName==='SCRIPT'||r.tagName==='STYLE')return;
+  ATTRS.forEach(a=>trAttr(r,a));
+  r.childNodes.forEach(trTree);
+}
+const OB=new MutationObserver(ms=>{
+  for(const m of ms){
+    if(m.type==='childList')m.addedNodes.forEach(trTree);
+    else if(m.type==='characterData')trNode(m.target);
+    else if(m.type==='attributes')trAttr(m.target,m.attributeName);
+  }
+  OB.takeRecords();
+});
+OB.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:ATTRS});
+const _alert=window.alert.bind(window);window.alert=m=>_alert(tr(m));
+function setLang(l){
+  LANG=l;try{localStorage.setItem('sa3rati_lang',l)}catch(e){}
+  document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.title=tr('Musclivo');
+  document.querySelectorAll('[data-lg]').forEach(b=>{const on=b.dataset.lg===l;b.classList.toggle('g',!on);b.setAttribute('aria-pressed',on)});
+  trTree(document.body);OB.takeRecords();
+  render();
+}
+document.querySelectorAll('[data-lg]').forEach(b=>b.onclick=()=>setLang(b.dataset.lg));
+function cmUpdate(){const n=$('who').textContent||'',m=$('cmsg').value.trim();$('cmb').href='mailto:pt.bodybuildingxx@gmail.com?subject='+encodeURIComponent('Musclivo - '+n)+'&body='+encodeURIComponent(m+(m?'\n\n':'')+'- '+n)}
+$('cmsg').oninput=cmUpdate;
+$('cmb').onclick=e=>{if(!$('cmsg').value.trim()){e.preventDefault();toast('اكتب رسالتك أولاً.')}else cmUpdate()};
+document.querySelectorAll('[data-cp]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.cp);toast('تم النسخ')}catch(e){toast(b.dataset.cp)}});
+
+
+setLang(LANG);tick();
+(async function(){
+  if(SB_URL.includes('YOUR-PROJECT')){showLogin('أضف رابط Supabase والمفتاح العام داخل الملف أولاً (انظر README).');return}
+  sb=supabase.createClient(SB_URL,SB_KEY);
+  const {data:{session}}=await sb.auth.getSession();
+  if(session)await startUser(session.user);else showLogin('');
+})();
+</script>
+</body>
+</html>
