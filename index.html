@@ -14,7 +14,7 @@
 :root[data-theme="light"]{--bg:#F2F6F4;--card:#FFFFFF;--ink:#0F2019;--mut:#5B6F66;--acc:#0E9F5B;--on:#FFFFFF;--acc2:#C98A00;--line:#D7E3DC;--warn:#C8553D;color-scheme:light}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;font-size:16px;line-height:1.5;padding-bottom:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;font-size:16px;line-height:1.5;padding-bottom:24px}
 main{max-width:520px;margin:0 auto;padding:16px}
 h1{font-size:22px;font-weight:800;margin:4px 0 14px}
 h2{font-size:16px;font-weight:800;margin:0 0 10px}
@@ -36,9 +36,11 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .mac b{display:block;font-size:20px}
 .item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-nav{position:fixed;bottom:0;inset-inline:0;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav{position:sticky;top:0;z-index:6;background:var(--card);border-bottom:1px solid var(--line);display:flex;padding-top:env(safe-area-inset-top,0px);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+nav{justify-content:center}nav>button{max-width:130px}
+@supports (backdrop-filter:blur(8px)){nav{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(10px)}}
 nav button{flex:1;background:transparent;color:var(--mut);border-radius:0;padding:14px 2px;font-size:13px}
-nav button[aria-selected=true]{color:var(--acc);font-weight:800;box-shadow:inset 0 3px 0 var(--acc)}
+nav button[aria-selected=true]{color:var(--acc);font-weight:800;box-shadow:inset 0 -3px 0 var(--acc)}
 .tab{display:none}.tab.on{display:block}
 .cups{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .cup{width:30px;height:38px;border:2px solid var(--acc);border-radius:4px 4px 10px 10px;background:transparent}
@@ -126,6 +128,13 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
 </head>
 <body>
 <div class="printblock"><div class="logo" style="color:#000"><svg viewBox="0 0 64 64" width="64" height="64"><rect x="2" y="21" width="8" height="22" rx="2.5"/><rect x="54" y="21" width="8" height="22" rx="2.5"/><path d="M17 49V18l15 17 15-17v31" fill="none" stroke="#000" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg></div><h1>MUSCLIVO</h1><p data-u="noPrint">هذا الدليل غير قابل للطباعة. Musclivo.</p></div>
+<nav role="tablist">
+  <button role="tab" aria-selected="true" data-t="0">اليوم</button>
+  <button role="tab" aria-selected="false" data-t="8">تغذية</button>
+  <button role="tab" aria-selected="false" data-t="3">تمارين</button>
+  <button role="tab" aria-selected="false" data-t="10">إنجازات</button>
+  <button role="tab" aria-selected="false" data-t="11">المزيد</button>
+</nav>
 <main>
 <div id="lg" style="position:fixed;inset:0;background:var(--bg);z-index:10;display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto">
   <div class="card" style="width:100%;max-width:360px;margin:auto">
@@ -192,7 +201,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
   </div>
 </div>
 <div class="card row sp" id="ub" style="padding:10px;display:none"><b id="who">-</b><span id="tb" class="mut" style="display:none;font-size:12px"></span><div class="row" style="gap:4px;flex-wrap:wrap"><button class="lgbtn" data-lg="ar" aria-pressed="true">العربية</button><button class="lgbtn g" data-lg="en" aria-pressed="false">English</button><button class="lgbtn g" data-lg="sv" aria-pressed="false">Svenska</button><button class="lgbtn g" data-lg="ru" aria-pressed="false">Русский</button><button class="lgbtn g thb" aria-label="Theme">☀️</button></div><button class="g" id="lo">خروج</button></div>
-<div id="toast" role="status" style="display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);inset-inline:12px;z-index:20;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px"></div>
+<div id="toast" role="status" style="display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 58px);inset-inline:12px;z-index:20;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px"></div>
 
 <div class="hero"><img src="images/hero.jpg" alt="" onerror="this.remove()"><div class="hb"><span class="logo"><svg viewBox="0 0 64 64" width="44" height="44" aria-hidden="true"><rect x="2" y="21" width="8" height="22" rx="2.5" fill="currentColor"/><rect x="10" y="25" width="5" height="14" rx="1.5" fill="currentColor"/><rect x="54" y="21" width="8" height="22" rx="2.5" fill="currentColor"/><rect x="49" y="25" width="5" height="14" rx="1.5" fill="currentColor"/><path d="M17 49V18l15 17 15-17v31" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/></svg></span><div><div class="wm">MUSCLIVO</div><div class="tg">تدريب. تغذية. نتائج.</div></div></div></div>
 <section id="t0" class="tab on">
@@ -474,13 +483,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
 </section>
 </main>
 
-<nav role="tablist">
-  <button role="tab" aria-selected="true" data-t="0">اليوم</button>
-  <button role="tab" aria-selected="false" data-t="8">تغذية</button>
-  <button role="tab" aria-selected="false" data-t="3">تمارين</button>
-  <button role="tab" aria-selected="false" data-t="10">إنجازات</button>
-  <button role="tab" aria-selected="false" data-t="11">المزيد</button>
-</nav>
+
 
 <script src="supabase.js"></script>
 <script>window.supabase||document.write('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"><\/script>')</script>
