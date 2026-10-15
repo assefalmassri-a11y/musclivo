@@ -29,6 +29,9 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>الحساب:</b> البريد الإلكتروني أو اسم المستخدم، وكلمة المرور (مخزّنة بشكل مشفّر ولا يمكن قراءتها)، ووقت موافقتك، وتواريخ التجربة والاشتراك.</li>
 <li><b>ما تدخله أنت</b> (وقد يكشف معلومات صحية): الوجبات والأطعمة التي تضيفها، والسعرات والماكروز، والماء، والوزن، وقياسات الجسم ونسبة الدهون، والتمارين والمجموعات والتكرارات والأوزان، وجلسات الصيام، والخطوات (تدخلها يدوياً)، والأهداف، والجنس والعمر والطول ومستوى النشاط ونوع النظام (عادي أو كيتو أو سكري).</li>
 <li><b>إعدادات التذكير والمنتجات الممسوحة:</b> أوقات تذكير الماء والوجبات والتمرين، وأسماء المنتجات التي تمسح باركودها وقيمها الغذائية، تُحفظ مع بيانات حسابك.</li>
+<li><b>المتابعة مع المدرب (اختياري):</b> الـ Check-in الأسبوعي (الوزن، النوم، الطاقة، الجوع، الالتزام، ملاحظاتك)، و<b>صور التقدّم</b> إذا رفعتها، ورسائل المدرب وهدف الأسبوع. الصور تُصغَّر على جهازك وتُحذف منها بيانات الموقع (GPS) قبل الرفع، وتُحفظ في مخزن خاص لا يراه إلا أنت والمدرب.</li>
+<li><b>الإشعارات:</b> إذا فعّلت إشعارات الخلفية نحفظ عنوان الاشتراك الخاص بجهازك ومنطقتك الزمنية ولغتك لنرسل التذكيرات في وقتها.</li>
+<li><b>نسخة على جهازك:</b> ليعمل التطبيق بدون إنترنت تُحفظ نسخة من بياناتك في متصفحك على جهازك، وتُحذف عند تسجيل الخروج.</li>
 <li><b>تقنية:</b> جلسة تسجيل الدخول وإعداد اللغة (محفوظان في متصفحك)، وعنوان IP والسجلات التقنية التي يعالجها مزوّدو الخدمة (القسم 6).</li>
 </ul>
 <p>لا نجمع بيانات بطاقات الدفع داخل التطبيق.</p><h2>4. لماذا نعالجها وما الأساس القانوني</h2><ul>
@@ -36,6 +39,7 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li>البيانات المتعلقة بالصحة: <b>موافقتك الصريحة</b> التي تعطيها عند إنشاء حسابك (المادة 9(2)(أ)). ولك سحبها في أي وقت (القسم 9). لا تعمل الخدمة بدونها، فسحب الموافقة يعني حذف حسابك.</li>
 <li>الأمان ومنع إساءة الاستخدام: مصلحة مشروعة (المادة 6(1)(و)).</li>
 <li>سجلات المحاسبة إن دفعت اشتراكاً: التزام قانوني (المادة 6(1)(ج)).</li>
+<li>صور التقدّم والـ Check-in اختيارية بالكامل، وتعتمد على موافقتك الصريحة نفسها. لا تُستخدم الصور لأي شيء غير متابعتك مع المدرب.</li>
 </ul>
 <p>لا نستخدم بياناتك للإعلانات، ولا نتخذ قرارات آلية لها أثر قانوني أو مماثل. والحسابات داخل التطبيق مجرد تقديرات آلية.</p><h2>5. من يرى بياناتك</h2><p>أنت والمدرب. يستطيع المدرب الاطلاع على بياناتك لمتابعتك وإدارة حسابك؛ وتعرض لوحة الإدارة ملخصاً (هدف السعرات، سعرات اليوم، آخر وزن، أيام التسجيل). لا نبيع بياناتك.</p><h2>6. مزوّدو الخدمة والتخزين</h2><ul>
 <li><b>Supabase:</b> قاعدة البيانات وتسجيل الدخول (معالِج بيانات). وتسري اتفاقية معالجة بيانات. وإذا عولجت البيانات خارج الاتحاد الأوروبي/المنطقة الاقتصادية الأوروبية فذلك استناداً إلى البنود التعاقدية النموذجية.</li>
@@ -43,13 +47,16 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Google (Gmail):</b> يرسل رسالة تأكيد البريد عند التسجيل، فتعالج Google عنوان بريدك والرسالة بصفتها مزوّد بريد.</li>
 <li><b>Open Food Facts:</b> عند مسح باركود أو كتابته، يُرسل رقم الباركود فقط إلى قاعدة بيانات Open Food Facts المفتوحة (فرنسا) لجلب القيم الغذائية، ويستلم عنوان IP الخاص بك. لا نرسل اسمك ولا بريدك ولا أي بيانات أخرى. صورة الكاميرا تُعالج على جهازك فقط ولا تُحفظ ولا تُرسل. وإذا لم يدعم متصفحك قراءة الباركود يُحمَّل قارئ الباركود من jsDelivr.</li>
 <li><b>الإشعارات:</b> تُعرض التذكيرات على جهازك من المتصفح مباشرة، ولا نستخدم خدمة إشعارات خارجية. وملف التقويم (.ics) يُنشأ على جهازك وتضيفه أنت إلى تقويمك.</li>
+<li><b>خدمات الإشعارات في المتصفح</b> (Google أو Apple أو Mozilla حسب جهازك): توصل الإشعار إلى جهازك، فتمر عبرها نص التذكير ومعرّف الجهاز. لا نرسل فيها بيانات صحية مفصلة.</li>
+<li><b>Google (Gmail)</b> يرسل أيضاً رسالة تذكير واحدة قبل انتهاء التجربة بيوم.</li>
 <li>يستخدم التطبيق خطوط النظام. وإذا لم يكن سكربت Supabase مستضافاً في الموقع نفسه فيُحمَّل من jsDelivr، وعندها يستلم عنوان IP الخاص بك.</li>
 </ul><h2>7. كم نحتفظ ببياناتك</h2><ul>
 <li><b>تجربة مجانية بدون اشتراك:</b> يُحذف حسابك وبياناتك <b>بعد 7 أيام من انتهاء التجربة</b>.</li>
 <li><b>الاشتراك:</b> طوال فترة سريانه و<b>شهرين بعد تاريخ انتهاء الاشتراك</b> (التاريخ الذي يسجّله المدرب كتاريخ انتهاء). بعدها يُحذف الحساب وكل البيانات تلقائياً.</li>
 <li>إذا اشتركت من جديد قبل تاريخ الحذف يُلغى الحذف.</li>
 <li>تستطيع حذف حسابك وبياناتك بنفسك في أي وقت من التطبيق (تبويب Coach، خصوصيتي).</li>
-<li>عند انتهاء تجربتك أو اشتراكك يعرض التطبيق تاريخ الحذف بدقة. التنبيهات تظهر داخل التطبيق، ولا نرسل تذكيرات بالبريد.</li>
+<li>عند انتهاء التجربة أو الاشتراك يعرض التطبيق تاريخ الحذف بالضبط. ونرسل رسالة بريد واحدة قبل انتهاء التجربة بيوم فيها تاريخ الانتهاء وتاريخ الحذف.</li>
+<li>صور التقدّم تُحذف مع الحساب. وإذا بقيت صورة لأي سبب تقني فتُحذف تلقائياً خلال 24 ساعة.</li>
 <li>النسخ الاحتياطية: إذا احتفظ المزوّد بنسخ احتياطية فقد تبقى البيانات المحذوفة فيها مدة محدودة وفق إجراءات المزوّد، ولا تُعاد إلى الاستخدام الفعلي.</li>
 <li>سجلات المحاسبة، إن وُجدت، تُحفظ للمدة التي يوجبها القانون.</li>
 </ul><h2>8. الأمان</h2><p>يستخدم التطبيق HTTPS وكلمات مرور مشفّرة، وقواعد في قاعدة البيانات تضمن أن كل مستخدم يصل إلى بياناته فقط (للمدرب صلاحية إدارة). وإذا حدث اختراق للبيانات الشخصية يُرجَّح أن يعرّضك للخطر فسنبلغ IMY خلال 72 ساعة ونُعلمك عند اللزوم.</p><h2>9. حقوقك</h2><p>يحق لك: الحصول على نسخة من بياناتك (زر التنزيل في التطبيق بصيغة قابلة للقراءة آلياً)، وتصحيحها (بتعديلها في التطبيق)، وحذفها (زر الحذف في التطبيق أو بالتواصل معنا)، وتقييد المعالجة أو الاعتراض عليها، وسحب موافقتك (بالتواصل معنا).</p>
@@ -60,6 +67,9 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Account:</b> email or username, password (stored hashed and never readable), the time of your consent, and your trial and subscription dates.</li>
 <li><b>What you enter</b> (this can reveal health information): meals and custom foods, calories and macros, water, weight, body measurements and body fat %, exercises, sets, reps and weights, fasting sessions, steps (entered manually), goals, sex, age, height, activity level and diet choice (normal, keto, diabetes).</li>
 <li><b>Reminder settings and scanned products:</b> your water, meal and workout reminder times, and the names and nutrition values of products you scan, are saved with your account data.</li>
+<li><b>Coaching (optional):</b> your weekly check-in (weight, sleep, energy, hunger, adherence, your notes), <b>progress photos</b> if you upload them, and messages and weekly goals from the coach. Photos are resized on your device and location data (GPS) is removed before upload; they are stored in private storage that only you and the coach can see.</li>
+<li><b>Notifications:</b> if you turn on background notifications we store your device’s push subscription address, your time zone and your language so reminders arrive on time.</li>
+<li><b>Copy on your device:</b> so the app works offline, a copy of your data is kept in your browser on your device and removed when you log out.</li>
 <li><b>Technical:</b> your login session and language setting (stored in your browser), and IP address and technical logs handled by our providers (section 6).</li>
 </ul>
 <p>We do not collect payment card details in the app.</p><h2>4. Why we process it and on what legal basis</h2><ul>
@@ -67,6 +77,7 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li>Health-related data: your <b>explicit consent</b>, given when you create your account (Art. 9(2)(a)). You can withdraw it at any time (section 9). The service cannot work without it, so withdrawing consent means your account is deleted.</li>
 <li>Security and preventing abuse: legitimate interest (Art. 6(1)(f)).</li>
 <li>Accounting records, if you pay for a subscription: legal obligation (Art. 6(1)(c)).</li>
+<li>Progress photos and check-ins are entirely optional and rely on the same explicit consent. Photos are used only for your coaching.</li>
 </ul>
 <p>We do not use your data for advertising and we do not make automated decisions that have legal or similarly significant effects. Calculations in the app are automatic estimates only.</p><h2>5. Who can see your data</h2><p>You, and the coach. The coach can access your data in order to follow you up and manage your account; the admin panel shows a summary (calorie goal, calories today, latest weight, days logged). We do not sell your data.</p><h2>6. Providers and storage</h2><ul>
 <li><b>Supabase:</b> database and login (processor). A data processing agreement applies. If data is processed outside the EU/EEA, this relies on standard contractual clauses.</li>
@@ -74,13 +85,16 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Google (Gmail):</b> sends the confirmation email when you sign up, so Google processes your email address and the message as an email provider.</li>
 <li><b>Open Food Facts:</b> when you scan or type a barcode, only the barcode number is sent to the open Open Food Facts database (France) to fetch nutrition values, and it receives your IP address. We do not send your name, email or any other data. The camera image is processed only on your device and is never saved or sent. If your browser cannot read barcodes itself, the barcode reader is loaded from jsDelivr.</li>
 <li><b>Notifications:</b> reminders are shown on your device directly by your browser; we do not use an external push service. The calendar file (.ics) is created on your device and you add it to your calendar yourself.</li>
+<li><b>Browser push services</b> (Google, Apple or Mozilla depending on your device): they deliver notifications to your device, so the reminder text and a device identifier pass through them. We do not put detailed health data in notifications.</li>
+<li><b>Google (Gmail)</b> also sends one reminder email the day before your trial ends.</li>
 <li>The app uses system fonts. If the Supabase script is not hosted on the same site, it is loaded from jsDelivr, which then receives your IP address.</li>
 </ul><h2>7. How long we keep your data</h2><ul>
 <li><b>Free trial without a subscription:</b> your account and data are deleted <b>7 days after the trial ends</b>.</li>
 <li><b>Subscription:</b> while it is active and for <b>2 months after the subscription end date</b> (the date the coach registers as the end date). After that the account and all data are deleted automatically.</li>
 <li>If you subscribe again before the deletion date, the deletion is cancelled.</li>
 <li>You can delete your account and data yourself at any time in the app (Coach tab, My privacy).</li>
-<li>When your trial or subscription has ended, the app shows the exact deletion date. Notices are shown in the app; we do not send email reminders.</li>
+<li>When your trial or subscription has ended, the app shows the exact deletion date. We send one email the day before your trial ends with the end date and the deletion date.</li>
+<li>Progress photos are deleted with the account. If a photo is left behind for any technical reason, it is deleted automatically within 24 hours.</li>
 <li>Backups: if the provider keeps backups, deleted data may remain there for a limited time under the provider’s routines and is not restored to active use.</li>
 <li>Accounting records, if any, are kept as long as the law requires.</li>
 </ul><h2>8. Security</h2><p>The app uses HTTPS and hashed passwords, and database rules ensure each user only reaches their own data (the coach has admin access). If a personal data breach occurs that is likely to put you at risk, we report it to IMY within 72 hours and inform you when required.</p><h2>9. Your rights</h2><p>You can: get a copy of your data (download button in the app, in a machine-readable format), correct it (edit it in the app), delete it (delete button in the app or contact us), restrict or object to processing, and withdraw your consent (contact us).</p>
@@ -91,6 +105,9 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Konto:</b> e-postadress eller användarnamn, lösenord (lagras hashat och kan aldrig läsas), tidpunkten för ditt samtycke samt datum för provperiod och prenumeration.</li>
 <li><b>Det du själv anger</b> (kan avslöja hälsouppgifter): måltider och egna livsmedel, kalorier och makron, vatten, vikt, kroppsmått och kroppsfett %, övningar, set, repetitioner och vikter, fastepass, steg (anges manuellt), mål, kön, ålder, längd, aktivitetsnivå och kostval (vanlig, keto, diabetes).</li>
 <li><b>Påminnelser och skannade produkter:</b> dina tider för vatten-, måltids- och träningspåminnelser samt namn och näringsvärden för produkter du skannar sparas med dina kontouppgifter.</li>
+<li><b>Coachning (valfritt):</b> din veckoavstämning (vikt, sömn, energi, hunger, följsamhet, dina kommentarer), <b>progressbilder</b> om du laddar upp dem samt meddelanden och veckomål från coachen. Bilderna förminskas på din enhet och platsdata (GPS) tas bort före uppladdning; de sparas i privat lagring som bara du och coachen ser.</li>
+<li><b>Aviseringar:</b> om du slår på bakgrundsaviseringar sparar vi enhetens push-adress, din tidszon och ditt språk så att påminnelserna kommer i tid.</li>
+<li><b>Kopia på din enhet:</b> för att appen ska fungera offline sparas en kopia av dina uppgifter i webbläsaren på din enhet; den tas bort när du loggar ut.</li>
 <li><b>Tekniskt:</b> din inloggningssession och språkinställning (sparas i din webbläsare) samt IP-adress och tekniska loggar som hanteras av våra leverantörer (avsnitt 6).</li>
 </ul>
 <p>Vi samlar inte in betalkortsuppgifter i appen.</p><h2>4. Varför vi behandlar uppgifterna och rättslig grund</h2><ul>
@@ -98,6 +115,7 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li>Hälsorelaterade uppgifter: ditt <b>uttryckliga samtycke</b>, som du lämnar när du skapar ditt konto (art. 9.2 a). Du kan återkalla det när som helst (avsnitt 9). Tjänsten kan inte fungera utan det, så ett återkallat samtycke innebär att ditt konto raderas.</li>
 <li>Säkerhet och förebyggande av missbruk: berättigat intresse (art. 6.1 f).</li>
 <li>Bokföringsunderlag, om du betalar för en prenumeration: rättslig förpliktelse (art. 6.1 c).</li>
+<li>Progressbilder och avstämningar är helt frivilliga och bygger på samma uttryckliga samtycke. Bilderna används bara för din coachning.</li>
 </ul>
 <p>Vi använder inte dina uppgifter för reklam och fattar inga automatiserade beslut med rättsliga eller liknande betydande följder. Beräkningar i appen är endast automatiska uppskattningar.</p><h2>5. Vem kan se dina uppgifter</h2><p>Du och coachen. Coachen kan ta del av dina uppgifter för att följa upp dig och hantera ditt konto; adminpanelen visar en sammanfattning (kalorimål, kalorier idag, senaste vikt, loggade dagar). Vi säljer inte dina uppgifter.</p><h2>6. Leverantörer och lagring</h2><ul>
 <li><b>Supabase:</b> databas och inloggning (personuppgiftsbiträde). Ett personuppgiftsbiträdesavtal gäller. Om uppgifter behandlas utanför EU/EES sker det med stöd av standardavtalsklausuler.</li>
@@ -105,13 +123,16 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Google (Gmail):</b> skickar bekräftelsemejlet när du registrerar dig, så Google behandlar din e-postadress och meddelandet som e-postleverantör.</li>
 <li><b>Open Food Facts:</b> när du skannar eller skriver en streckkod skickas bara streckkodsnumret till den öppna databasen Open Food Facts (Frankrike) för att hämta näringsvärden, och den får då din IP-adress. Vi skickar inte ditt namn, din e-post eller andra uppgifter. Kamerabilden behandlas bara på din enhet och sparas eller skickas aldrig. Om din webbläsare inte själv kan läsa streckkoder laddas streckkodsläsaren från jsDelivr.</li>
 <li><b>Aviseringar:</b> påminnelser visas direkt av webbläsaren på din enhet; vi använder ingen extern push-tjänst. Kalenderfilen (.ics) skapas på din enhet och du lägger själv till den i din kalender.</li>
+<li><b>Webbläsarens push-tjänster</b> (Google, Apple eller Mozilla beroende på enhet): de levererar aviseringar till din enhet, så påminnelsetexten och en enhetsidentifierare passerar dem. Vi lägger inga detaljerade hälsouppgifter i aviseringar.</li>
+<li><b>Google (Gmail)</b> skickar också ett påminnelsemejl dagen innan provperioden slutar.</li>
 <li>Appen använder systemtypsnitt. Om Supabase-skriptet inte finns på samma webbplats laddas det från jsDelivr, som då får din IP-adress.</li>
 </ul><h2>7. Hur länge vi sparar uppgifterna</h2><ul>
 <li><b>Gratis provperiod utan prenumeration:</b> ditt konto och dina uppgifter raderas <b>7 dagar efter att provperioden har slutat</b>.</li>
 <li><b>Prenumeration:</b> så länge den är aktiv och i <b>2 månader efter prenumerationens slutdatum</b> (det datum coachen registrerar som slutdatum). Därefter raderas kontot och alla uppgifter automatiskt.</li>
 <li>Om du prenumererar igen före raderingsdatumet avbryts raderingen.</li>
 <li>Du kan själv radera ditt konto och dina uppgifter när som helst i appen (fliken Coach, Min integritet).</li>
-<li>När din provperiod eller prenumeration har slutat visar appen det exakta raderingsdatumet. Aviseringar visas i appen; vi skickar inga e-postpåminnelser.</li>
+<li>När provperioden eller medlemskapet har slutat visar appen exakt raderingsdatum. Vi skickar ett mejl dagen innan provperioden slutar med slutdatum och raderingsdatum.</li>
+<li>Progressbilder raderas med kontot. Om en bild av tekniska skäl blir kvar raderas den automatiskt inom 24 timmar.</li>
 <li>Säkerhetskopior: om leverantören sparar säkerhetskopior kan raderade uppgifter finnas kvar där en begränsad tid enligt leverantörens rutiner och återställs inte till aktiv användning.</li>
 <li>Bokföringsunderlag, om sådant finns, sparas så länge lagen kräver.</li>
 </ul><h2>8. Säkerhet</h2><p>Appen använder HTTPS och hashade lösenord, och databasregler ser till att varje användare bara når sina egna uppgifter (coachen har adminåtkomst). Om en personuppgiftsincident inträffar som sannolikt innebär en risk för dig anmäler vi den till IMY inom 72 timmar och informerar dig när det krävs.</p><h2>9. Dina rättigheter</h2><p>Du kan: få en kopia av dina uppgifter (nedladdningsknapp i appen, i maskinläsbart format), rätta dem (ändra i appen), radera dem (raderingsknapp i appen eller kontakta oss), begränsa eller invända mot behandlingen och återkalla ditt samtycke (kontakta oss).</p>
@@ -122,6 +143,9 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Аккаунт:</b> эл. почта или имя пользователя, пароль (хранится в виде хеша и не читается), время вашего согласия, даты пробного периода и подписки.</li>
 <li><b>То, что вы вводите</b> (может раскрывать сведения о здоровье): приёмы пищи и свои продукты, калории и макронутриенты, вода, вес, замеры тела и процент жира, упражнения, подходы, повторы и веса, сеансы голодания, шаги (вводятся вручную), цели, пол, возраст, рост, уровень активности и выбор питания (обычное, кето, диабет).</li>
 <li><b>Настройки напоминаний и отсканированные продукты:</b> время напоминаний о воде, еде и тренировках, а также названия и пищевая ценность отсканированных продуктов сохраняются вместе с данными аккаунта.</li>
+<li><b>Работа с тренером (по желанию):</b> еженедельный отчёт (вес, сон, энергия, голод, соблюдение плана, ваши заметки), <b>фото прогресса</b>, если вы их загружаете, а также сообщения и цели недели от тренера. Фото уменьшаются на устройстве, данные о местоположении (GPS) удаляются перед загрузкой; они хранятся в закрытом хранилище, доступном только вам и тренеру.</li>
+<li><b>Уведомления:</b> если вы включите фоновые уведомления, мы сохраняем адрес push-подписки устройства, часовой пояс и язык, чтобы напоминания приходили вовремя.</li>
+<li><b>Копия на устройстве:</b> чтобы приложение работало без интернета, копия ваших данных хранится в браузере на устройстве и удаляется при выходе.</li>
 <li><b>Технические данные:</b> сессия входа и настройка языка (хранятся в вашем браузере), а также IP-адрес и технические журналы, которые обрабатывают наши поставщики (раздел 6).</li>
 </ul>
 <p>Мы не собираем данные платёжных карт в приложении.</p><h2>4. Зачем мы обрабатываем данные и на каком основании</h2><ul>
@@ -129,6 +153,7 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li>Данные о здоровье: ваше <b>явное согласие</b>, которое вы даёте при создании аккаунта (ст. 9(2)(a)). Вы можете отозвать его в любое время (раздел 9). Без него сервис не работает, поэтому отзыв согласия означает удаление вашего аккаунта.</li>
 <li>Безопасность и предотвращение злоупотреблений: законный интерес (ст. 6(1)(f)).</li>
 <li>Бухгалтерские документы, если вы платите за подписку: юридическая обязанность (ст. 6(1)(c)).</li>
+<li>Фото прогресса и отчёты полностью добровольны и основаны на том же явном согласии. Фото используются только для работы с тренером.</li>
 </ul>
 <p>Мы не используем ваши данные для рекламы и не принимаем автоматизированных решений с правовыми или аналогично значимыми последствиями. Расчёты в приложении — лишь автоматические оценки.</p><h2>5. Кто видит ваши данные</h2><p>Вы и тренер. Тренер может получать доступ к вашим данным, чтобы сопровождать вас и управлять аккаунтом; панель администратора показывает сводку (цель по калориям, калории за сегодня, последний вес, дни с записями). Мы не продаём ваши данные.</p><h2>6. Поставщики и хранение</h2><ul>
 <li><b>Supabase:</b> база данных и вход (обработчик). Действует соглашение об обработке данных. Если данные обрабатываются за пределами ЕС/ЕЭЗ, это происходит на основе стандартных договорных условий.</li>
@@ -136,13 +161,16 @@ ul{padding-inline-start:20px} li{margin-bottom:6px}
 <li><b>Google (Gmail):</b> отправляет письмо с подтверждением при регистрации, поэтому Google обрабатывает ваш адрес эл. почты и письмо как почтовый провайдер.</li>
 <li><b>Open Food Facts:</b> когда вы сканируете или вводите штрихкод, в открытую базу Open Food Facts (Франция) отправляется только номер штрихкода, чтобы получить пищевую ценность; база при этом получает ваш IP-адрес. Мы не отправляем ваше имя, e-mail или другие данные. Изображение с камеры обрабатывается только на вашем устройстве и не сохраняется и не отправляется. Если браузер сам не умеет читать штрихкоды, сканер загружается с jsDelivr.</li>
 <li><b>Уведомления:</b> напоминания показывает сам браузер на вашем устройстве; внешний push-сервис не используется. Файл календаря (.ics) создаётся на вашем устройстве, и вы сами добавляете его в календарь.</li>
+<li><b>Push-сервисы браузера</b> (Google, Apple или Mozilla в зависимости от устройства): доставляют уведомления, поэтому через них проходят текст напоминания и идентификатор устройства. Подробные данные о здоровье в уведомления не включаются.</li>
+<li><b>Google (Gmail)</b> также отправляет одно письмо-напоминание за день до окончания пробного периода.</li>
 <li>Приложение использует системные шрифты. Если скрипт Supabase не размещён на том же сайте, он загружается с jsDelivr, который тогда получает ваш IP-адрес.</li>
 </ul><h2>7. Как долго мы храним данные</h2><ul>
 <li><b>Бесплатный пробный период без подписки:</b> ваш аккаунт и данные удаляются <b>через 7 дней после окончания пробного периода</b>.</li>
 <li><b>Подписка:</b> пока она активна и <b>2 месяца после даты окончания подписки</b> (дата, которую тренер фиксирует как дату окончания). После этого аккаунт и все данные удаляются автоматически.</li>
 <li>Если вы оформите подписку снова до даты удаления, удаление отменяется.</li>
 <li>Вы можете сами удалить аккаунт и данные в любое время в приложении (вкладка Coach, «Моя конфиденциальность»).</li>
-<li>Когда пробный период или подписка закончились, приложение показывает точную дату удаления. Уведомления отображаются в приложении; напоминания по эл. почте мы не отправляем.</li>
+<li>После окончания пробного периода или подписки приложение показывает точную дату удаления. За день до окончания пробного периода мы отправляем одно письмо с датой окончания и датой удаления.</li>
+<li>Фото прогресса удаляются вместе с аккаунтом. Если фото по техническим причинам осталось, оно удаляется автоматически в течение 24 часов.</li>
 <li>Резервные копии: если поставщик хранит резервные копии, удалённые данные могут оставаться в них ограниченное время согласно процедурам поставщика и не возвращаются в активное использование.</li>
 <li>Бухгалтерские документы, если они есть, хранятся столько, сколько требует закон.</li>
 </ul><h2>8. Безопасность</h2><p>Приложение использует HTTPS и хешированные пароли, а правила базы данных гарантируют, что каждый пользователь видит только свои данные (у тренера есть доступ администратора). Если произойдёт утечка персональных данных, которая может создать для вас риск, мы сообщим о ней в IMY в течение 72 часов и уведомим вас, когда это требуется.</p><h2>9. Ваши права</h2><p>Вы можете: получить копию своих данных (кнопка скачивания в приложении, в машиночитаемом формате), исправить их (изменить в приложении), удалить (кнопка удаления в приложении или связавшись с нами), ограничить обработку или возразить против неё и отозвать согласие (связавшись с нами).</p>
