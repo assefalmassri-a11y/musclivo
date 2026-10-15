@@ -850,7 +850,7 @@ function ik(H,P){ // ساق بمفصلين: الركبة لقدّام
   const th=phi+al,K=add(H,v(th,L.TH));return [th,Math.atan2(P[0]-K[0],P[1]-K[1])*180/Math.PI];
 }
 // قوالب الحركة. a: الإرساء (foot/hip/hand)، ax/ay: نقطة الإرساء، k: وضعيات، w: الأجزاء الشغّالة، rom: [المفصل، الجزء]
-const BASE={t:180,u:5,f:5,l:[[0,0]],fa:90};
+const BASE={t:180,u:5,f:5,l:[[0,0]],fa:90,dy:0,hx:0};
 const T={
  squat:{a:'foot',ax:110,ay:G,k:[{u:-15,f:165},{t:145,u:-40,f:150,l:[[82,-28]]}],w:['th','s'],rom:['K','s'],eq:'bbs'},
  goblet:{a:'foot',ax:110,ay:G,k:[{u:15,f:165},{t:150,u:40,f:170,l:[[82,-28]]}],w:['th','s'],rom:['K','s'],eq:'db'},
@@ -859,11 +859,11 @@ const T={
  bulgarian:{a:'foot',ax:140,ay:G,k:[{l:[[0,0],[-20,-80]]},{t:170,l:[[80,0],[-35,-95]]}],w:['th','s'],rom:['K','s'],eq:'db',props:[{r:[40,140,40,10,3]},{l:[48,150,48,185]},{l:[72,150,72,185]}]},
  deadlift:{a:'foot',ax:110,ay:G,k:[{t:125,l:[[60,-25]]},{}],w:['t','th'],rom:['H','t'],eq:'bb'},
  rdl:{a:'foot',ax:110,ay:G,k:[{},{t:105,l:[[18,-8]]}],w:['t','th'],rom:['H','t'],eq:'bb'},
- hipthrust:{a:'foot',ax:150,ay:G,k:[{t:-125,u:-20,f:40,l:[[50,-5]]},{t:-92,u:10,f:60,l:[[90,0]]}],w:['th','t'],rom:['H','th'],eq:'bbh',props:[{r:[20,128,58,12,3]},{l:[30,140,30,185]},{l:[68,140,68,185]}]},
- bridge:{a:'foot',ax:150,ay:G,k:[{t:-95,u:-80,f:-80,l:[[40,-10]]},{t:-75,u:-80,f:-80,l:[[75,0]]}],w:['th','t'],rom:['H','th']},
- legpress:{a:'hip',ax:95,ay:140,k:[{t:-140,u:30,f:60,l:[[160,95]]},{t:-140,u:30,f:60,l:[[128,128]]}],w:['th','s'],rom:['K','s'],eq:'plat',props:[{l:[95,140,60,105]},{l:[80,145,120,145]}]},
+ hipthrust:{a:'hip',ax:112,ay:150,feet:[144,G],fa:90,k:[{t:-120.4,u:70,f:50,dy:25},{t:-96.2,u:95,f:72,dy:3}],w:['th','t'],rom:['H','t'],eq:'bbh',props:[{r:[16,147,54,10,3]},{l:[24,157,24,185]},{l:[62,157,62,185]}]},
+ bridge:{a:'hip',ax:118,ay:150,feet:[158,G],fa:90,k:[{t:-85,u:80,f:84,dy:22,hd:-90},{t:-60.3,u:80,f:84,hx:-6,dy:2,hd:-90}],w:['th','t'],rom:['H','t']},
+ legpress:{a:'hip',ax:95,ay:140,k:[{t:-140,u:30,f:60,l:[[160,95]]},{t:-140,u:30,f:60,l:[[128,128]]}],w:['th','s'],rom:['K','s'],eq:'plat',props:[{l:[95,142,58,104]},{r:[78,145,46,8,3]},{l:[100,153,100,185]},{l:[84,185,118,185]},{l:[118,150,196,96]}]},
  legext:{a:'hip',ax:95,ay:140,k:[{t:-172,u:5,f:60,l:[[90,0]]},{t:-172,u:5,f:60,l:[[90,88]]}],w:['s'],rom:['K','s'],eq:'pad',props:[{r:[60,140,45,10,3]},{l:[92,135,85,85]},{l:[90,150,90,185]}]},
- legcurl:{a:'hip',ax:110,ay:140,k:[{t:-90,u:-150,f:-170,l:[[90,90]]},{t:-90,u:-150,f:-170,l:[[90,195]]}],w:['s'],rom:['K','s'],eq:'pad',props:[{r:[50,145,110,10,3]},{l:[80,155,80,185]},{l:[140,155,140,185]}]},
+ legcurl:{a:'hip',ax:112,ay:137,k:[{t:90,u:20,f:5,l:[[-90,-90]]},{t:90,u:20,f:5,l:[[-90,-200]]}],w:['s'],rom:['K','s'],eq:'pad',fa:-90,props:[{r:[44,144,142,10,3]},{l:[70,154,70,185]},{l:[164,154,164,185]}]},
  calf:{a:'foot',ax:110,ay:G,k:[{u:-10,f:170},{u:-10,f:170,dy:-9,fa:41}],w:['s'],rom:['A','fa'],eq:'bbs'},
  bench:{a:'hip',ax:110,ay:140,k:[{t:-90,u:22,f:168,l:[[45,0]]},{t:-90,u:178,f:180,l:[[45,0]]}],w:['u','f'],rom:['S','u'],eq:'bb',props:[{r:[40,145,80,9,3]},{l:[55,154,55,185]},{l:[105,154,105,185]}]},
  dbbench:{a:'hip',ax:110,ay:140,k:[{t:-90,u:22,f:168,l:[[45,0]]},{t:-90,u:178,f:180,l:[[45,0]]}],w:['u','f'],rom:['S','u'],eq:'db',props:[{r:[40,145,80,9,3]},{l:[55,154,55,185]},{l:[105,154,105,185]}]},
@@ -889,7 +889,7 @@ const T={
  ohext:{a:'foot',ax:110,ay:G,k:[{u:-178,f:-15},{u:-178,f:-178}],w:['f'],rom:['E','f'],eq:'db'},
  kickback:{a:'foot',ax:110,ay:G,k:[{t:122,u:-112,f:0,l:[[30,-20]]},{t:122,u:-112,f:-110,l:[[30,-20]]}],w:['f'],rom:['E','f'],eq:'db'},
  tmachine:{a:'hip',ax:95,ay:140,k:[{u:-20,f:140,l:[[90,0]]},{u:-20,f:8,l:[[90,0]]}],w:['f'],rom:['E','f'],eq:'handle',props:[{l:[88,145,84,82]},{r:[70,142,40,8,3]},{l:[92,150,92,185]}]},
- gkick:{a:'foot',ax:95,ay:G,k:[{t:165,u:40,f:60,l:[[0,0],[5,0]]},{t:160,u:40,f:60,l:[[0,0],[-45,-30]]}],w:['th2'],rom:['H','th2'],eq:'ankle',cable:[215,180]},
+ gkick:{a:'foot',al2:1,ax:95,ay:G,k:[{t:165,u:60,f:75,l:[[5,0],[0,0]]},{t:160,u:60,f:75,l:[[-45,-30],[0,0]]}],w:['th'],rom:['H','th'],eq:'ankle',cable:[168,182]},
  crunch:{a:'hip',ax:115,ay:178,k:[{t:-90,u:150,f:170,rel:1,l:[[140,20]]},{t:-128,u:150,f:170,rel:1,l:[[140,20]]}],w:['t'],rom:['H','t']},
  abmachine:{a:'hip',ax:100,ay:140,k:[{t:180,u:160,f:-20,rel:1,l:[[90,0]]},{t:140,u:160,f:-20,rel:1,l:[[90,0]]}],w:['t'],rom:['H','t'],props:[{r:[70,142,40,8,3]},{l:[92,150,92,185]}]},
  cablecrunch:{a:'knee',ax:110,ay:G,k:[{t:172,u:160,f:-25,rel:1,l:[[0,-90]]},{t:100,u:160,f:-25,rel:1,l:[[0,-90]]}],w:['t'],rom:['H','t'],eq:'handle',cable:[150,12]},
@@ -974,7 +974,7 @@ function frame(tp,t){ // t ثواني
   return Object.assign(mix(pose(tp,0),pose(tp,1),x),{_x:x});
 }
 function solve(tp,p){
-  const rel=p.rel?p.t:0,H=[0,0],S=add(H,v(p.t,L.T)),HD=add(S,v(p.t,13));
+  const rel=p.rel?p.t:0,H=[0,0],S=add(H,v(p.t,L.T)),HD=add(S,v(p.hd!=null?p.hd:p.t,13));
   const arm=(u,f)=>{const E=add(S,v(u+rel,L.UA));return [E,add(E,v(f+rel,L.FA))]};
   const [E,W]=arm(p.u,p.f),[E2,W2]=arm(p.u2!==undefined?p.u2:p.u,p.f2!==undefined?p.f2:p.f);
   let legs;
@@ -991,15 +991,15 @@ function solve(tp,p){
   const pts={H,S,HD,E,W,E2,W2,K:LP[0].K,A:LP[0].A,F:LP[0].F,K2:LP[1].K,A2:LP[1].A,F2:LP[1].F};
   // الإرساء
   let ref=[0,0],an=p.a||tp.a;
-  if(an==='foot')ref=pts.A;else if(an==='hand')ref=pts.W;else if(an==='knee')ref=pts.K;
-  let ox=tp.ax-ref[0],oy=tp.ay-ref[1]+(p.dy||0);
+  if(an==='foot')ref=tp.al2?pts.A2:pts.A;else if(an==='hand')ref=pts.W;else if(an==='knee')ref=pts.K;
+  let ox=tp.ax-ref[0]+(an==='hip'?(p.hx||0):0),oy=tp.ay-ref[1]+(p.dy||0);
   if(an==='hand'&&p.a==='hand'&&tp.a!=='hand'){ox=tp.ax+40-ref[0]}
   if(tp.crank||tp.ell||tp.step||tp.row){ox=tp.ax+(p.hx||0);oy=tp.ay+(p.dy||0)}
   for(const k in pts){pts[k]=[pts[k][0]+ox,pts[k][1]+oy]}
   if(tp.crank||tp.ell||tp.step||tp.row){// الساقين محسوبين بإحداثيات مطلقة
     legs.forEach(([th,s],i)=>{const K=add(pts.H,v(th,L.TH)),A=add(K,v(s,L.SH));const sfx=i?'2':'';pts['K'+sfx]=K;pts['A'+sfx]=A;pts['F'+sfx]=add(A,v(90,L.FT))});
   }
-  if(tp.feet){legs=[0,1].map(()=>ik(pts.H,tp.feet));legs.forEach(([th,s],i)=>{const K=add(pts.H,v(th,L.TH)),A=add(K,v(s,L.SH));const sfx=i?'2':'';pts['K'+sfx]=K;pts['A'+sfx]=A;pts['F'+sfx]=add(A,v(90,L.FT))})}
+  if(tp.feet){legs=[ik(pts.H,tp.feet),tp.feetOne?p.l[1]:ik(pts.H,tp.feet)];legs.forEach(([th,s],i)=>{const K=add(pts.H,v(th,L.TH)),A=add(K,v(s,L.SH));const sfx=i?'2':'';pts['K'+sfx]=K;pts['A'+sfx]=A;pts['F'+sfx]=add(A,v(i&&tp.feetOne?(tp.fa2!=null?tp.fa2:90):(tp.fa!=null?tp.fa:90),L.FT))})}
   pts.legs=legs;return pts;
 }
 const ln=(a,b,c,w,o)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"${o?` opacity="${o}"`:''}/>`;
@@ -1017,9 +1017,9 @@ function eqDraw(tp,pts,C){
   else if(e==='wheel')s+=`<circle cx="${W[0]}" cy="${W[1]+3}" r="8" fill="none" stroke="${C.eq}" stroke-width="4"/>`;
   else if(e==='bag')s+=`<rect x="${W[0]-9}" y="${W[1]-2}" width="18" height="20" rx="5" fill="${C.eq}"/>`;
   else if(e==='bottle')s+=`<rect x="${W2[0]-4}" y="${W2[1]-9}" width="8" height="18" rx="3" fill="${C.water}" opacity=".45"/><rect x="${W[0]-4}" y="${W[1]-9}" width="8" height="18" rx="3" fill="${C.water}"/>`;
-  else if(e==='ankle')s+=`<circle cx="${pts.A2[0]}" cy="${pts.A2[1]}" r="4" fill="${C.eq}"/>`;
+  else if(e==='ankle')s+=`<rect x="${f1(pts.A[0]-5)}" y="${f1(pts.A[1]-4)}" width="10" height="8" rx="3" fill="${C.eq}"/>`;
   else if(e==='rope'){const y=Math.max(pts.A[1],pts.F[1])+6;s+=`<path d="M${W[0]} ${W[1]} Q ${W[0]-60} ${y+10} ${W[0]-4} ${y} " fill="none" stroke="${C.eq}" stroke-width="2"/>`}
-  if(tp.cable){let P=tp.cable==='top'?[W[0],14]:tp.cable;const from=e==='ankle'?pts.A2:W;s=`<circle cx="${f1(P[0])}" cy="${f1(P[1])}" r="6" fill="${C.prop}" stroke="${C.eq}" stroke-width="2.5"/><circle cx="${f1(P[0])}" cy="${f1(P[1])}" r="1.8" fill="${C.eq}"/>`+ln(from,P,C.eq,1.6)+s}
+  if(tp.cable){let P=tp.cable==='top'?[W[0],14]:tp.cable;const from=e==='ankle'?pts.A:W;s=`<circle cx="${f1(P[0])}" cy="${f1(P[1])}" r="6" fill="${C.prop}" stroke="${C.eq}" stroke-width="2.5"/><circle cx="${f1(P[0])}" cy="${f1(P[1])}" r="1.8" fill="${C.eq}"/>`+ln(from,P,C.eq,1.6)+s}
   return s;
 }
 const MU={squat:'quads,glutes|hams,lowback',goblet:'quads,glutes|hams',bwsquat:'quads,glutes|hams',hack:'quads|glutes',lunge:'quads,glutes|hams',lungebw:'quads,glutes|hams',bulgarian:'quads,glutes|hams',bulgarianbw:'quads,glutes|hams',
@@ -1066,14 +1066,18 @@ function musSide(k,P,far,fill,op,glow){const H=P.H,S=P.S,E=far?P.E2:P.E,W=far?P.
   }return ''}
 function muList(tp,name){const x=(typeof XEX!=='undefined'&&XEX[name])||{};const s=x.mu||tp.mu||MU[tp._k]||'';const [a,b]=s.split('|');return [(a||'').split(',').filter(Boolean),(b||'').split(',').filter(Boolean)]}
 const DEFS=C=>`<defs><filter id="xgl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.6"/></filter><linearGradient id="xbody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.ink}"/><stop offset="1" stop-color="${C.ink}" stop-opacity=".82"/></linearGradient></defs>`;
-function body(P,C,far){const op=far?.33:1,col=far?C.ink:'url(#xbody)',s=[];const L2=(a,b,w,c)=>`<line x1="${f1(a[0])}" y1="${f1(a[1])}" x2="${f1(b[0])}" y2="${f1(b[1])}" stroke="${c||col}" stroke-width="${w}" stroke-linecap="round" opacity="${op}"/>`;
-  if(far)return L2(P.H,P.K2,10)+L2(P.K2,P.A2,7.5)+L2(P.A2,P.F2,5)+L2(P.S,P.E2,7.5)+L2(P.E2,P.W2,6);
-  // الجذع: شكل مخروطي
-  const [dx,dy]=nrm(P.H,P.S),nx=-dy,ny=dx,hw=6.5,sw=8.5,H=P.H,S=P.S;
-  const tor=`<path d="M${f1(H[0]+nx*hw)} ${f1(H[1]+ny*hw)} L${f1(S[0]+nx*sw)} ${f1(S[1]+ny*sw)} Q ${f1(S[0]+dx*5)} ${f1(S[1]+dy*5)} ${f1(S[0]-nx*sw)} ${f1(S[1]-ny*sw)} L${f1(H[0]-nx*hw)} ${f1(H[1]-ny*hw)} Q ${f1(H[0]-dx*6)} ${f1(H[1]-dy*6)} ${f1(H[0]+nx*hw)} ${f1(H[1]+ny*hw)} Z" fill="${col}" stroke="${C.ink}" stroke-width="1.5" stroke-linejoin="round"/>`;
-  const NK=add(S,[dx*5,dy*5]);
-  return {torso:tor+L2(S,NK,6)+`<circle cx="${f1(P.HD[0])}" cy="${f1(P.HD[1])}" r="9.5" fill="${C.ink}"/>`,
-    legs:L2(H,P.K,11)+L2(P.K,P.A,8)+L2(P.A,P.F,5.5),arms:L2(S,P.E,8)+L2(P.E,P.W,6.5)+`<circle cx="${f1(P.W[0])}" cy="${f1(P.W[1])}" r="3.6" fill="${C.ink}"/>`}}
+function tap(a,b,w1,w2,col,op){const [dx,dy]=nrm(a,b),nx=-dy,ny=dx,h1=w1/2,h2=w2/2;
+  return `<path d="M${f1(a[0]+nx*h1)} ${f1(a[1]+ny*h1)} L${f1(b[0]+nx*h2)} ${f1(b[1]+ny*h2)} A ${f1(h2)} ${f1(h2)} 0 0 1 ${f1(b[0]-nx*h2)} ${f1(b[1]-ny*h2)} L${f1(a[0]-nx*h1)} ${f1(a[1]-ny*h1)} A ${f1(h1)} ${f1(h1)} 0 0 1 ${f1(a[0]+nx*h1)} ${f1(a[1]+ny*h1)} Z" fill="${col}"${op<1?` opacity="${op}"`:''}/>`}
+function joints(P,C,far){const r=far?1.8:2.5,o=far?.55:1,J=far?[P.S,P.E2,P.W2,P.H,P.K2,P.A2]:[P.S,P.E,P.W,P.H,P.K,P.A];
+  return J.map(j=>`<circle cx="${f1(j[0])}" cy="${f1(j[1])}" r="${r}" fill="${C.bg}" opacity="${o}"/>`).join('')}
+function body(P,C,far){const col=C.ink;
+  if(far)return tap(P.H,P.K2,11,8,col,.33)+tap(P.K2,P.A2,8,6,col,.33)+tap(P.A2,P.F2,5.5,4,col,.33)+tap(P.S,P.E2,8,6.5,col,.33)+tap(P.E2,P.W2,6.5,5,col,.33);
+  const [dx,dy]=nrm(P.H,P.S),nx=-dy,ny=dx,hw=6.8,sw=8.8,H=P.H,S=P.S;
+  const tor=`<path d="M${f1(H[0]+nx*hw)} ${f1(H[1]+ny*hw)} C ${f1(H[0]+nx*(hw+1)+dx*24)} ${f1(H[1]+ny*(hw+1)+dy*24)}, ${f1(S[0]+nx*(sw+1.5)-dx*10)} ${f1(S[1]+ny*(sw+1.5)-dy*10)}, ${f1(S[0]+nx*sw)} ${f1(S[1]+ny*sw)} Q ${f1(S[0]+dx*6)} ${f1(S[1]+dy*6)} ${f1(S[0]-nx*sw)} ${f1(S[1]-ny*sw)} C ${f1(S[0]-nx*(sw-1)-dx*14)} ${f1(S[1]-ny*(sw-1)-dy*14)}, ${f1(H[0]-nx*(hw+.5)+dx*18)} ${f1(H[1]-ny*(hw+.5)+dy*18)}, ${f1(H[0]-nx*hw)} ${f1(H[1]-ny*hw)} Q ${f1(H[0]-dx*7)} ${f1(H[1]-dy*7)} ${f1(H[0]+nx*hw)} ${f1(H[1]+ny*hw)} Z" fill="url(#xbody)"/>`;
+  const NK=add(S,[dx*6,dy*6]),HD=P.HD,eye=[HD[0]+nx*4.6+dx*1.5,HD[1]+ny*4.6+dy*1.5];
+  return {torso:tor+tap(S,NK,6.5,6,col,1)+`<circle cx="${f1(HD[0])}" cy="${f1(HD[1])}" r="9.5" fill="${col}"/><circle cx="${f1(eye[0])}" cy="${f1(eye[1])}" r="1.5" fill="${C.bg}"/>`,
+    legs:tap(H,P.K,12,8.5,col,1)+tap(P.K,P.A,8.5,6,col,1)+tap(P.A,P.F,6,4.2,col,1),
+    arms:tap(S,P.E,8.6,6.6,col,1)+tap(P.E,P.W,6.6,5,col,1)+`<circle cx="${f1(P.W[0])}" cy="${f1(P.W[1])}" r="3.4" fill="${col}"/>`}}
 function svgSide(tp,t,C,name){
   const p=frame(tp,t),P=solve(tp,p),x=p._x==null?.5:p._x;let s=DEFS(C);
   const met=C.eq,pad=C.prop;
@@ -1088,7 +1092,7 @@ function svgSide(tp,t,C,name){
   const [m1,m2]=muList(tp,name),gop=.55+.45*x;
   const mus=far=>m2.map(k=>musSide(k,P,far,C.acc,far?.14:.34,0)).join('')+m1.map(k=>musSide(k,P,far,C.acc,far?gop*.4:gop,!far)).join('');
   // الجهة البعيدة
-  s+=body(P,C,1)+mus(1);
+  s+=body(P,C,1)+mus(1)+joints(P,C,1);
   // قوس المدى الحركي
   if(tp.rom&&tp.k.length>1&&!tp.cyc&&!tp.multi){
     const j=tp.rom[0],sg=tp.rom[1],c={S:P.S,E:P.E,K:P.K,H:P.H,A:P.A}[j]||P.H;
@@ -1103,6 +1107,7 @@ function svgSide(tp,t,C,name){
   // إعادة رسم عضلات الذراع فوق الذراع
   s+=m2.filter(k=>/^(bi|tri|brach|fore|delt|fdelt|rdelt)$/.test(k)).map(k=>musSide(k,P,0,C.acc,.34,0)).join('')+m1.filter(k=>/^(bi|tri|brach|fore|delt|fdelt|rdelt)$/.test(k)).map(k=>musSide(k,P,0,C.acc,gop,1)).join('');
   if(m1.includes('heart')||m2.includes('heart'))s+=musSide('heart',P,0,C.acc,x,0);
+  s+=joints(P,C,0);
   return s;
 }
 function svgFront(tp,t,C,name){
@@ -1114,9 +1119,9 @@ function svgFront(tp,t,C,name){
   const L2=(a,b,w,c,o)=>`<line x1="${f1(a[0])}" y1="${f1(a[1])}" x2="${f1(b[0])}" y2="${f1(b[1])}" stroke="${c||C.ink}" stroke-width="${w}" stroke-linecap="round"${o?` opacity="${o}"`:''}/>`;
   const glo=(c,rx,ry,ang,o)=>o?ell(c,rx,ry,ang,C.acc,o,o>.4):'';
   // الأرجل
-  const lg=p.legs!==undefined?p.legs:10;
+  const lg=p.legs!==undefined?p.legs:10,JF=[];
   [-1,1].forEach(sd=>{const Hh=[cx+sd*12,hy+2],Ft=[cx+sd*(lg+10),G-3],Kn=[(Hh[0]+Ft[0])/2+sd*1,(Hh[1]+Ft[1])/2];
-    s+=L2(Hh,Kn,13)+L2(Kn,Ft,9)+L2(Ft,[Ft[0]+sd*6,Ft[1]+1],6);
+    s+=L2(Hh,Kn,13)+L2(Kn,Ft,9)+L2(Ft,[Ft[0]+sd*6,Ft[1]+1],6);JF.push(Hh,Kn,Ft);
     const a=Math.atan2(Kn[1]-Hh[1],Kn[0]-Hh[0])*180/Math.PI;
     s+=glo([(Hh[0]+Kn[0])/2-sd*2,(Hh[1]+Kn[1])/2],15,4,a,on('adduct'));
     s+=glo([(Hh[0]+Kn[0])/2+sd*1,(Hh[1]+Kn[1])/2],16,5,a,on('quads'));
@@ -1136,11 +1141,11 @@ function svgFront(tp,t,C,name){
     if(p.ab!==undefined){const a=p.ab;const d=[Math.sin(a*Math.PI/180)*sd,Math.cos(a*Math.PI/180)];E=[Sx+d[0]*26,Sy+d[1]*26];Wp=[E[0]+d[0]*22,E[1]+d[1]*22-4]}
     else if(p.chop!==undefined){const xx=p.chop;const H0=[cx+48,sy-30],H1=[cx-38,hy+22];Wp=[lerp(H0[0],H1[0],xx)+sd*3,lerp(H0[1],H1[1],xx)];E=[(Sx+Wp[0])/2,(Sy+Wp[1])/2+6]}
     else if(p.up!==undefined){const u=p.up;Wp=[cx+sd*9,lerp(hy+6,sy+4,u)];E=[cx+sd*lerp(28,44,u),lerp((sy+hy)/2+4,sy-6,u)]}
-    else if(p.hx!==undefined){const hx=p.hx,hyy=sy+6+(p.hy||0);Wp=[cx+sd*hx,hyy];E=[(Sx+Wp[0])/2+sd*6,(Sy+Wp[1])/2+6]}
+    else if(tp.k[0].hx!==undefined){const hx=p.hx,hyy=sy+6+(p.hy||0);Wp=[cx+sd*hx,hyy];E=[(Sx+Wp[0])/2+sd*6,(Sy+Wp[1])/2+6]}
     else{E=[Sx+sd*3,Sy+26];Wp=[Sx+sd*4,Sy+50]}
     Ws.push(Wp);
     if(tp.fcable){const A=tp.fcable==='high'?[cx+sd*105,25]:tp.fcable==='low'?[cx-sd*40,G-4]:[cx+95,25];if(tp.fcable!=='chop'||sd===1)s+=`<circle cx="${A[0]}" cy="${A[1]}" r="6" fill="none" stroke="${C.eq}" stroke-width="3"/>`+L2(Wp,A,1.8,C.eq)}
-    s+=L2([Sx,Sy],E,9.5)+L2(E,Wp,7.5)+`<circle cx="${f1(Wp[0])}" cy="${f1(Wp[1])}" r="4" fill="${C.ink}"/>`;
+    s+=L2([Sx,Sy],E,9.5)+L2(E,Wp,7.5)+`<circle cx="${f1(Wp[0])}" cy="${f1(Wp[1])}" r="4" fill="${C.ink}"/>`;JF.push([Sx,Sy],E,Wp);
     const a=Math.atan2(E[1]-Sy,E[0]-Sx)*180/Math.PI;
     const dl=Math.max(on('delt'),on('fdelt'),on('rdelt'));if(dl)s+=glo([Sx+(E[0]-Sx)*.18,Sy+(E[1]-Sy)*.18],8,7,a,dl);
     const ar=Math.max(on('bi'),on('tri'));if(ar)s+=glo([(Sx+E[0])/2,(Sy+E[1])/2],10,4,a,ar);
@@ -1149,13 +1154,14 @@ function svgFront(tp,t,C,name){
     else if(tp.eq==='pad')s+=`<rect x="${f1(Wp[0]-6)}" y="${f1(Wp[1]-15)}" width="12" height="30" rx="5" fill="${C.eq}"/>`;
     else if(tp.eq==='handle')s+=`<rect x="${f1(Wp[0]-5)}" y="${f1(Wp[1]-3)}" width="10" height="6" rx="3" fill="${C.eq}"/>`;
   });
+  s+=JF.map(j=>`<circle cx="${f1(j[0])}" cy="${f1(j[1])}" r="2.5" fill="${C.bg}"/>`).join('')+`<circle cx="${cx+4}" cy="${sy-25}" r="1.6" fill="${C.bg}"/><circle cx="${cx-4}" cy="${sy-25}" r="1.6" fill="${C.bg}"/>`;
   if(tp.eq==='bbf')s+=L2([Ws[0][0]-34,Ws[0][1]],[Ws[1][0]+34,Ws[1][1]],4,C.eq)+`<rect x="${f1(Ws[0][0]-44)}" y="${f1(Ws[0][1]-13)}" width="9" height="26" rx="2" fill="${C.eq}"/><rect x="${f1(Ws[1][0]+35)}" y="${f1(Ws[1][1]-13)}" width="9" height="26" rx="2" fill="${C.eq}"/>`;
   return s;
 }
 
 function svg(name,t){
   const m=MAP[name];if(!m)return '';const tp=T[m[0]];if(!tp)return '';
-  const now=Date.now();if(!svg.C||now-svg.ct>600){const cs=getComputedStyle(document.documentElement);const g=k=>cs.getPropertyValue(k).trim();const lt=document.documentElement.dataset.theme==='light';svg.C={ink:g('--ink')||'#EAF3EE',acc:g('--acc')||'#39FF88',acc2:g('--acc2')||'#F2C94C',eq:g('--mut')||'#8FA39A',prop:lt?'#B9CCC2':'#2E4A40',water:'#3AA0FF'};svg.ct=now}const C=svg.C;
+  const now=Date.now();if(!svg.C||now-svg.ct>600){const cs=getComputedStyle(document.documentElement);const g=k=>cs.getPropertyValue(k).trim();const lt=document.documentElement.dataset.theme==='light';svg.C={ink:g('--ink')||'#EAF3EE',acc:g('--acc')||'#39FF88',acc2:g('--acc2')||'#F2C94C',bg:g('--bg')||'#0A0E0C',eq:g('--mut')||'#8FA39A',prop:lt?'#B9CCC2':'#2E4A40',water:'#3AA0FF'};svg.ct=now}const C=svg.C;
   return tp.front?svgFront(tp,t,C,name):svgSide(tp,t,C,name);
 }
 const cp=(b,o)=>Object.assign({},T[b],o);
@@ -1166,7 +1172,7 @@ Object.assign(T,{
  conc:{a:'hip',ax:95,ay:140,k:[{t:150,u:25,f:15,l:[[90,0]]},{t:150,u:25,f:155,l:[[90,0]]}],w:['f'],rom:['E','f'],eq:'db',props:[{r:[60,142,50,8,3]},{l:[85,150,85,185]}]},
  inclinecurl:{a:'hip',ax:120,ay:145,k:[{t:-145,u:-8,f:-5,l:[[60,0]]},{t:-145,u:-8,f:150,l:[[60,0]]}],w:['f'],rom:['E','f'],eq:'db',props:[{l:[122,150,78,108]},{l:[110,152,135,152]},{l:[122,152,122,185]}]},
  hanglr:cp('pullup',{k:[{u:178,f:180,l:[[3,0]]},{u:178,f:180,l:[[92,92]]}],w:['th','t'],rom:['H','th']}),
- hack:cp('squat',{eq:null,props:[{l:[48,185,92,30]}]}),
+ hack:{a:'hip',ax:104,ay:128,feet:[138,183],fa:70,k:[{t:-160,u:15,f:165},{t:-160,u:15,f:165,dy:35,hx:13}],w:['th','s'],rom:['H','th'],props:[{l:[64,40,116,185]},{l:[124,188,158,176]}]},
  calfseat:{a:'hip',ax:95,ay:140,k:[{t:180,u:20,f:80,l:[[90,0]],fa:100},{t:180,u:20,f:80,l:[[90,0]],fa:55,dy:-7}],w:['s'],rom:['A','fa'],props:[{r:[70,142,40,8,3]},{l:[92,150,92,185]}]},
  frontraise:{a:'foot',ax:110,ay:G,k:[{u:5,f:5},{u:95,f:92}],w:['u'],rom:['S','u'],eq:'db'},
  pullover:cp('dbbench',{k:[{t:-90,u:-75,f:-75,l:[[45,0]]},{t:-90,u:-178,f:-178,l:[[45,0]]}],w:['u'],rom:['S','u']}),
@@ -1183,8 +1189,8 @@ Object.assign(T,{
  jumpsquat:{a:'foot',ax:110,ay:G,multi:1,k:[{u:-15,f:-15},{t:145,u:95,f:95,l:[[82,-28]]},{u:178,f:180,dy:-18}],w:['th','s']},
  wallsit:{a:'foot',ax:122,ay:G,slow:1,k:[{t:180,u:0,f:0,l:[[90,0]]},{t:180,u:0,f:0,l:[[90,0]],dy:-1}],w:['th'],props:[{l:[82,30,82,185]}]},
  stepup:{a:'foot',ax:132,ay:150,k:[{l:[[88,-3],[0,0]]},{l:[[0,0],[-10,-25]]}],w:['th','s'],rom:['K','s'],props:[{r:[112,150,48,8,2]},{l:[117,158,117,185]},{l:[155,158,155,185]}]},
- bridge1:cp('bridge',{k:[{t:-95,u:-80,f:-80,l:[[40,-10],[85,85]]},{t:-75,u:-80,f:-80,l:[[75,0],[105,105]]}]}),
- donkey:{a:'hand',ax:160,ay:G,k:[{t:112,u:0,f:0,l:[[0,-90],[0,-90]]},{t:112,u:0,f:0,l:[[0,-90],[-95,180]]}],w:['th2'],rom:['H','th2'],fa:-90},
+ bridge1:{a:'hip',ax:118,ay:150,feet:[158,G],feetOne:1,fa:90,fa2:90,k:[{t:-85,u:80,f:84,dy:22,hd:-90,l:[[0,0],[95,95]]},{t:-60.3,u:80,f:84,hx:-6,dy:2,hd:-90,l:[[0,0],[119.7,119.7]]}],w:['th','t'],rom:['H','t']},
+ donkey:{a:'hand',ax:160,ay:G,k:[{t:112,u:0,f:0,l:[[0,-90],[0,-90]]},{t:112,u:0,f:0,l:[[-95,180],[0,-90]]}],w:['th'],rom:['H','th'],fa:-90},
  bicycle:{a:'hip',ax:115,ay:178,multi:1,k:[{t:-118,u:150,f:170,rel:1,l:[[160,70],[100,100]]},{t:-118,u:150,f:170,rel:1,l:[[100,100],[160,70]]}],w:['t','th']},
  sideplank:cp('plank',{k:[{t:107,u:-10,f:90,u2:178,f2:180,l:[[-73,-73]]},{t:107,u:-10,f:90,u2:178,f2:180,l:[[-73,-73]],dy:-3}]}),
  highknee:{a:'hip',ax:110,ay:121,cyc:1,fast:1,k:[{u:-30,f:60,u2:30,f2:100,l:[[95,-10],[0,0]]},{u:30,f:100,u2:-30,f2:60,l:[[0,0],[95,-10]]}],w:['th','th2']},
