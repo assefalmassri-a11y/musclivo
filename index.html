@@ -1060,12 +1060,16 @@ async function adm(action,body){
   if(!r.ok)throw new Error(j.error||'حدث خطأ');
   return j;
 }
+function SUBOPTS(){
+  const lb=n=>TL({ar:n===1?'شهر واحد':n===2?'شهرين':n<=10?n+' أشهر':n+' شهر',en:n+(n===1?' month':' months'),sv:n+(n===1?' månad':' månader'),ru:n+' '+(n%10===1&&n%100!==11?'месяц':[2,3,4].includes(n%10)&&![12,13,14].includes(n%100)?'месяца':'месяцев')});
+  return [1,2,3,4,5,6,7,8,9,10,11,12,18,24,36].map(n=>`<option value="${n}">${lb(n)}${n===12?' ('+TL({ar:'سنة',en:'1 year',sv:'1 år',ru:'1 год'})+')':n===24?' ('+TL({ar:'سنتين',en:'2 years',sv:'2 år',ru:'2 года'})+')':''}</option>`).join('')+`<option value="custom">${TL({ar:'عدد آخر…',en:'Other…',sv:'Annat…',ru:'Другое…'})}</option><option value="life">${TL({ar:'مدى الحياة',en:'Lifetime',sv:'Livstid',ru:'Навсегда'})}</option>`;
+}
 async function loadUsers(){
   try{
     const j=await adm('list');
     const dd=u=>{if(u.is_admin||u.subscribed)return null;let d=null;if(u.sub_ended_at){d=new Date(u.sub_ended_at);d.setMonth(d.getMonth()+2)}else if(u.trial_ends_at){d=new Date(u.trial_ends_at);d.setDate(d.getDate()+7)}return d?d.toISOString().slice(0,10):null};
     const st=u=>(u.is_admin?'':(subOn(u)?(u.sub_until?'مشترك حتى '+u.sub_until.slice(0,10):'مشترك مدى الحياة'):u.subscribed?'انتهى الاشتراك':(u.trial_ends_at&&new Date(u.trial_ends_at)>new Date()?'تجربة حتى '+u.trial_ends_at.slice(0,10):'انتهت')))+(dd(u)?' · الحذف: '+dd(u):'');
-    $('al').innerHTML='<table><thead><tr><th>الشخص</th><th>كلمة المرور</th><th></th></tr></thead><tbody>'+j.users.map(u=>`<tr><td><b>${esc(u.username)}</b>${u.is_admin?' <span class="mut">(المدير)</span>':''}<div class="mut">${st(u)}</div></td><td>${u.id===me.id?'-':`<input data-pw="${u.id}" placeholder="كلمة جديدة" style="width:120px"> <button class="g" data-rs="${u.id}">غيّر</button>`}</td><td>${u.id===me.id?'':`<span class="subp"><select data-plan="${u.id}" aria-label="مدة الاشتراك"><option value="month">شهر واحد</option><option value="year">سنة واحدة</option><option value="life">مدى الحياة</option></select><button class="g" data-sb="${u.id}|1">${u.subscribed?'مدّد / غيّر':'فعّل الاشتراك'}</button></span> ${u.subscribed?`<button class="g" data-sb="${u.id}|0">ألغِ الاشتراك</button> `:''}${u.subscribed?'':`<button class="g" data-ex="${u.id}">مدّد 3 أيام</button> `}<button class="g" data-vw="${u.id}">بياناته</button> <button class="g" data-ad="${u.id}|${u.is_admin?0:1}">${u.is_admin?'أزل المدير':'اجعله مدير'}</button> <button class="x" data-dl="${u.id}">حذف</button>`}</td></tr>`).join('')+'</tbody></table><div id="av"></div>';
+    $('al').innerHTML='<table><thead><tr><th>الشخص</th><th>كلمة المرور</th><th></th></tr></thead><tbody>'+j.users.map(u=>`<tr><td><b>${esc(u.username)}</b>${u.is_admin?' <span class="mut">(المدير)</span>':''}<div class="mut">${st(u)}</div></td><td>${u.id===me.id?'-':`<input data-pw="${u.id}" placeholder="كلمة جديدة" style="width:120px"> <button class="g" data-rs="${u.id}">غيّر</button>`}</td><td>${u.id===me.id?'':`<span class="subp"><select data-plan="${u.id}" aria-label="مدة الاشتراك">${SUBOPTS()}</select><button class="g" data-sb="${u.id}|1">${u.subscribed?'مدّد / غيّر':'فعّل الاشتراك'}</button></span> ${u.subscribed?`<button class="g" data-sb="${u.id}|0">ألغِ الاشتراك</button> `:''}${u.subscribed?'':`<button class="g" data-ex="${u.id}">مدّد 3 أيام</button> `}<button class="g" data-vw="${u.id}">بياناته</button> <button class="g" data-ad="${u.id}|${u.is_admin?0:1}">${u.is_admin?'أزل المدير':'اجعله مدير'}</button> <button class="x" data-dl="${u.id}">حذف</button>`}</td></tr>`).join('')+'</tbody></table><div id="av"></div>';
   }catch(e){toast(e.message)}
 }
 $('al').onclick=async e=>{
@@ -1074,7 +1078,7 @@ $('al').onclick=async e=>{
     if(b.dataset.sb){
       const [id,v]=b.dataset.sb.split('|');const pl=$('al').querySelector(`[data-plan="${id}"]`);
       if(v==='0'&&b.dataset.c!=='1'){b.dataset.c='1';const o=b.textContent;b.textContent=tr('تأكيد الإلغاء؟');setTimeout(()=>{b.dataset.c='';b.textContent=o},3000);return}
-      await adm('subscribe',{id,value:v==='1',plan:pl?pl.value:'life'});toast('تم تحديث الاشتراك.');loadUsers();loadClients();
+      let pv=pl?pl.value:'life';if(v==='1'&&pv==='custom'){const n=parseInt(prompt(TL({ar:'كم شهر؟ (1 إلى 120)',en:'How many months? (1–120)',sv:'Hur många månader? (1–120)',ru:'Сколько месяцев? (1–120)'}))||'',10);if(!(n>=1&&n<=120)){toast(TL({ar:'اكتب رقم من 1 إلى 120.',en:'Enter a number from 1 to 120.',sv:'Ange ett tal från 1 till 120.',ru:'Введите число от 1 до 120.'}));return}pv=String(n)}await adm('subscribe',pv==='life'?{id,value:v==='1',plan:'life'}:{id,value:v==='1',months:+pv});toast('تم تحديث الاشتراك.');loadUsers();loadClients();
     }else if(b.dataset.ad){
       const [id,v]=b.dataset.ad.split('|');
       if(b.dataset.c!=='1'){b.dataset.c='1';const o=b.textContent;b.textContent=tr(v==='1'?'تأكيد: مدير؟':'تأكيد الإزالة؟');setTimeout(()=>{b.dataset.c='';b.textContent=o},3000);return}
