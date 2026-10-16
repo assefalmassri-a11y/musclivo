@@ -265,6 +265,18 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
 .vshb .sd{background:transparent;color:var(--acc);border:1px solid var(--line)}
 .vshb .wide{grid-column:span 3}
 .vshb [hidden],#vml[hidden],#vmp[hidden]{display:none!important}
+
+.fgrid{grid-template-columns:1fr 1fr;gap:6px}
+.fgrid>div{display:grid;grid-template-columns:auto 1fr;column-gap:7px;align-items:start;padding:7px 8px;border-radius:10px}
+.fgrid i{font-size:15px;line-height:1.3;grid-row:span 2}.fgrid b{font-size:12px;line-height:1.3;margin:0}.fgrid span{font-size:10.5px;line-height:1.35;margin-top:2px}
+.vsw{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+.vsw::-webkit-scrollbar{display:none}
+.vsw .vcard{flex:0 0 74%;flex-direction:column;align-items:stretch;gap:0;padding:0;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always}
+.vsw .vth{flex:none;width:100%;height:auto;aspect-ratio:9/16;border-radius:0}
+.vsw .vpl{width:48px;height:48px;font-size:18px}
+.vsw .vth em{font-size:12px;bottom:8px;right:8px}
+.vsw .vtx{padding:10px 12px 12px}.vsw .vtx b{font-size:15px}.vsw .vtx span{font-size:12px}
+.vdots{display:flex;justify-content:center;gap:6px;margin-top:8px}.vdots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:.2s}.vdots i.on{background:var(--acc);width:18px;border-radius:4px}
 </style>
 </head>
 <body>
@@ -337,8 +349,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
       <div class="trs" style="margin-top:8px">لديك حساب؟ <a href="#ls" id="lhave">سجّل دخولك</a></div>
     </div>
     <button class="g inst" id="linst" style="display:none;width:100%;margin-bottom:12px"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 7v7M9 11l3 3 3-3"/></svg><span>ثبّت Musclivo على جهازك</span></button>
-    <div class="lpsec" id="lpvid"><h3>فيديوهات تعليمية</h3><div class="vlist"><button type="button" class="vcard" data-vid="install"><span class="vth"><img src="vid-install.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:02</em></span><span class="vtx"><b>كيف تثبّت التطبيق على جوالك</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="signup"><span class="vth"><img src="vid-signup.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:05</em></span><span class="vtx"><b>كيف تنشئ حساباً تجريبياً مجانياً</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="tutorial"><span class="vth"><img src="vid-tutorial.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:54</em></span><span class="vtx"><b>شرح ميزات التطبيق وطريقة استخدامها</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button></div></div>
-    <div class="lpsec"><h3>شاهد التطبيق</h3><div class="shots" id="lpsh"><figure><img data-shot="today" alt="" width="440" height="790" loading="lazy"><figcaption>شاشة اليوم</figcaption></figure><figure><img data-shot="food" alt="" width="440" height="790" loading="lazy"><figcaption>وجبات اليوم</figcaption></figure><figure><img data-shot="log" alt="" width="440" height="790" loading="lazy"><figcaption>تطوّر قوتك</figcaption></figure><figure><img data-shot="fast" alt="" width="440" height="790" loading="lazy"><figcaption>مؤقت الصيام</figcaption></figure></div></div>
+    <div class="lpsec" id="lpvid"><h3>فيديوهات تعليمية</h3><div class="vlist vsw" id="vsw"><button type="button" class="vcard" data-vid="install"><span class="vth"><img src="vid-install.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:02</em></span><span class="vtx"><b>كيف تثبّت التطبيق على جوالك</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="signup"><span class="vth"><img src="vid-signup.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:05</em></span><span class="vtx"><b>كيف تنشئ حساباً تجريبياً مجانياً</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="tutorial"><span class="vth"><img src="vid-tutorial.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:54</em></span><span class="vtx"><b>شرح ميزات التطبيق وطريقة استخدامها</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button></div><div class="vdots" id="vdots" aria-hidden="true"><i class="on"></i><i></i><i></i></div></div>
     <div class="lpsec"><h3>كل ما تحتاجه في مكان واحد</h3><div class="fgrid"><div><i aria-hidden="true">🍽️</i><b>سجّل أكلك بثوانٍ</b><span>أكثر من 2000 أكلة عربية وسويدية، وماسح للباركود.</span></div><div><i aria-hidden="true">🎯</i><b>هدفك اليومي</b><span>يحسب سعراتك والبروتين والكارب والدهون حسب جسمك وهدفك.</span></div><div><i aria-hidden="true">🏋️</i><b>برامج تمارين</b><span>برامج للنادي والبيت مع عرض متحرك لكل تمرين.</span></div><div><i aria-hidden="true">📈</i><b>شاهد تقدّمك</b><span>رسوم بيانية للوزن والقياسات والسعرات والتمارين.</span></div><div><i aria-hidden="true">⏱️</i><b>صيام متقطع</b><span>مؤقت 16:8 أو حسب اختيارك، مع مراحل حرق الدهون.</span></div><div><i aria-hidden="true">💬</i><b>مدربك معك</b><span>رسائل مباشرة وتقرير أسبوعي مع مدرب شخصي.</span></div></div></div>
     <div class="lpsec" id="lprv" hidden><h3>آراء المشتركين</h3><div id="lprl"></div></div>
     <details class="mbr" id="mbr">
@@ -2740,6 +2751,9 @@ $('vsn').onclick=async()=>{if(!VCUR)return;const t='Musclivo – '+tr(VIDS[VCUR]
   try{if(VFILE)await navigator.share({files:[VFILE],title:t,text:t+'\n'+u});else await navigator.share({title:t,text:t,url:u})}catch(e){if(e&&e.name!=='AbortError'){try{await navigator.share({title:t,text:t,url:u})}catch(_){}}}};
 $('vcp').onclick=async()=>{if(!VCUR)return;const u=vUrl(VCUR);try{await navigator.clipboard.writeText(u);toast(tr('تم نسخ الرابط'))}catch(e){toast(u)}};
 (()=>{try{const q=new URLSearchParams(location.search).get('v');if(q&&VIDS[q])setTimeout(()=>vOpen(q),700)}catch(e){}})();
+(()=>{const w=$('vsw');if(!w)return;const ds=[...document.querySelectorAll('#vdots i')];
+  const upd=()=>{const cs=[...w.children],c=w.getBoundingClientRect(),rtl=getComputedStyle(w).direction==='rtl';let bi=0,bd=1e9;cs.forEach((x,i)=>{const r=x.getBoundingClientRect(),dd=rtl?Math.abs(r.right-c.right):Math.abs(r.left-c.left);if(dd<bd){bd=dd;bi=i}});ds.forEach((d,i)=>d.classList.toggle('on',i===bi))};
+  w.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});addEventListener('resize',upd);ds.forEach((d,i)=>{d.style.cursor='pointer';d.onclick=()=>w.children[i].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'})})})();
 /*VIDEO-END*/
 /*INSTALL-START*/
 let DEFER=null;
