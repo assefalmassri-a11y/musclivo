@@ -2105,7 +2105,7 @@ const XL=()=>!!XLANGS[LANG];
 function L1(s){if(!XLANGS[LANG]||typeof s!=='string')return s;const h=LX[s];if(h!=null)return h;
   const ns=[];const k=s.replace(/\d+(?:[.,]\d+)?/g,m=>{ns.push(m);return '#'});if(ns.length){const t=LX[k];if(t!=null){let i=0;return t.replace(/#/g,()=>ns[i++]!=null?ns[i-1]:'#')}}
   const m=s.match(/^(\s*)([\s\S]*?)(\s*)$/);if(m&&(m[1]||m[3])&&LX[m[2]]!=null)return m[1]+LX[m[2]]+m[3];return s}
-function loadLX(l){return fetch('lang/'+l+'.json?v=1').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{XLC[l]=j}).catch(()=>{XLC[l]={t:{},g:null,fail:1}})}
+function loadLX(l){const g=u=>fetch(u+l+'.json?v=1').then(r=>{if(!r.ok)throw 0;return r.json()});return g('lang/').catch(()=>g('')).then(j=>{XLC[l]=j}).catch(()=>{XLC[l]={t:{},g:null,fail:1}})}
 if(!['ar','en','sv','ru'].includes(LANG)&&!XLANGS[LANG])LANG='ar';
 const KEYS=DICT.slice().sort((a,b)=>b[0].length-a[0].length).map(k=>[k[0],k[1],k[2],k[3]||k[1],new RegExp('(?<!['+LET+'])'+k[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?!['+LET+'])','g')]);
 function tr(s){
