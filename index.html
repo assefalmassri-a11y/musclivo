@@ -358,10 +358,19 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
       <div class="trs" style="margin-top:8px">لديك حساب؟ <a href="#ls" id="lhave">سجّل دخولك</a></div>
     </div>
     <button class="g inst" id="linst" style="display:none;width:100%;margin-bottom:12px"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M12 7v7M9 11l3 3 3-3"/></svg><span>ثبّت Musclivo على جهازك</span></button>
-    <div class="lpsec" id="lpvid"><h3>فيديوهات تعليمية</h3><div class="vlist vsw" id="vsw"><button type="button" class="vcard" data-vid="install"><span class="vth"><img src="vid-install.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:02</em></span><span class="vtx"><b>كيف تثبّت التطبيق على جوالك</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="signup"><span class="vth"><img src="vid-signup.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:05</em></span><span class="vtx"><b>كيف تنشئ حساباً تجريبياً مجانياً</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="tutorial"><span class="vth"><img src="vid-tutorial.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:54</em></span><span class="vtx"><b>شرح ميزات التطبيق وطريقة استخدامها</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button></div><div class="vdots" id="vdots" aria-hidden="true"><i class="on"></i><i></i><i></i></div></div>
     <div class="lpsec"><h3>كل ما تحتاجه في مكان واحد</h3><div class="fgrid"><div><i aria-hidden="true">🍽️</i><b>سجّل أكلك بثوانٍ</b><span>أكثر من 2000 أكلة عربية وسويدية، وماسح للباركود.</span></div><div><i aria-hidden="true">🎯</i><b>هدفك اليومي</b><span>يحسب سعراتك والبروتين والكارب والدهون حسب جسمك وهدفك.</span></div><div><i aria-hidden="true">🏋️</i><b>برامج تمارين</b><span>برامج للنادي والبيت مع عرض متحرك لكل تمرين.</span></div><div><i aria-hidden="true">📈</i><b>شاهد تقدّمك</b><span>رسوم بيانية للوزن والقياسات والسعرات والتمارين.</span></div><div><i aria-hidden="true">⏱️</i><b>صيام متقطع</b><span>مؤقت 16:8 أو حسب اختيارك، مع مراحل حرق الدهون.</span></div><div><i aria-hidden="true">💬</i><b>مدربك معك</b><span>رسائل مباشرة وتقرير أسبوعي مع مدرب شخصي.</span></div></div></div>
     <div class="lpsec" id="lprv" hidden><h3>آراء المشتركين</h3><div id="lprl"></div></div>
-    <details class="mbr" id="mbr">
+    <div class="mut" id="lhint" style="margin-bottom:10px">اكتب إيميلك (أو اسم المستخدم) وكلمة المرور.</div>
+    <input id="ls" placeholder="البريد الإلكتروني أو اسم المستخدم" autocomplete="username" autocapitalize="none" aria-label="البريد الإلكتروني أو اسم المستخدم">
+    <input id="lp" type="password" placeholder="كلمة المرور" autocomplete="current-password" style="margin-top:8px" aria-label="كلمة المرور">
+    <a href="#" id="lfg" style="display:inline-block;margin-top:8px;font-size:13px">نسيت كلمة المرور؟</a>
+    <label id="scw" class="mut" style="display:none;margin-top:8px;font-size:13px"><input id="sc" type="checkbox" style="width:auto;margin-inline-end:6px">أوافق على <a href="privacy.html" target="_blank" rel="noopener">سياسة الخصوصية</a> ومعالجة بياناتي الصحية.</label>
+    <button id="lb" style="margin-top:10px;width:100%">دخول</button>
+    <button class="g" id="lm" style="margin-top:8px;width:100%">إنشاء حساب (تجربة مجانية 3 أيام)</button>
+    <div id="le" role="alert" style="color:var(--warn);margin-top:8px"></div>
+    <div id="lok" role="status" style="display:none;color:var(--acc);margin-top:8px;font-weight:700"></div>
+    <button class="g" id="lrs" style="display:none;margin-top:8px;width:100%">أعد إرسال رسالة التأكيد</button>
+    <details class="mbr" id="mbr" style="margin-top:16px">
       <summary><span><span class="mbrk" dir="ltr">MUSCLIVO MEMBERSHIP</span><span class="mbrt">الاشتراك الشهري</span></span><svg class="mbrx" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
       <div class="mbrb">
       <p>خطط تدريب وتغذية مخصصة تناسب أهدافك، مع متابعة مباشرة من المدرب لضمان أفضل النتائج.</p>
@@ -375,16 +384,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px 6px;t
       </div>
       </div>
     </details>
-    <div class="mut" id="lhint" style="margin-bottom:10px">اكتب إيميلك (أو اسم المستخدم) وكلمة المرور.</div>
-    <input id="ls" placeholder="البريد الإلكتروني أو اسم المستخدم" autocomplete="username" autocapitalize="none" aria-label="البريد الإلكتروني أو اسم المستخدم">
-    <input id="lp" type="password" placeholder="كلمة المرور" autocomplete="current-password" style="margin-top:8px" aria-label="كلمة المرور">
-    <a href="#" id="lfg" style="display:inline-block;margin-top:8px;font-size:13px">نسيت كلمة المرور؟</a>
-    <label id="scw" class="mut" style="display:none;margin-top:8px;font-size:13px"><input id="sc" type="checkbox" style="width:auto;margin-inline-end:6px">أوافق على <a href="privacy.html" target="_blank" rel="noopener">سياسة الخصوصية</a> ومعالجة بياناتي الصحية.</label>
-    <button id="lb" style="margin-top:10px;width:100%">دخول</button>
-    <button class="g" id="lm" style="margin-top:8px;width:100%">إنشاء حساب (تجربة مجانية 3 أيام)</button>
-    <div id="le" role="alert" style="color:var(--warn);margin-top:8px"></div>
-    <div id="lok" role="status" style="display:none;color:var(--acc);margin-top:8px;font-weight:700"></div>
-    <button class="g" id="lrs" style="display:none;margin-top:8px;width:100%">أعد إرسال رسالة التأكيد</button>
+    <div class="lpsec" id="lpvid"><h3>فيديوهات تعليمية</h3><div class="vlist vsw" id="vsw"><button type="button" class="vcard" data-vid="install"><span class="vth"><img src="vid-install.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:02</em></span><span class="vtx"><b>كيف تثبّت التطبيق على جوالك</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="signup"><span class="vth"><img src="vid-signup.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:05</em></span><span class="vtx"><b>كيف تنشئ حساباً تجريبياً مجانياً</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button><button type="button" class="vcard" data-vid="tutorial"><span class="vth"><img src="vid-tutorial.jpg" alt="" width="270" height="480" loading="lazy"><i class="vpl" aria-hidden="true">▶</i><em>1:54</em></span><span class="vtx"><b>شرح ميزات التطبيق وطريقة استخدامها</b><span>صوت إنجليزي مع شرح بالعربية</span></span></button></div><div class="vdots" id="vdots" aria-hidden="true"><i class="on"></i><i></i><i></i></div></div>
     <div style="margin-top:12px"><a href="privacy.html" target="_blank" rel="noopener">سياسة الخصوصية</a> · <a class="notr" href="sv.html" hreflang="sv" lang="sv">Musclivo på svenska</a> · <a class="notr" href="en.html" hreflang="en" lang="en">Musclivo in English</a></div>
   </div>
 </div>
