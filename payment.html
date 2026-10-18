@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0E0C">
+  <title>Payment | Musclivo</title>
+  <meta name="description" content="Pay for your Musclivo subscription with USDT or USDC.">
+  <link rel="icon" href="icon-192.png">
+  <script>try{if(localStorage.getItem('musclivo_theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
+  <style>
+    /* ===== Musclivo colors (copied from index.html) ===== */
+    :root {
+      --bg: #0A0E0C;
+      --card: #111713;
+      --ink: #EAF3EE;
+      --mut: #8FA39A;
+      --acc: #39FF88;
+      --on: #03120A;
+      --acc2: #F2C94C;
+      --line: #1E2A23;
+      --glow: rgba(57, 255, 136, .18);
+      --tint: rgba(57, 255, 136, .08);
+      color-scheme: dark;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #F2F6F4;
+      --card: #FFFFFF;
+      --ink: #0F2019;
+      --mut: #5B6F66;
+      --acc: #0E9F5B;
+      --on: #FFFFFF;
+      --acc2: #C98A00;
+      --line: #D7E3DC;
+      --glow: transparent;
+      --tint: rgba(14, 159, 91, .08);
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 20px 14px calc(36px + env(safe-area-inset-bottom, 0px));
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    a { -webkit-tap-highlight-color: transparent; }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    /* ===== Header ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+    }
+
+    .wm {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .tg {
+      font-size: 13px;
+      color: var(--mut);
+    }
+
+    .theme-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* ===== Intro ===== */
+    .intro {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .intro h1 {
+      font-size: clamp(28px, 6vw, 40px);
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--mut);
+    }
+
+    /* ===== Plans (stacked: App first, App + Coach under it) ===== */
+    .plans {
+      display: grid;
+      gap: 14px;
+    }
+
+    .plan {
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    /* Coach plan gets the same green glow as the membership card on the site */
+    .plan.featured {
+      border: 2px solid var(--acc);
+      background: linear-gradient(160deg, var(--tint), transparent 60%), var(--card);
+      box-shadow: 0 0 28px var(--glow);
+    }
+
+    .plan-label {
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      border-radius: 999px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+      color: var(--acc);
+      border: 1px solid var(--acc);
+    }
+
+    .plan.featured .plan-label {
+      color: var(--on);
+      background: var(--acc);
+    }
+
+    .plan h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .plan-description {
+      color: var(--mut);
+      font-size: 14px;
+      margin: 4px 0 0;
+    }
+
+    .features {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 0;
+      font-size: 14px;
+    }
+
+    .features li {
+      position: relative;
+      padding-inline-start: 24px;
+      margin-bottom: 8px;
+    }
+
+    .features li::before {
+      content: "✓";
+      position: absolute;
+      inset-inline-start: 0;
+      color: var(--acc);
+      font-weight: 800;
+    }
+
+    .field { margin-top: 16px; }
+
+    .field-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* ===== Option cards (replace the dropdowns) ===== */
+    .opts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .opts.one-col { grid-template-columns: 1fr; }
+
+    .opt {
+      position: relative;
+      display: block;
+      min-height: 64px;
+      padding: 10px 12px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: border-color .15s, background .15s;
+    }
+
+    /* Hide the real radio button, the whole card is clickable */
+    .opt input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .opt.on {
+      border-color: var(--acc);
+      background: var(--tint);
+      box-shadow: inset 0 0 0 1px var(--acc);
+    }
+
+    /* Outline only for keyboard users, not on tap */
+    .opt:has(input:focus-visible) {
+      outline: 2px solid var(--acc);
+      outline-offset: 2px;
+    }
+
+    .opt-t {
+      display: block;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .opt-p {
+      display: block;
+      font-size: 13px;
+      color: var(--mut);
+    }
+
+    .opt.on .opt-t { color: var(--acc); }
+
+    .opt-save {
+      position: absolute;
+      top: 8px;
+      inset-inline-end: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--on);
+      background: var(--acc2);
+      border-radius: 999px;
+      padding: 1px 7px;
+    }
+
+    /* ===== Price box ===== */
+    .total {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .total span {
+      display: block;
+      color: var(--mut);
+      font-size: 13px;
+    }
+
+    .total strong {
+      display: block;
+      color: var(--acc);
+      font-size: 30px;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    /* ===== Buttons ===== */
+    .primary-btn,
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      margin-top: 14px;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--acc);
+      color: var(--on);
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    .primary-btn:hover,
+    .contact-btn:hover { opacity: .86; }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--acc);
+      outline-offset: 2px;
+    }
+
+    /* ===== Payment cards ===== */
+    .box {
+      margin-top: 14px;
+      padding: 18px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .box h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+
+    .box p {
+      margin: 0;
+      color: var(--mut);
+      font-size: 14px;
+    }
+
+    .other-payment { text-align: center; }
+
+    .other-payment .icon {
+      font-size: 32px;
+      margin-bottom: 6px;
+    }
+
+    .other-payment p {
+      max-width: 460px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .contact-btn {
+      max-width: 320px;
+      margin: 16px auto 0;
+    }
+
+    .footer {
+      margin-top: 26px;
+      text-align: center;
+      color: var(--mut);
+      font-size: 12px;
+    }
+
+    .footer a { color: var(--mut); }
+  
+    .lg { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:18px; }
+    .lg button { font:inherit; font-size:13px; padding:6px 10px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--acc); cursor:pointer; }
+    .lg button[aria-pressed="true"] { background:var(--acc); color:var(--on); }
+    .note { margin-top:10px; font-size:12px; color:var(--mut); text-align:center; }
+    .back { display:inline-block; margin-bottom:14px; color:var(--mut); font-size:14px; text-decoration:none; }
+    .theme-btn { color: var(--ink); }
+
+    .sum { display:grid; grid-template-columns:auto 1fr; gap:6px 12px; font-size:14px; margin-top:8px; }
+    .sum dt { color:var(--mut); } .sum dd { margin:0; font-weight:700; text-align:end; }
+    .big { color:var(--acc); font-size:34px; font-weight:800; line-height:1.15; margin:6px 0 0; }
+    .step { display:flex; gap:10px; align-items:flex-start; }
+    .step .n { flex:none; width:28px; height:28px; border-radius:50%; background:var(--acc); color:var(--on); font-weight:800; display:flex; align-items:center; justify-content:center; font-size:14px; }
+    .step h3 { margin:2px 0 4px; font-size:16px; }
+    .warn { border:2px solid var(--acc2); border-radius:12px; padding:10px 12px; margin-top:10px; }
+    .warn b { color:var(--acc2); }
+    .addr { display:flex; gap:8px; margin-top:10px; align-items:stretch; }
+    .addr code { flex:1; min-width:0; overflow-wrap:anywhere; word-break:break-all; direction:ltr; text-align:left; font-size:14px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); }
+    .sbtn { flex:none; font:inherit; font-size:14px; font-weight:700; padding:8px 12px; border-radius:10px; border:1px solid var(--acc); background:transparent; color:var(--acc); cursor:pointer; min-width:84px; }
+    .qr { display:block; width:200px; max-width:70%; margin:14px auto 4px; background:#fff; padding:8px; border-radius:12px; image-rendering:pixelated; }
+    .qrc { text-align:center; font-size:13px; color:var(--mut); }
+    .f { display:block; margin-top:10px; font-size:13px; color:var(--mut); }
+    .f input { display:block; width:100%; margin-top:4px; font:inherit; font-size:15px; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--bg); color:var(--ink); direction:ltr; text-align:left; }
+    .err { color:#ff6b6b; font-size:13px; min-height:18px; margin-top:6px; }
+    .row2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .row2 .contact-btn, .row2 .sbtn { max-width:none; margin:10px 0 0; min-height:46px; }
+    .coins { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+</style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <div>
+        <a class="wm" href="index.html">MUSCLIVO</a>
+        <div class="tg" data-t="tag">Build your strength. Own your progress.</div>
+      </div>
+      <button class="theme-btn" id="themeBtn" type="button" data-ta="theme" aria-label="Switch light / dark">☀️</button>
+    </header>
+    <div class="lg" id="lg"><button type="button" data-lg="ar" lang="ar">العربية</button><button type="button" data-lg="en" lang="en">English</button><button type="button" data-lg="sv" lang="sv">Svenska</button><button type="button" data-lg="ru" lang="ru">Русский</button></div>
+    <a class="back" href="pricing.html" data-t="change">← Change plan</a>
+    <section class="intro"><h1 data-t="payH">Complete Your Payment</h1></section>
+
+    <section class="box">
+      <dl class="sum">
+        <dt data-t="plan">Plan</dt><dd id="pPlan"></dd>
+        <dt data-t="duration">Duration</dt><dd id="pDur"></dd>
+        <dt data-t="network">Network</dt><dd id="pNet" dir="ltr"></dd>
+      </dl>
+      <div class="coins" id="coinOpts" role="radiogroup" aria-label="USDT / USDC">
+        <label class="opt"><input type="radio" name="coin" value="USDT"><span class="opt-t">USDT</span><span class="opt-p">BEP20</span></label>
+        <label class="opt"><input type="radio" name="coin" value="USDC"><span class="opt-t">USDC</span><span class="opt-p">ERC20</span></label>
+      </div>
+    </section>
+
+    <section class="box">
+      <div class="step"><span class="n">1</span><div style="flex:1;min-width:0"><h3 data-t="s1">Send exactly this amount</h3>
+        <div class="addr"><code id="pAmt" style="font-size:22px;font-weight:800;color:var(--acc)"></code><button class="sbtn" type="button" id="cpAmt" data-t="copy">Copy</button></div>
+        <p style="margin-top:6px" data-t="s1d"></p></div></div>
+    </section>
+
+    <section class="box">
+      <div class="step"><span class="n">2</span><div style="flex:1;min-width:0"><h3 data-t="s2">Use this network only</h3>
+        <div class="warn"><b id="pNet2" dir="ltr"></b><p style="margin-top:4px" data-t="s2d"></p></div></div></div>
+    </section>
+
+    <section class="box">
+      <div class="step"><span class="n">3</span><div style="flex:1;min-width:0"><h3 data-t="s3">Wallet address</h3>
+        <div class="addr"><code id="pAddr"></code><button class="sbtn" type="button" id="cpAddr" data-t="copy">Copy</button></div>
+        <img class="qr" src="qr-wallet.png" width="200" height="200" alt="QR">
+        <div class="qrc" data-t="scan"></div></div></div>
+    </section>
+
+    <section class="box">
+      <div class="step"><span class="n">4</span><div style="flex:1;min-width:0"><h3 data-t="s4">After you pay, send us the confirmation</h3>
+        <p data-t="s4d"></p>
+        <label class="f"><span data-t="email">Your Musclivo account email</span><input id="fEmail" type="email" inputmode="email" autocomplete="email" maxlength="120"></label>
+        <label class="f"><span data-t="txid">Transaction ID</span><input id="fTx" type="text" autocomplete="off" spellcheck="false" maxlength="80" placeholder="0x…"></label>
+        <div class="err" id="fErr" role="alert"></div>
+        <a class="contact-btn" id="sendMail" href="#" style="max-width:none;margin:8px 0 0" data-t="sendMail">Send confirmation by email</a>
+        <div class="row2"><button class="sbtn" type="button" id="cpMsg" data-t="copyMsg">Copy message</button><a class="sbtn" id="tgBtn" href="https://t.me/Musclivo" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;text-decoration:none" data-t="tg">Telegram</a></div>
+        <p class="note" data-t="noRefund"></p></div></div>
+    </section>
+    <footer class="footer">
+      © <span id="year"></span> Musclivo. <span data-t="rights">All rights reserved.</span><br>
+      <a href="privacy.html" data-t="privacy">Privacy Policy</a> · <a href="terms.html" data-t="terms">Terms</a>
+    </footer>
+  </main>
+  <script src="pricing.js?v=1"></script>
+  <script>
+  (function () {
+    var q = new URLSearchParams(location.search), P = MV.PRICES;
+    var plan = q.get('plan'), months = Number(q.get('months')), coin = q.get('currency');
+    if (!P[plan] || !P[plan][months]) { location.replace('pricing.html'); return; }
+    if (!MV.COINS[coin]) coin = 'USDT';
+    var amount = P[plan][months];   // السعر من الجدول، مو من الرابط
+    function el(id) { return document.getElementById(id); }
+    function draw() {
+      el('pPlan').textContent = MV.t(plan === 'coach' ? 'coachName' : 'appName');
+      el('pDur').textContent = MV.durLabel(months);
+      el('pNet').textContent = coin + ' · ' + MV.COINS[coin].net;
+      el('pNet2').textContent = MV.COINS[coin].net;
+      el('pAmt').textContent = amount.toFixed(2) + ' ' + coin;
+      el('pAddr').textContent = MV.WALLET;
+      document.querySelectorAll('#coinOpts .opt').forEach(function (c) { var i = c.querySelector('input'); i.checked = i.value === coin; c.classList.toggle('on', i.checked); });
+      var u = new URL(location.href); u.searchParams.set('currency', coin); history.replaceState(null, '', u.pathname + u.search);
+    }
+    function message() {
+      return [MV.t('msg'), '', MV.t('mPlan') + ': ' + MV.t(plan === 'coach' ? 'coachName' : 'appName'), MV.t('mDur') + ': ' + MV.durLabel(months),
+        MV.t('mAmt') + ': ' + amount.toFixed(2) + ' ' + coin, MV.t('mNet') + ': ' + MV.COINS[coin].net,
+        MV.t('mEmail') + ': ' + el('fEmail').value.trim(), MV.t('mTx') + ': ' + el('fTx').value.trim()].join('\n');
+    }
+    function valid() {
+      var e = el('fEmail').value.trim(), tx = el('fTx').value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { el('fErr').textContent = MV.t('errEmail'); el('fEmail').focus(); return false; }
+      if (!/^0x[0-9a-fA-F]{64}$/.test(tx)) { el('fErr').textContent = MV.t('errTx'); el('fTx').focus(); return false; }
+      el('fErr').textContent = ''; return true;
+    }
+    el('coinOpts').addEventListener('change', function (e) { if (e.target.name === 'coin') { coin = e.target.value; draw(); } });
+    el('cpAmt').onclick = function () { MV.copy(amount.toFixed(2), this); };
+    el('cpAddr').onclick = function () { MV.copy(MV.WALLET, this); };
+    el('cpMsg').onclick = function () { if (valid()) MV.copy(message(), this); };
+    el('tgBtn').onclick = function (e) { if (!valid()) { e.preventDefault(); return; } MV.copy(message(), null); };
+    el('sendMail').onclick = function (e) {
+      e.preventDefault(); if (!valid()) return;
+      location.href = 'mailto:' + MV.COACH_MAIL + '?subject=' + encodeURIComponent(MV.t('mailSubj') + ' - ' + el('fEmail').value.trim()) + '&body=' + encodeURIComponent(message());
+    };
+    try { var m = localStorage.getItem('musclivo_pay_email'); if (m) el('fEmail').value = m; } catch (e) {}
+    el('fEmail').addEventListener('change', function () { try { localStorage.setItem('musclivo_pay_email', el('fEmail').value.trim()); } catch (e) {} });
+    MV.onLang = draw;
+    MV.initChrome(); draw();
+  })();
+  </script>
+</body>
+</html>
