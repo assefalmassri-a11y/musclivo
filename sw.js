@@ -1,7 +1,7 @@
 // Musclivo service worker
 // - يعرض الإشعارات (من الموقع ومن السيرفر) ويفتح التطبيق عند الضغط عليها
 // - يحفظ نسخة من صفحات الموقع ليفتح بدون إنترنت. يجرّب الشبكة أولاً دائماً، فتظهر التحديثات مباشرة.
-const CACHE = 'musclivo-v2';
+const CACHE = 'musclivo-v3';
 const CORE = ['./', 'index.html', 'privacy.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -19,11 +19,12 @@ self.addEventListener('fetch', (e) => {
   const same = u.origin === self.location.origin;
   const cdn = u.hostname === 'cdn.jsdelivr.net';
   if (!same && !cdn) return; // لا نخزّن طلبات Supabase أو Open Food Facts
+  if (/\.mp4$/i.test(u.pathname) || r.headers.has('range')) return; // الفيديوهات ما بتنخزّن (كبيرة)
   e.respondWith(
     fetch(r).then((res) => {
-      if (res.ok && (res.type === 'basic' || res.type === 'cors')) {
+      if (res.status === 200 && (res.type === 'basic' || res.type === 'cors')) {
         const cp = res.clone();
-        caches.open(CACHE).then((c) => c.put(r, cp));
+        caches.open(CACHE).then((c) => c.put(r, cp)).catch(() => {});
       }
       return res;
     }).catch(async () => {
