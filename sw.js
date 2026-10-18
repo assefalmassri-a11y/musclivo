@@ -1,7 +1,7 @@
 // Musclivo service worker
 // - يعرض الإشعارات (من الموقع ومن السيرفر) ويفتح التطبيق عند الضغط عليها
 // - يحفظ نسخة من صفحات الموقع ليفتح بدون إنترنت. يجرّب الشبكة أولاً دائماً، فتظهر التحديثات مباشرة.
-const CACHE = 'musclivo-v4';
+const CACHE = 'musclivo-v5';
 const CORE = ['./', 'index.html', 'privacy.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

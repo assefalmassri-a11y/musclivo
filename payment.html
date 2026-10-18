@@ -448,7 +448,7 @@
     var plan = q.get('plan'), months = Number(q.get('months')), coin = q.get('currency');
     if (!P[plan] || !P[plan][months]) { location.replace('pricing.html'); return; }
     if (!MV.COINS[coin]) coin = 'USDT';
-    var amount = P[plan][months];   // السعر من الجدول، مو من الرابط
+    var amount = P[plan][months];   // السعر من الجدول، وليس من الرابط
     function el(id) { return document.getElementById(id); }
     function draw() {
       el('pPlan').textContent = MV.t(plan === 'coach' ? 'coachName' : 'appName');
