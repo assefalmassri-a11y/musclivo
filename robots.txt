@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://assefalmassri-a11y.github.io/musclivo/sitemap.xml
