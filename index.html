@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/ 'sha256-9IckspRJjuj5q38StG+uhW+XZPZ2+IeYq/VvcdgacJ4=' 'sha256-D6Cqre+TksARRuBkLhabcoohAO5O7620MOhiLv6UWBE='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://kucmmjnfrgypcwewlzpl.supabase.co https://images.openfoodfacts.org https://static.openfoodfacts.org; connect-src 'self' https://kucmmjnfrgypcwewlzpl.supabase.co wss://kucmmjnfrgypcwewlzpl.supabase.co https://world.openfoodfacts.org; font-src 'self' data:; media-src 'self' blob:; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="google-site-verification" content="qddAD0P1zlzICHJs62Ums6cWwAXEbzLIfi-fmiF7e18" />
 <meta name="description" content="Musclivo: تطبيق مجاني لمدة 3 أيام لحساب السعرات الحرارية والبروتين والكارب والدهون، وتتبع الوزن والتمارين والصيام، مع خطط تغذية وتدريب ومتابعة مباشرة من المدرب الشخصي في مالمو. Kaloriräknare och personlig tränare i Malmö.">
 <meta name="robots" content="index,follow">
@@ -2321,7 +2322,7 @@ const fmtMi=(k,v)=>k==='fiber'||k==='iron'?(Math.round(v*10)/10):Math.round(v);
 function recCard(r,open){
   const m=recMacros(r),steps=r.steps[LANG]||r.steps.en.map(L1);
   const mic=[['fiber',m.fib,'g'],['iron',m.fe,'mg'],['calcium',m.ca,'mg'],['potassium',m.kk,'mg'],['vitc',m.vc,'mg']].map(a=>`<span class="chip">${ut(a[0])} ${fmtMi(a[0],a[1])} ${ut(a[2])}</span>`).join('');
-  return `<details data-r="${r.id}" ${open.includes(r.id)?'open':''} style="border-top:1px solid var(--line);padding:10px 0"><summary style="display:flex;gap:10px;align-items:center;cursor:pointer"><span class="rimg"><img src="images/recipes/${r.id}.jpg" alt="" onerror="this.remove()"><span>${r.e}</span></span><span><b>${esc(T4(r.name))}</b><div class="mut">${r.min} ${ut('min')} · ${r1(m.k)} ${ut('kcal')}</div><div class="mut">${ut('protein')} ${r1(m.p)} ${ut('g')} · ${ut('carb')} ${r1(m.c)} ${ut('g')} · ${ut('fat')} ${r1(m.f)} ${ut('g')}</div></span></summary><div style="margin:8px 0">${mic}</div><b>${ut('ingr')}</b><ul style="margin:4px 0 8px;padding-inline-start:20px">${r.ing.map(a=>`<li>${a[1]} ${ut('g')} ${esc(inm(a[0]))}</li>`).join('')}</ul><b>${ut('steps')}</b><ol style="margin:4px 0 10px;padding-inline-start:20px">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><button class="g" data-ar="${r.id}">${ut('addLog')}</button></details>`;
+  return `<details data-r="${r.id}" ${open.includes(r.id)?'open':''} style="border-top:1px solid var(--line);padding:10px 0"><summary style="display:flex;gap:10px;align-items:center;cursor:pointer"><span class="rimg"><img src="images/recipes/${r.id}.jpg" alt="" class="rmerr"><span>${r.e}</span></span><span><b>${esc(T4(r.name))}</b><div class="mut">${r.min} ${ut('min')} · ${r1(m.k)} ${ut('kcal')}</div><div class="mut">${ut('protein')} ${r1(m.p)} ${ut('g')} · ${ut('carb')} ${r1(m.c)} ${ut('g')} · ${ut('fat')} ${r1(m.f)} ${ut('g')}</div></span></summary><div style="margin:8px 0">${mic}</div><b>${ut('ingr')}</b><ul style="margin:4px 0 8px;padding-inline-start:20px">${r.ing.map(a=>`<li>${a[1]} ${ut('g')} ${esc(inm(a[0]))}</li>`).join('')}</ul><b>${ut('steps')}</b><ol style="margin:4px 0 10px;padding-inline-start:20px">${steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><button class="g" data-ar="${r.id}">${ut('addLog')}</button></details>`;
 }
 const MEALAR={b:'فطور',l:'غداء',d:'عشاء',s:'سناك'};
 function logRecipe(id,meal,f){const r=RID[id],m=recMacros(r,f||1),d=day();(S.log[d]=S.log[d]||[]).push({n:r.name.ar,rid:id,g:r1(m.g),m:meal,k:m.k,p:m.p,c:m.c,f:m.f})}
@@ -3733,6 +3734,7 @@ $('rmvol').onchange=()=>{S.rmVol=+$('rmvol').value;save();playTone()};
 $('rmplay').onclick=()=>{const n=$('rmsnd').value;if(n==='off'){toast(tr('النغمة متوقفة.'));return}playTone(n,$('rmvol').value)};
 /*TONE-END*/
 
+/*IMGERR*/document.addEventListener('error',e=>{const t=e.target;if(t&&t.classList&&t.classList.contains('rmerr'))t.remove()},true);
 /*CE-START*/
 // المدير: آخر أخطاء رفع الصور عند المستخدمين (للتشخيص)
 async function ceAdmin(){
@@ -3894,7 +3896,7 @@ async function bcLook(raw){
 function bcShow(code,o){
   $('bcs').textContent='';
   const ex=[o.s!=null?`<span class="chip">سكر ${rd1(o.s)}غ</span>`:'',o.fi!=null?`<span class="chip">ألياف ${rd1(o.fi)}غ</span>`:''].join('');
-  $('bcr').innerHTML=`<div class="item" style="justify-content:flex-start;gap:10px">${o.img?`<span class="rimg"><img src="${esc(o.img)}" alt="" onerror="this.remove()"><span>📦</span></span>`:'<span class="rimg"><span>📦</span></span>'}<div><b>${esc(o.n)}</b><div class="mut">لكل 100غ: ${r1(o.k)} سعرة · بروتين ${o.p}غ · كارب ${o.c}غ · دهون ${o.f}غ</div><div>${ex}</div></div></div>
+  $('bcr').innerHTML=`<div class="item" style="justify-content:flex-start;gap:10px">${o.img?`<span class="rimg"><img src="${esc(o.img)}" alt="" class="rmerr"><span>📦</span></span>`:'<span class="rimg"><span>📦</span></span>'}<div><b>${esc(o.n)}</b><div class="mut">لكل 100غ: ${r1(o.k)} سعرة · بروتين ${o.p}غ · كارب ${o.c}غ · دهون ${o.f}غ</div><div>${ex}</div></div></div>
 <div class="grid2" style="margin-top:8px"><input id="bcg" type="number" inputmode="decimal" value="${o.sq>0?Math.round(o.sq):100}" aria-label="الكمية بالغرام" placeholder="الكمية (غرام)"><button id="bca">أضف الوجبة</button></div>
 <div class="mut" style="font-size:12px;margin-top:6px">المصدر: Open Food Facts. قارن الأرقام مع العبوة.</div>`;
   $('bca').onclick=()=>{
