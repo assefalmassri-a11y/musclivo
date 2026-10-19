@@ -364,9 +364,6 @@
     .lg { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:18px; }
     .lg button { font:inherit; font-size:13px; padding:6px 10px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--acc); cursor:pointer; }
     .lg button[aria-pressed="true"] { background:var(--acc); color:var(--on); }
-    .lg select { font:inherit; font-size:13px; padding:6px 8px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--acc); cursor:pointer; width:auto; }
-    .lg select.on { background:var(--acc); color:var(--on); }
-    .lg select option { color:#111; }
     .note { margin-top:10px; font-size:12px; color:var(--mut); text-align:center; }
     .back { display:inline-block; margin-bottom:14px; color:var(--mut); font-size:14px; text-decoration:none; }
     .theme-btn { color: var(--ink); }
@@ -381,7 +378,7 @@
       </div>
       <button class="theme-btn" id="themeBtn" type="button" data-ta="theme" aria-label="Switch light / dark">☀️</button>
     </header>
-    <div class="lg" id="lg"><button type="button" data-lg="ar" lang="ar">العربية</button><button type="button" data-lg="en" lang="en">English</button><button type="button" data-lg="sv" lang="sv">Svenska</button><button type="button" data-lg="ru" lang="ru">Русский</button><select id="lgx" aria-label="More languages" dir="ltr"><option value="">🌐 More</option><option value="de" lang="de">Deutsch</option><option value="fr" lang="fr">Français</option><option value="es" lang="es">Español</option><option value="tr" lang="tr">Türkçe</option><option value="uk" lang="uk">Українська</option><option value="pl" lang="pl">Polski</option><option value="nb" lang="nb">Norsk</option><option value="da" lang="da">Dansk</option></select></div>
+    <div class="lg" id="lg"><button type="button" data-lg="ar" lang="ar">العربية</button><button type="button" data-lg="en" lang="en">English</button><button type="button" data-lg="sv" lang="sv">Svenska</button><button type="button" data-lg="ru" lang="ru">Русский</button></div>
     <a class="back" href="index.html" data-t="back">← Back to the app</a>
     <section class="intro">
       <h1 data-t="title">Choose Your Plan</h1>
@@ -440,7 +437,7 @@
       <a href="privacy.html" data-t="privacy">Privacy Policy</a> · <a href="terms.html" data-t="terms">Terms</a>
     </footer>
   </main>
-  <script src="pricing.js?v=2"></script>
+  <script src="pricing.js?v=1"></script>
   <script>
   (function () {
     var P = MV.PRICES;
