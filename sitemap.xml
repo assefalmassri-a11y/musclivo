@@ -1,9 +1,11 @@
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://assefalmassri-a11y.github.io/musclivo/</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://assefalmassri-a11y.github.io/musclivo/sv.html</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://assefalmassri-a11y.github.io/musclivo/en.html</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://assefalmassri-a11y.github.io/musclivo/pricing.html</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://assefalmassri-a11y.github.io/musclivo/privacy.html</loc><lastmod>2026-10-18</lastmod></url>
-  <url><loc>https://assefalmassri-a11y.github.io/musclivo/terms.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://musclivo.top/</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://musclivo.top/sv.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://musclivo.top/en.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://musclivo.top/pricing.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://musclivo.top/privacy.html</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://musclivo.top/terms.html</loc><lastmod>2026-10-18</lastmod></url>
 </urlset>
+```
